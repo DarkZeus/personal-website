@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-soft-titanium: oklch(0.97 0.01 250);
+  --color-blue-horizon: oklch(0.45 0.2 250);
+  --color-surface: oklch(0.98 0.01 250);
+  --color-surface-dark: oklch(0.95 0.01 250);
+  --color-primary: oklch(0.45 0.2 250);
+  --color-primary-dark: oklch(0.35 0.2 250);
+  --color-text: oklch(0.2 0.01 250);
+  --color-text-light': 'oklch(0.4 0.01 250)',
+
+  --font-sans: "SF Pro", system-ui, sans-serif;
+  --font-display: "SF Pro Display", system-ui, sans-serif;
+
+  --border-radius-3xl: 2rem;
+
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+
+  --backdrop-blur-xs: 2px;
+}

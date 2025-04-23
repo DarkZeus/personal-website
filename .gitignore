@@ -1,0 +1,77 @@
+# Dependencies
+node_modules
+.pnpm-store
+.yarn
+.yarn-cache
+
+# Nuxt.js build output
+.output
+.nuxt
+.nitro
+.cache
+dist
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE and editor files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+.cursor
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage
+.nyc_output
+
+# Build files
+*.tsbuildinfo
+.next
+out
+
+# Misc
+.DS_Store
+*.pem
+*.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Tailwind CSS
+.tailwind-cache 

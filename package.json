@@ -1,0 +1,20 @@
+{
+	"name": "personal-website",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev --port 3000",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.21",
+		"nuxt": "^3.16.2"
+	},
+	"dependencies": {
+		"tailwindcss": "^4.1.4",
+		"@tailwindcss/vite": "^4.1.4"
+	}
+}
