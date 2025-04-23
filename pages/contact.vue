@@ -1,19 +1,11 @@
 <template>
   <div>
-    <!-- Hero Section -->
-    <section class="relative py-32 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent -z-10"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-5xl font-display font-semibold text-text sm:text-6xl md:text-7xl">
-            Get in Touch
-          </h1>
-          <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl">
-            Have a project in mind or want to collaborate? I'd love to hear from you.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection>
+      <template #title>Get in Touch</template>
+      <template #description>
+        Have a project in mind or want to collaborate? I'd love to hear from you.
+      </template>
+    </HeroSection>
 
     <!-- Contact Section -->
     <section class="py-24">
@@ -24,42 +16,39 @@
             <div class="bg-surface rounded-lg shadow-card p-8">
               <h2 class="text-3xl font-display font-semibold text-text mb-6">Contact Information</h2>
               <div class="space-y-6">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
+                <ContactInfo title="Email">
+                  <template #icon>
                     <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-semibold text-text">Email</h3>
+                  </template>
+                  <template #content>
                     <p class="text-text-light">serhii.resnyanskyi@gmail.com</p>
-                  </div>
-                </div>
+                  </template>
+                </ContactInfo>
 
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
+                <ContactInfo title="Telegram">
+                  <template #icon>
                     <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-semibold text-text">Telegram</h3>
+                  </template>
+                  <template #content>
                     <a href="https://t.me/fuad_first" class="text-text-light hover:text-primary transition-colors duration-300">@fuad_first</a>
-                  </div>
-                </div>
+                  </template>
+                </ContactInfo>
 
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
+                <ContactInfo title="Location">
+                  <template #icon>
                     <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-semibold text-text">Location</h3>
+                  </template>
+                  <template #content>
                     <p class="text-text-light">Kyiv, Ukraine</p>
-                  </div>
-                </div>
+                  </template>
+                </ContactInfo>
               </div>
             </div>
 
@@ -77,7 +66,7 @@
                   <div class="absolute inset-0 bg-primary/10 opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                   <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg class="relative z-10 w-6 h-6 text-text-light group-hover:text-primary transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                   </svg>
                 </a>
               </div>
@@ -89,65 +78,18 @@
             <h2 class="text-3xl font-display font-semibold text-text mb-6">Send a Message</h2>
             <form class="space-y-6">
               <div>
-                <label for="name" class="block text-sm font-medium text-text mb-2">Name</label>
-                <div class="group relative">
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="w-full px-4 py-3 rounded-md bg-surface text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
-                    placeholder="Your name"
-                  />
-                  <div class="absolute inset-0 rounded-md border border-primary/10 group-hover:border-primary/20 transition-colors duration-300 pointer-events-none"></div>
-                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                <label for="name" class="block text-sm font-medium text-text-light mb-2">Name</label>
+                <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required>
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-text mb-2">Email</label>
-                <div class="group relative">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="w-full px-4 py-3 rounded-md bg-surface text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
-                    placeholder="your@email.com"
-                  />
-                  <div class="absolute inset-0 rounded-md border border-primary/10 group-hover:border-primary/20 transition-colors duration-300 pointer-events-none"></div>
-                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                <label for="email" class="block text-sm font-medium text-text-light mb-2">Email</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required>
               </div>
               <div>
-                <label for="subject" class="block text-sm font-medium text-text mb-2">Subject</label>
-                <div class="group relative">
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    class="w-full px-4 py-3 rounded-md bg-surface text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
-                    placeholder="What's this about?"
-                  />
-                  <div class="absolute inset-0 rounded-md border border-primary/10 group-hover:border-primary/20 transition-colors duration-300 pointer-events-none"></div>
-                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                <label for="message" class="block text-sm font-medium text-text-light mb-2">Message</label>
+                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required></textarea>
               </div>
-              <div>
-                <label for="message" class="block text-sm font-medium text-text mb-2">Message</label>
-                <div class="group relative">
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="4"
-                    class="w-full px-4 py-3 rounded-md bg-surface text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 resize-none"
-                    placeholder="Your message here..."
-                  ></textarea>
-                  <div class="absolute inset-0 rounded-md border border-primary/10 group-hover:border-primary/20 transition-colors duration-300 pointer-events-none"></div>
-                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
-              </div>
-              <button
-                type="submit"
-                class="group relative w-full px-6 py-3 text-base font-medium rounded-md text-white overflow-hidden"
-              >
+              <button type="submit" class="group relative px-8 py-3 text-base font-medium rounded-md text-white overflow-hidden">
                 <span class="relative z-10">Send Message</span>
                 <div class="absolute inset-0 bg-primary opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -158,4 +100,9 @@
       </div>
     </section>
   </div>
-</template> 
+</template>
+
+<script setup>
+import HeroSection from '~/components/sections/HeroSection.vue'
+import ContactInfo from '~/components/ui/ContactInfo.vue'
+</script>

@@ -1,19 +1,11 @@
 <template>
   <div>
-    <!-- Hero Section -->
-    <section class="relative py-32 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent -z-10"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-5xl font-display font-semibold text-text sm:text-6xl md:text-7xl">
-            About Me
-          </h1>
-          <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl">
-            A passionate developer with a focus on creating beautiful, functional, and user-friendly applications.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroSection>
+      <template #title>About Me</template>
+      <template #description>
+        A passionate developer with a focus on creating beautiful, functional, and user-friendly applications.
+      </template>
+    </HeroSection>
 
     <!-- About Content -->
     <section class="py-24">
@@ -24,10 +16,10 @@
             <div class="bg-surface rounded-lg shadow-card p-8">
               <h2 class="text-3xl font-display font-semibold text-text mb-6">Who I Am</h2>
               <p class="text-lg text-text-light leading-relaxed">
-                Detail-oriented Frontend Developer with 7+ years of experience across JavaScript frameworks and technologies. 
-                Proven expertise in building responsive, user-friendly web applications with React and Vue ecosystems. 
-                Skilled in optimizing performance, solving complex technical challenges, and enhancing developer experience 
-                through code quality improvements. Combines technical versatility with a commitment to continuous learning 
+                Detail-oriented Frontend Developer with 7+ years of experience across JavaScript frameworks and technologies.
+                Proven expertise in building responsive, user-friendly web applications with React and Vue ecosystems.
+                Skilled in optimizing performance, solving complex technical challenges, and enhancing developer experience
+                through code quality improvements. Combines technical versatility with a commitment to continuous learning
                 and professional growth.
               </p>
             </div>
@@ -38,43 +30,43 @@
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4">Frontend Development</h3>
                   <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">JavaScript (ES6+)</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">TypeScript</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">HTML5</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">CSS3/SCSS/BEM</span>
+                    <SkillTag>JavaScript (ES6+)</SkillTag>
+                    <SkillTag>TypeScript</SkillTag>
+                    <SkillTag>HTML5</SkillTag>
+                    <SkillTag>CSS3/SCSS/BEM</SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4">Frontend Frameworks</h3>
                   <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">React</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Redux (RTK)</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Vue.js 2/3</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Nuxt</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Pinia</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Vue Router</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Zustand</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">TanStack</span>
+                    <SkillTag>React</SkillTag>
+                    <SkillTag>Redux (RTK)</SkillTag>
+                    <SkillTag>Vue.js 2/3</SkillTag>
+                    <SkillTag>Nuxt</SkillTag>
+                    <SkillTag>Pinia</SkillTag>
+                    <SkillTag>Vue Router</SkillTag>
+                    <SkillTag>Zustand</SkillTag>
+                    <SkillTag>TanStack</SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4">UI Libraries & Design</h3>
                   <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Material UI</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">TailwindCSS</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Shadcn/UI</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Chakra UI</span>
+                    <SkillTag>Material UI</SkillTag>
+                    <SkillTag>TailwindCSS</SkillTag>
+                    <SkillTag>Shadcn/UI</SkillTag>
+                    <SkillTag>Chakra UI</SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4">Backend & Databases</h3>
                   <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">PHP (Laravel)</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Python</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">PostgreSQL</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">MySQL</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">SQLite</span>
-                    <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">IndexedDB</span>
+                    <SkillTag>PHP (Laravel)</SkillTag>
+                    <SkillTag>Python</SkillTag>
+                    <SkillTag>PostgreSQL</SkillTag>
+                    <SkillTag>MySQL</SkillTag>
+                    <SkillTag>SQLite</SkillTag>
+                    <SkillTag>IndexedDB</SkillTag>
                   </div>
                 </div>
               </div>
@@ -112,10 +104,10 @@
                       </li>
                     </ul>
                     <div class="mt-4 flex flex-wrap gap-2">
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">React</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Redux</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">SCSS</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">Material UI</span>
+                      <SkillTag>React</SkillTag>
+                      <SkillTag>Redux</SkillTag>
+                      <SkillTag>SCSS</SkillTag>
+                      <SkillTag>Material UI</SkillTag>
                     </div>
                   </div>
                 </div>
@@ -175,4 +167,9 @@
       </div>
     </section>
   </div>
-</template> 
+</template>
+
+<script setup>
+import HeroSection from '~/components/sections/HeroSection.vue'
+import SkillTag from '~/components/ui/SkillTag.vue'
+</script>
