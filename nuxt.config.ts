@@ -3,8 +3,17 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  components: false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
+  modules: [
+    'motion-v/nuxt'  
+  ],
+
+  experimental: {
+    viewTransition: true,
+    crossOriginPrefetch: true,
+  },
 
   vite: {
     plugins: [

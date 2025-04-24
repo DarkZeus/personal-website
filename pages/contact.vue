@@ -1,20 +1,29 @@
 <template>
   <div>
-    <HeroSection>
+    <HeroSection class="min-h-screen flex flex-1 items-center justify-center">
       <template #title>Get in Touch</template>
       <template #description>
-        Have a project in mind or want to collaborate? I'd love to hear from you.
+        Have a question or want to work together? I'd love to hear from you.
+      </template>
+      
+      <template #scroll-indicator>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+          <span class="text-text-light text-sm">Scroll for contact details</span>
+          <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
       </template>
     </HeroSection>
 
-    <!-- Contact Section -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Contact Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <section class="py-24 relative overflow-hidden">
         <div class="grid gap-16 lg:grid-cols-2">
           <!-- Contact Information -->
           <div class="space-y-8">
             <div class="bg-surface rounded-lg shadow-card p-8">
-              <h2 class="text-3xl font-display font-semibold text-text mb-6">Contact Information</h2>
+              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Contact Information</h2>
               <div class="space-y-6">
                 <ContactInfo title="Email">
                   <template #icon>
@@ -23,7 +32,7 @@
                     </svg>
                   </template>
                   <template #content>
-                    <p class="text-text-light">serhii.resnyanskyi@gmail.com</p>
+                    <p class="text-text-light text-pretty">serhii.resnyanskyi@gmail.com</p>
                   </template>
                 </ContactInfo>
 
@@ -34,7 +43,7 @@
                     </svg>
                   </template>
                   <template #content>
-                    <a href="https://t.me/fuad_first" class="text-text-light hover:text-primary transition-colors duration-300">@fuad_first</a>
+                    <a href="https://t.me/fuad_first" class="text-text-light hover:text-primary transition-colors duration-300 text-pretty">@fuad_first</a>
                   </template>
                 </ContactInfo>
 
@@ -46,14 +55,14 @@
                     </svg>
                   </template>
                   <template #content>
-                    <p class="text-text-light">Kyiv, Ukraine</p>
+                    <p class="text-text-light text-pretty">Kyiv, Ukraine</p>
                   </template>
                 </ContactInfo>
               </div>
             </div>
 
             <div class="bg-surface rounded-lg shadow-card p-8">
-              <h2 class="text-3xl font-display font-semibold text-text mb-6">Social Media</h2>
+              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Social Media</h2>
               <div class="flex gap-4">
                 <a href="https://www.linkedin.com/in/serhii-resnianskyi" class="group relative w-12 h-12 rounded-md overflow-hidden flex items-center justify-center">
                   <div class="absolute inset-0 bg-primary/10 opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
@@ -75,34 +84,79 @@
 
           <!-- Contact Form -->
           <div class="bg-surface rounded-lg shadow-card p-8">
-            <h2 class="text-3xl font-display font-semibold text-text mb-6">Send a Message</h2>
+            <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Send a Message</h2>
             <form class="space-y-6">
-              <div>
-                <label for="name" class="block text-sm font-medium text-text-light mb-2">Name</label>
-                <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required>
+              <div class="space-y-1">
+                <label for="name" class="block text-sm font-medium text-text mb-1 text-pretty">Name</label>
+                <div class="relative group">
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    class="w-full px-4 py-3 rounded-md bg-white/50 border border-gray-200 text-text placeholder:text-text-light/50
+                    focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300
+                    hover:border-primary/50"
+                    placeholder="Your name"
+                    required
+                  >
+                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
               </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-text-light mb-2">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required>
+
+              <div class="space-y-1">
+                <label for="email" class="block text-sm font-medium text-text mb-1 text-pretty">Email</label>
+                <div class="relative group">
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="w-full px-4 py-3 rounded-md bg-white/50 border border-gray-200 text-text placeholder:text-text-light/50
+                    focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300
+                    hover:border-primary/50"
+                    placeholder="your.email@example.com"
+                    required
+                  >
+                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
               </div>
-              <div>
-                <label for="message" class="block text-sm font-medium text-text-light mb-2">Message</label>
-                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-md border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-300" required></textarea>
+
+              <div class="space-y-1">
+                <label for="message" class="block text-sm font-medium text-text mb-1 text-pretty">Message</label>
+                <div class="relative group">
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="4" 
+                    class="w-full px-4 py-3 rounded-md bg-white/50 border border-gray-200 text-text placeholder:text-text-light/50
+                    focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300
+                    hover:border-primary/50 resize-none"
+                    placeholder="Your message here..."
+                    required
+                  ></textarea>
+                  <div class="absolute inset-0 rounded-md bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
               </div>
-              <button type="submit" class="group relative px-8 py-3 text-base font-medium rounded-md text-white overflow-hidden">
-                <span class="relative z-10">Send Message</span>
+
+              <button 
+                type="submit" 
+                class="group relative px-8 py-3 text-base font-medium rounded-md text-white overflow-hidden w-full sm:w-auto"
+              >
+                <span class="relative z-10 text-pretty">Send Message</span>
                 <div class="absolute inset-0 bg-primary opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <!-- Button decoration -->
+                <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20"></div>
+                <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20"></div>
               </button>
             </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
 <script setup>
-import HeroSection from '~/components/sections/HeroSection.vue'
-import ContactInfo from '~/components/ui/ContactInfo.vue'
+import HeroSection from '~/components/sections/hero-section.vue'
+import ContactInfo from '~/components/ui/contact-info.vue'
 </script>

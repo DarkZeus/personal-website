@@ -1,6 +1,6 @@
 <template>
     <nav class="fixed top-0 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full sm:w-[70%] md:w-[65%] lg:w-[60%]">
-      <div class="bg-white/80 backdrop-blur-sm rounded-none sm:rounded-lg shadow-glass px-4 sm:px-6 py-3">
+      <div class="bg-soft-titanium/50 backdrop-blur-sm rounded-none sm:rounded-lg shadow-glass px-4 sm:px-6 py-3">
         <div class="flex items-center justify-between">
           <NuxtLink to="/" class="text-primary font-display font-semibold text-xl hover:opacity-80 transition-opacity">Serhii Resnianskyi</NuxtLink>
           
