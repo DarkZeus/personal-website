@@ -180,16 +180,4 @@
 
 <script setup lang="ts">
 import { Motion } from "motion-v";
-import { useReducedMotion } from '~/composables/useReducedMotion'
-
-const prefersReducedMotion = useReducedMotion()
-
-const motionConfig = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: {
-    duration: prefersReducedMotion.value ? 0 : 0.5,
-    ease: 'easeOut'
-  }
-}
 </script>
