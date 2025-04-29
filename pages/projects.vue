@@ -17,40 +17,60 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <!-- Filters -->
-          <div class="flex flex-wrap gap-4 mb-12">
-            <button class="group relative px-4 py-2 rounded-md text-white overflow-hidden">
+          <div class="flex flex-wrap gap-4 mb-12" role="tablist" aria-label="Project categories">
+            <button 
+              class="group relative px-4 py-2 rounded-md text-white overflow-hidden"
+              role="tab"
+              aria-selected="true"
+              aria-controls="all-projects"
+            >
               <span class="relative z-10 text-pretty">All Projects</span>
               <div class="absolute inset-0 bg-primary opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
               <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <!-- Button decoration -->
-              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20"></div>
-              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20"></div>
+              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20" aria-hidden="true"></div>
+              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20" aria-hidden="true"></div>
             </button>
-            <button class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden">
+            <button 
+              class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden"
+              role="tab"
+              aria-selected="false"
+              aria-controls="web-projects"
+            >
               <span class="relative z-10 text-pretty">Web Development</span>
               <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <!-- Button decoration -->
-              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20"></div>
-              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20"></div>
+              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
+              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
             </button>
-            <button class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden">
+            <button 
+              class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden"
+              role="tab"
+              aria-selected="false"
+              aria-controls="mobile-projects"
+            >
               <span class="relative z-10 text-pretty">Mobile Apps</span>
               <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <!-- Button decoration -->
-              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20"></div>
-              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20"></div>
+              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
+              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
             </button>
-            <button class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden">
+            <button 
+              class="group relative px-4 py-2 rounded-md text-text-light overflow-hidden"
+              role="tab"
+              aria-selected="false"
+              aria-controls="open-source-projects"
+            >
               <span class="relative z-10 text-pretty">Open Source</span>
               <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <!-- Button decoration -->
-              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20"></div>
-              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20"></div>
+              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
+              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20" aria-hidden="true"></div>
             </button>
           </div>
 
           <!-- Projects Grid -->
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" role="region" aria-label="Projects list">
             <ProjectCard
               title="E-commerce Platform"
               description="A full-featured e-commerce platform with real-time inventory management and payment processing."

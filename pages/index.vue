@@ -11,18 +11,8 @@
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45rem] h-[45rem] rounded-full bg-primary/3 blur-3xl opacity-50"></div>
       
       <Motion
-        as="div"
-        :initial="{ opacity: 0, y: 40, filter: 'blur(10px)' }"
-        :in-view="{
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-        }"
-        :transition="{
-          type: 'spring',
-          duration: 1,
-          bounce: 0,
-        }"
+        v-bind="motionConfig"
+        class="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
           <div class="text-center relative">
@@ -190,4 +180,16 @@
 
 <script setup lang="ts">
 import { Motion } from "motion-v";
+import { useReducedMotion } from '~/composables/useReducedMotion'
+
+const prefersReducedMotion = useReducedMotion()
+
+const motionConfig = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: {
+    duration: prefersReducedMotion.value ? 0 : 0.5,
+    ease: 'easeOut'
+  }
+}
 </script>

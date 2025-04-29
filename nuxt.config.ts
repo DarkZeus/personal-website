@@ -16,7 +16,6 @@ export default defineNuxtConfig({
     componentIslands: true,
     payloadExtraction: true,
     renderJsonPayloads: true,
-    noVueServer: true,
     asyncContext: true,
   },
 

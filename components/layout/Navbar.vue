@@ -9,6 +9,8 @@
             @mousedown="isMenuOpen = !isMenuOpen"
             class="sm:hidden p-2 rounded-md hover:bg-primary/5 active:bg-primary/10 transition-colors duration-150 will-change-transform"
             aria-label="Toggle menu"
+            :aria-expanded="isMenuOpen"
+            aria-controls="mobile-menu"
           >
             <svg 
               class="w-6 h-6 text-text-light will-change-transform" 
@@ -72,56 +74,49 @@
         </div>
   
         <!-- Mobile menu -->
-        <Transition
-          enter-active-class="transition duration-150 ease-out"
-          enter-from-class="transform opacity-0 scale-95"
-          enter-to-class="transform opacity-100 scale-100"
-          leave-active-class="transition duration-100 ease-in"
-          leave-from-class="transform opacity-100 scale-100"
-          leave-to-class="transform opacity-0 scale-95"
+        <div 
+          id="mobile-menu"
+          class="sm:hidden absolute top-full left-0 right-0 bg-soft-titanium/50 backdrop-blur-sm rounded-lg shadow-glass mt-2 py-2"
+          :class="{ 'hidden': !isMenuOpen }"
+          role="menu"
         >
-          <div 
-            v-if="isMenuOpen"
-            class="sm:hidden mt-4 space-y-2 will-change-transform"
+          <NuxtLink 
+            to="/" 
+            class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
+            active-class="text-primary"
+            :aria-current="$route.path === '/' ? 'page' : undefined"
           >
-            <NuxtLink 
-              to="/" 
-              class="block group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-              active-class="text-primary"
-              @mousedown="isMenuOpen = false"
-            >
-              <span class="relative z-10">Home</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
-            </NuxtLink>
-            <NuxtLink 
-              to="/about" 
-              class="block group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-              active-class="text-primary"
-              @mousedown="isMenuOpen = false"
-            >
-              <span class="relative z-10">About</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
-            </NuxtLink>
-            <NuxtLink 
-              to="/projects" 
-              class="block group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-              active-class="text-primary"
-              @mousedown="isMenuOpen = false"
-            >
-              <span class="relative z-10">Projects</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
-            </NuxtLink>
-            <NuxtLink 
-              to="/contact" 
-              class="block group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-              active-class="text-primary"
-              @mousedown="isMenuOpen = false"
-            >
-              <span class="relative z-10">Contact</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
-            </NuxtLink>
-          </div>
-        </Transition>
+            <span class="relative z-10">Home</span>
+            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+          </NuxtLink>
+          <NuxtLink 
+            to="/about" 
+            class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
+            active-class="text-primary"
+            :aria-current="$route.path === '/about' ? 'page' : undefined"
+          >
+            <span class="relative z-10">About</span>
+            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+          </NuxtLink>
+          <NuxtLink 
+            to="/projects" 
+            class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
+            active-class="text-primary"
+            :aria-current="$route.path === '/projects' ? 'page' : undefined"
+          >
+            <span class="relative z-10">Projects</span>
+            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+          </NuxtLink>
+          <NuxtLink 
+            to="/contact" 
+            class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
+            active-class="text-primary"
+            :aria-current="$route.path === '/contact' ? 'page' : undefined"
+          >
+            <span class="relative z-10">Contact</span>
+            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+          </NuxtLink>
+        </div>
       </div>
     </nav>
   </template>
