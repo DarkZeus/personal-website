@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-24">
+    <section class="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-16 sm:pt-24">
       <!-- Grid pattern background -->
       <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
       
