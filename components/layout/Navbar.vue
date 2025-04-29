@@ -36,89 +36,90 @@
   
           <!-- Desktop menu -->
           <div class="hidden sm:flex items-center space-x-4">
-            <NuxtLink 
-              to="/" 
-              class="group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-              active-class="text-primary"
-            >
-              <span class="relative z-10">Home</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </NuxtLink>
-            <NuxtLink 
-              to="/about" 
-              class="group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-              active-class="text-primary"
-            >
-              <span class="relative z-10">About</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </NuxtLink>
-            <!-- <NuxtLink 
-              to="/projects" 
-              class="group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-              active-class="text-primary"
-            >
-              <span class="relative z-10">Projects</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </NuxtLink> -->
-            <NuxtLink 
-              to="/contact" 
-              class="group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-              active-class="text-primary"
-            >
-              <span class="relative z-10">Contact</span>
-              <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </NuxtLink>
+            <template v-for="link in navigationLinks" :key="link.path">
+              <NuxtLink 
+                v-if="!link.disabled"
+                :to="link.path" 
+                class="group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
+                active-class="text-primary"
+              >
+                <span class="relative z-10">{{ link.label }}</span>
+                <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </NuxtLink>
+            </template>
           </div>
         </div>
   
         <!-- Mobile menu -->
-        <div 
-          v-show="isMenuOpen"
-          class="sm:hidden mt-4 space-y-2"
-        >
-          <NuxtLink 
-            to="/" 
-            class="block group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-            active-class="text-primary"
-            @click="isMenuOpen = false"
+        <AnimatePresence>
+          <Motion 
+            v-if="isMenuOpen"
+            as="div"
+            :initial="{ opacity: 0, y: -20 }"
+            :animate="{ opacity: 1, y: 0 }"
+            :exit="{ opacity: 0, y: -20 }"
+            :transition="{ 
+              type: 'spring',
+              stiffness: 300,
+              damping: 30
+            }"
+            class="mt-4 space-y-2"
           >
-            <span class="relative z-10">Home</span>
-            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </NuxtLink>
-          <NuxtLink 
-            to="/about" 
-            class="block group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-            active-class="text-primary"
-            @click="isMenuOpen = false"
-          >
-            <span class="relative z-10">About</span>
-            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </NuxtLink>
-          <NuxtLink 
-            to="/projects" 
-            class="block group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-            active-class="text-primary"
-            @click="isMenuOpen = false"
-          >
-            <span class="relative z-10">Projects</span>
-            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </NuxtLink>
-          <NuxtLink 
-            to="/contact" 
-            class="block group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
-            active-class="text-primary"
-            @click="isMenuOpen = false"
-          >
-            <span class="relative z-10">Contact</span>
-            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </NuxtLink>
-        </div>
+            <template v-for="(link, index) in navigationLinks" :key="link.path">
+              <Motion
+                v-if="!link.disabled"
+                :initial="{ opacity: 0, x: -20 }"
+                :animate="{ opacity: 1, x: 0 }"
+                :exit="{ opacity: 0, x: -20 }"
+                :transition="{ 
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                  delay: index * 0.1
+                }"
+              >
+                <NuxtLink 
+                  :to="link.path" 
+                  class="block group relative px-4 py-2 text-text-light hover:text-primary transition-colors duration-300"
+                  active-class="text-primary"
+                  @click="isMenuOpen = false"
+                >
+                  <span class="relative z-10">{{ link.label }}</span>
+                  <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </NuxtLink>
+              </Motion>
+            </template>
+          </Motion>
+        </AnimatePresence>
       </div>
     </nav>
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  
+  import { Motion, AnimatePresence } from 'motion-v'
   const isMenuOpen = ref(false)
+  
+  const navigationLinks = [
+    {
+      path: '/',
+      label: 'Home',
+      disabled: false
+    },
+    {
+      path: '/about',
+      label: 'About',
+      disabled: false
+    },
+    {
+      path: '/projects',
+      label: 'Projects',
+      disabled: true
+    },
+    {
+      path: '/contact',
+      label: 'Contact',
+      disabled: false
+    }
+  ]
   </script> 
