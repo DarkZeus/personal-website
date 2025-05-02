@@ -15,8 +15,8 @@ importers:
         specifier: ^13.1.0
         version: 13.1.0(vue@3.5.13(typescript@5.8.3))
       motion-v:
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2(vue@3.5.13(typescript@5.8.3))
+        specifier: 1.0.0
+        version: 1.0.0(vue@3.5.13(typescript@5.8.3))
       tailwindcss:
         specifier: ^4.1.4
         version: 4.1.4
@@ -2630,8 +2630,8 @@ packages:
   motion-utils@12.7.5:
     resolution: {integrity: sha512-JIgrmEq7Vw1x0AUrjvkRp7oMMQkGqSUMT50O/Ag6RRCQWG3gRRTkOI+BirBAJT6m+GIPoiyxkJ1u98GgF/a6TQ==}
 
-  motion-v@1.0.0-beta.2:
-    resolution: {integrity: sha512-NjG110Jf2zqdKulV20eMizXo2lutMGdrusqQ8oYdhTZGNLgKcbcxcS/ZF3ibj3C6oKmyhO8twwAW2FZmWmjVrA==}
+  motion-v@1.0.0:
+    resolution: {integrity: sha512-wkzVHgg5k7kPMelZ5wR3AOyNtgtXBfXEPGwdOv2vodv8iWTT523/wv6U7Xb/XNbpEF62O5Z1r8gQ/DYzh3T2KQ==}
     peerDependencies:
       vue: '>=3.0.0'
 
@@ -6660,7 +6660,7 @@ snapshots:
 
   motion-utils@12.7.5: {}
 
-  motion-v@1.0.0-beta.2(vue@3.5.13(typescript@5.8.3)):
+  motion-v@1.0.0(vue@3.5.13(typescript@5.8.3)):
     dependencies:
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.8.3))
       framer-motion: 12.5.0

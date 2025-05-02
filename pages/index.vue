@@ -11,7 +11,13 @@
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45rem] h-[45rem] rounded-full bg-primary/3 blur-3xl opacity-50"></div>
       
       <Motion
-        v-bind="motionConfig"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{
+          type: 'spring',
+          stiffness: 200,
+          damping: 50
+        }"
         class="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
@@ -180,4 +186,14 @@
 
 <script setup lang="ts">
 import { Motion } from "motion-v";
+
+const motionConfig = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: {
+    type: 'spring',
+    stiffness: 200,
+    damping: 50
+  }
+};
 </script>

@@ -57,12 +57,11 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'preload', href: '/components/layout/navbar.vue', as: 'script' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
       ]
     }
   },
 
-  compatibilityDate: '2025-04-22'
+  compatibilityDate: '2025-04-22',
 })
