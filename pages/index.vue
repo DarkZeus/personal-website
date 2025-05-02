@@ -29,7 +29,7 @@
               </span>
             </h1>
             <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl leading-relaxed text-pretty">
-              A detail-oriented Frontend Developer with 7+ years of experience, specializing in building responsive, user-friendly web applications with React and Vue ecosystems.
+              Performance-focused Frontend Developer with 7+ years of expertise across React and Vue ecosystems.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Motion

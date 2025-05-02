@@ -35,11 +35,7 @@
                   <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
                 </h2>
                 <p class="text-lg text-text-light leading-relaxed text-pretty" aria-labelledby="about-me">
-                  Detail-oriented Frontend Developer with 7+ years of experience across JavaScript frameworks and technologies.
-                  Proven expertise in building responsive, user-friendly web applications with React and Vue ecosystems.
-                  Skilled in optimizing performance, solving complex technical challenges, and enhancing developer experience
-                  through code quality improvements. Combines technical versatility with a commitment to continuous learning
-                  and professional growth.
+                  Performance-focused Frontend Developer with 7+ years of expertise across React and Vue ecosystems. Proven track record of building responsive, user-friendly web applications while enhancing developer experience through thoughtful code quality improvements and architectural advancements.
                 </p>
               </div>
 

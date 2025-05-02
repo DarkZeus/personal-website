@@ -55,7 +55,7 @@
                     </svg>
                   </template>
                   <template #content>
-                    <p class="text-text-light text-pretty">Kyiv, Ukraine</p>
+                    <p class="text-text-light text-pretty">Chernihiv, Ukraine</p>
                   </template>
                 </ContactInfo>
               </div>
