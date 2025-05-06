@@ -130,6 +130,7 @@ const navBlur = useTransform(scrollY,
 const menuItems = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' }
+  { path: '/projects', label: 'Projects' },
+  { path: '/contact', label: 'Contact' },
 ]
 </script> 

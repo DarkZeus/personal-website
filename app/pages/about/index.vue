@@ -68,87 +68,87 @@
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4 text-balance">Frontend Development</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Frontend Development skills">
-                    <skill-tag class="text-pretty" role="listitem">
+                    <SkillTag class="text-pretty" role="listitem">
                       <template #content>JavaScript (ES6+)</template>
-                    </skill-tag>
-                    <skill-tag class="text-pretty" role="listitem">
+                    </SkillTag>
+                    <SkillTag class="text-pretty" role="listitem">
                       <template #content>TypeScript</template>
-                    </skill-tag>
-                    <skill-tag class="text-pretty" role="listitem">
+                    </SkillTag>
+                    <SkillTag class="text-pretty" role="listitem">
                       <template #content>HTML5</template>
-                    </skill-tag>
-                    <skill-tag class="text-pretty" role="listitem">
+                    </SkillTag>
+                    <SkillTag class="text-pretty" role="listitem">
                       <template #content>CSS3/SCSS/BEM</template>
-                    </skill-tag>
+                    </SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4 text-balance">Frontend Frameworks</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Frontend Framework skills">
-                    <skill-tag role="listitem">
+                    <SkillTag role="listitem">
                       <template #content>React</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Redux (RTK)</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Vue.js 2/3</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Nuxt</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Pinia</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Vue Router</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Zustand</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>TanStack</template>
-                    </skill-tag>
+                    </SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4 text-balance">UI Libraries & Design</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="UI Libraries and Design skills">
-                    <skill-tag role="listitem">
+                    <SkillTag role="listitem">
                       <template #content>Material UI</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>TailwindCSS</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Shadcn/UI</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Chakra UI</template>
-                    </skill-tag>
+                    </SkillTag>
                   </div>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text mb-4 text-balance">Backend & Databases</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Backend and Database skills">
-                    <skill-tag role="listitem">
+                    <SkillTag role="listitem">
                       <template #content>PHP (Laravel)</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>Python</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>PostgreSQL</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>MySQL</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>SQLite</template>
-                    </skill-tag>
-                    <skill-tag role="listitem">
+                    </SkillTag>
+                    <SkillTag role="listitem">
                       <template #content>IndexedDB</template>
-                    </skill-tag>
+                    </SkillTag>
                   </div>
                 </div>
               </div>
@@ -191,10 +191,10 @@
                       </li>
                     </ul>
                     <div class="mt-4 flex flex-wrap gap-2" role="list" aria-label="Technologies used">
-                      <skill-tag role="listitem">React</skill-tag>
-                      <skill-tag role="listitem">Redux</skill-tag>
-                      <skill-tag role="listitem">SCSS</skill-tag>
-                      <skill-tag role="listitem">Material UI</skill-tag>
+                      <SkillTag role="listitem">React</SkillTag>
+                      <SkillTag role="listitem">Redux</SkillTag>
+                      <SkillTag role="listitem">SCSS</SkillTag>
+                      <SkillTag role="listitem">Material UI</SkillTag>
                     </div>
                   </div>
                 </div>
@@ -264,5 +264,6 @@
 
 <script setup>
 import HeroSection from '~/components/sections/hero-section.vue'
+import SkillTag from '~/components/ui/skill-tag.vue'
 import { CodeBracketIcon, BoltIcon, UsersIcon, PuzzlePieceIcon } from '@heroicons/vue/24/outline'
 </script> 
