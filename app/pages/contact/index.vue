@@ -167,4 +167,4 @@
 <script setup>
 import HeroSection from '~/components/sections/hero-section.vue'
 import ContactInfo from '~/components/ui/contact-info.vue'
-</script>
+</script> 

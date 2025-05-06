@@ -5,7 +5,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   components: false,
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
+  css: ['./app/assets/css/main.css'],
   modules: [
     'motion-v/nuxt'  
   ],
@@ -64,4 +64,7 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-04-22',
+  future: {
+    compatibilityVersion: 4,
+  },
 })
