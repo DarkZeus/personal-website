@@ -76,3 +76,19 @@ html {
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
   background-size: 24px 24px;
 }
+ 
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+}

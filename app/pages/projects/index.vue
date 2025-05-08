@@ -25,6 +25,8 @@
               :description="project.description"
               :link="project.link"
               :tags="project.tags"
+              :image="project.image"
+              :badge="project.badge"
               class="text-pretty"
             />
           </div>
@@ -40,28 +42,28 @@ import ProjectCard from '~/components/ui/project-card.vue'
 
 const projects = [
   {
+    title: "Playstation 5 Web Dashboard",
+    description: "A web-based recreation of the PlayStation 5's user interface dashboard design. Built with modern web technologies to deliver a smooth, interactive experience.",
+    link: "https://playstation-dashboard.pages.dev/",
+    tags: ['Vue.js', 'Nuxt', 'Tailwind CSS', 'TypeScript', 'Motion',],
+    image: "/images/playstation-dashboard.jpg",
+    badge: {
+      text: "Research Pet Project",
+      color: "bg-purple-500/10 text-purple-500 border-purple-500"
+    }
+  },
+  {
     title: "Personal Portfolio",
     description: "A modern, responsive portfolio website showcasing my work and skills, built with Vue.js and Nuxt.",
-    link: "#",
-    tags: ['Vue.js', 'Nuxt', 'Tailwind CSS', 'TypeScript']
+    link: "https://fuad.work/",
+    tags: ['Vue.js', 'Nuxt', 'Tailwind CSS', 'TypeScript', 'Motion'],
+    image: "/images/personal-website.png"
   },
-  {
-    title: "Psychochauffer Bot WebUI",
-    description: "A full-featured dashboard for all-purpose Telegram bot with per-chat real-time monitoring, config edit, and analytics.",
-    link: "#",
-    tags: ['React', 'TanStack (Router, Query, Table)', 'Shadcn/UI']
-  },
-  {
-    title: "Premium Deluxe Motorsport",
-    description: "An in-game automotive dealer website",
-    link: "#",
-    tags: ['HTML/CSS', 'JavaScript']
-  },
-  {
-    title: "Weather Dashboard",
-    description: "A weather dashboard that displays real-time weather data and forecasts.",
-    link: "#",
-    tags: ['Vue.js', 'OpenWeather API', 'Chart.js']
-  }
+  // {
+  //   title: "Psychochauffer Bot WebUI",
+  //   description: "A full-featured dashboard for all-purpose Telegram bot with per-chat real-time monitoring, config edit, and analytics.",
+  //   link: "#",
+  //   tags: ['React', 'TanStack (Router, Query, Table)', 'Shadcn/UI']
+  // },
 ]
 </script> 

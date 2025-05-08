@@ -1,5 +1,7 @@
 <template>
   <section class="relative py-24 flex items-center justify-center overflow-hidden">
+    <AuroraBackground class="absolute inset-0" />
+    
     <!-- Grid pattern background -->
     <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
     
@@ -22,4 +24,8 @@
     <!-- Scroll indicator slot -->
     <slot name="scroll-indicator" />
   </section>
-</template> 
+</template>
+
+<script setup lang="ts">
+import AuroraBackground from '../AuroraBackground.vue'
+</script> 
