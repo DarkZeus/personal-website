@@ -23,7 +23,7 @@
           </span>
         </div>
         <div class="mt-4 flex flex-wrap gap-2">
-          <span v-if="badge" :class="['px-2 py-0.5 rounded-full text-xs font-medium border', badge.color]">
+          <span v-if="badge" :class="['flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium', badge.color]">
             {{ badge.text }}
           </span>
         </div>
