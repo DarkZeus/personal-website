@@ -9,6 +9,23 @@
       backdropFilter: navBlur
     }"
   >
+    <!-- SVG Filter for liquid glass effect -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="liquid-glass" color-interpolation-filters="sRGB">
+          <feImage
+            :href="displacementMap"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            result="map"
+          />
+          <feDisplacementMap in2="map" in="SourceGraphic" scale="-180" xChannelSelector="R" yChannelSelector="B" />
+        </filter>
+      </defs>
+    </svg>
+
     <div class="bg-soft-titanium/50 backdrop-blur-sm px-4 sm:px-6 py-3 will-change-transform rounded-[inherit]">
       <div class="flex items-center justify-between">
         <NuxtLink to="/" class="text-primary font-display font-medium text-xl tracking-tight hover:opacity-80 transition-opacity will-change-opacity">Serhii Resnianskyi</NuxtLink>
@@ -90,11 +107,47 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { motion, useScroll, useMotionValueEvent, AnimatePresence, useTransform } from 'motion-v'
 
 const isMenuOpen = ref(false)
 const { scrollY } = useScroll()
+
+// Create displacement map for liquid glass effect
+const displacementMap = computed(() => {
+  // Match original configuration values
+  const width = 400
+  const height = 60
+  const radius = 8
+  const border = Math.min(width, height) * (0.07 * 0.5) // Original border calculation
+  const lightness = 50
+  const alpha = 0.93
+  const blur = 11
+  
+  const svg = `
+    <svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="red" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#0000"/>
+          <stop offset="100%" stop-color="red"/>
+        </linearGradient>
+        <linearGradient id="blue" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0000"/>
+          <stop offset="100%" stop-color="blue"/>
+        </linearGradient>
+      </defs>
+      <!-- backdrop -->
+      <rect x="0" y="0" width="${width}" height="${height}" fill="black"/>
+      <!-- red linear -->
+      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#red)"/>
+      <!-- blue linear -->
+      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#blue)" style="mix-blend-mode: difference"/>
+      <!-- block out distortion -->
+      <rect x="${border}" y="${border}" width="${width - border * 2}" height="${height - border * 2}" rx="${radius}" fill="hsl(0 0% ${lightness}% / ${alpha})" style="filter:blur(${blur}px)"/>
+    </svg>
+  `
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`
+})
 
 // Create smooth interpolated values for each animated property
 const navWidth = useTransform(scrollY, 
@@ -123,7 +176,7 @@ const navShadow = useTransform(scrollY,
 
 const navBlur = useTransform(scrollY,
   [0, 100],
-  ['none', 'blur(10px)'],
+  ['none', 'url(#liquid-glass) blur(3px)'],
   { clamp: true }
 )
 

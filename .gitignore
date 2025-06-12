@@ -25,7 +25,8 @@ dist
 *.sln
 *.sw?
 .DS_Store
-.cursor
+.cursor/
+!.cursor/rules/
 
 # Logs
 logs
