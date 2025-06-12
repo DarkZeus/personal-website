@@ -26,7 +26,7 @@
       </defs>
     </svg>
 
-    <div class="bg-soft-titanium/50 backdrop-blur-sm px-4 sm:px-6 py-3 will-change-transform rounded-[inherit]">
+    <div class="bg-soft-titanium/50 backdrop-blur-[3px] px-4 sm:px-6 py-3 will-change-transform rounded-[inherit]">
       <div class="flex items-center justify-between">
         <NuxtLink to="/" class="text-primary font-display font-medium text-xl tracking-tight hover:opacity-80 transition-opacity will-change-opacity">Serhii Resnianskyi</NuxtLink>
         
@@ -115,17 +115,8 @@ const { scrollY } = useScroll()
 
 // Create displacement map for liquid glass effect
 const displacementMap = computed(() => {
-  // Match original configuration values
-  const width = 400
-  const height = 60
-  const radius = 8
-  const border = Math.min(width, height) * (0.07 * 0.5) // Original border calculation
-  const lightness = 50
-  const alpha = 0.93
-  const blur = 11
-  
   const svg = `
-    <svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="red" x1="100%" y1="0%" x2="0%" y2="0%">
           <stop offset="0%" stop-color="#0000"/>
@@ -136,14 +127,10 @@ const displacementMap = computed(() => {
           <stop offset="100%" stop-color="blue"/>
         </linearGradient>
       </defs>
-      <!-- backdrop -->
-      <rect x="0" y="0" width="${width}" height="${height}" fill="black"/>
-      <!-- red linear -->
-      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#red)"/>
-      <!-- blue linear -->
-      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#blue)" style="mix-blend-mode: difference"/>
-      <!-- block out distortion -->
-      <rect x="${border}" y="${border}" width="${width - border * 2}" height="${height - border * 2}" rx="${radius}" fill="hsl(0 0% ${lightness}% / ${alpha})" style="filter:blur(${blur}px)"/>
+      <rect width="100" height="100" fill="black"/>
+      <rect width="100" height="100" rx="8" fill="url(#red)"/>
+      <rect width="100" height="100" rx="8" fill="url(#blue)" style="mix-blend-mode: difference"/>
+      <rect x="3.5" y="3.5" width="93" height="93" rx="8" fill="hsl(0 0% 50% / 0.93)" style="filter:blur(11px)"/>
     </svg>
   `
   return `data:image/svg+xml,${encodeURIComponent(svg)}`
