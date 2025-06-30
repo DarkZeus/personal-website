@@ -42,6 +42,23 @@ import ProjectCard from '~/components/ui/project-card.vue'
 
 const projects = [
   {
+    title: "YAFFW - Yet Another FFmpeg Wrapper",
+    description: "A simple, browser-based video editor built with React and FFmpeg. Trim, convert (TBD), and concatenate (TBD) videos with an intuitive interface and keyboard shortcuts.",
+    link: "https://github.com/DarkZeus/yaffw",
+    tags: ['React', 'TanStack', 'Hono', 'FFmpeg', 'Tailwind CSS', 'TypeScript', 'Shadcn/UI',],
+    image: "https://github.com/DarkZeus/yaffw/raw/master/public/screenshot.jpg?raw=true",
+    badges: [
+      {
+        text: "Personal Project",
+        color: "bg-green-500/10 text-green-500 border-green-500"
+      },
+      {
+        text: "In progress",
+        color: "bg-blue-500/10 text-blue-500 border-blue-500"
+      }
+    ]
+  },
+  {
     title: "Playstation 5 Web Dashboard",
     description: "A web-based recreation of the PlayStation 5's user interface dashboard design. Built with modern web technologies to deliver a smooth, interactive experience.",
     link: "https://playstation-dashboard.pages.dev/",
