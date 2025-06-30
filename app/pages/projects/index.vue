@@ -26,7 +26,7 @@
               :link="project.link"
               :tags="project.tags"
               :image="project.image"
-              :badge="project.badge"
+              :badges="project.badges"
               class="text-pretty"
             />
           </div>
@@ -47,10 +47,16 @@ const projects = [
     link: "https://playstation-dashboard.pages.dev/",
     tags: ['Vue.js', 'Nuxt', 'Tailwind CSS', 'TypeScript', 'Motion',],
     image: "/images/playstation-dashboard.jpg",
-    badge: {
-      text: "Research Pet Project",
-      color: "bg-purple-500/10 text-purple-500 border-purple-500"
-    }
+    badges: [
+      {
+        text: "Research Pet Project",
+        color: "bg-purple-500/10 text-purple-500 border-purple-500"
+      },
+      {
+        text: "In progress",
+        color: "bg-blue-500/10 text-blue-500 border-blue-500"
+      }
+    ]
   },
   {
     title: "Personal Portfolio",

@@ -21,9 +21,7 @@
           <span v-for="tag in tags" :key="tag" class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary">
             {{ tag }}
           </span>
-        </div>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <span v-if="badge" :class="['flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium', badge.color]">
+          <span v-for="badge in badges" v-if="badges" :key="badge.text.toLowerCase()" :class="['px-2 py-0.5 rounded-full text-xs font-medium border', badge.color]">
             {{ badge.text }}
           </span>
         </div>
@@ -54,8 +52,8 @@ defineProps({
     type: String,
     required: false
   },
-  badge: {
-    type: Object,
+  badges: {
+    type: Array,
     required: false,
     default: null
   }
