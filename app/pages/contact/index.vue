@@ -98,45 +98,45 @@
               <div class="space-y-6">
                 <div class="space-y-4">
                   <h3 class="text-xl font-display font-medium text-text">What I Do</h3>
-                  <ul class="space-y-3">
+                  <ul class="space-y-5">
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
                       <p class="text-text-light text-pretty">Full-stack web development with modern technologies</p>
                     </li>
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <p class="text-text-light text-pretty">Building scalable and maintainable applications</p>
+                      <p class="text-text-light text-pretty">Performance optimization and scalable architecture design</p>
                     </li>
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <p class="text-text-light text-pretty">Collaborative team player with strong communication skills</p>
+                      <p class="text-text-light text-pretty">Cross-functional collaboration and technical mentorship</p>
                     </li>
                   </ul>
                 </div>
 
                 <div class="space-y-4">
                   <h3 class="text-xl font-display font-medium text-text">What I'm Looking For</h3>
-                  <ul class="space-y-3">
+                  <ul class="space-y-5">
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
                       <p class="text-text-light text-pretty">Full-time remote or hybrid positions</p>
                     </li>
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
                       <p class="text-text-light text-pretty">Opportunities for growth and learning</p>
                     </li>
                     <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="w-6 h-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                       </svg>
                       <p class="text-text-light text-pretty">Collaborative and innovative team environment</p>

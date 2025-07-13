@@ -29,7 +29,7 @@
               </span>
             </h1>
             <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl leading-relaxed text-pretty">
-              Web Developer with 7+ years of experience in both frontend and backend technologies, strong in 
+              Experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical decision-making in complex environments. Expert in
               <span class="inline-flex items-center gap-1.5 -mt-4 px-4 py-0.5 rounded-full text-sm border bg-[#61DAFB]/10 border border-[#61DAFB]">
                 <svg class="w-4 h-4" viewBox="0 0 569 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g fill="none" fill-rule="evenodd">
