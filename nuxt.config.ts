@@ -7,7 +7,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
   modules: [
-    'motion-v/nuxt'  
+    'motion-v/nuxt',
+    '@nuxtjs/seo',
+    '@nuxtjs/sitemap',
+    'nuxt-og-image',
   ],
 
   experimental: {
@@ -56,7 +59,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Personal website of Serhii Resnianskyi, a software engineer specializing in web development and modern technologies.' },
+        { name: 'description', content: 'Personal website of Serhii Resnianskyi, an experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical decision-making in complex environments. Expert in React and Vue ecosystems.' },
         { name: 'keywords', content: 'software engineer, web development, full-stack developer, Serhii Resnianskyi' },
         { name: 'author', content: 'Serhii Resnianskyi' },
         { name: 'robots', content: 'index, follow' },
@@ -64,16 +67,16 @@ export default defineNuxtConfig({
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://fuad.work/' },
-        { property: 'og:title', content: 'Serhii Resnianskyi - Software Engineer' },
-        { property: 'og:description', content: 'Personal website of Serhii Resnianskyi, a software engineer specializing in web development and modern technologies.' },
-        { property: 'og:image', content: 'https://fuad.work/og-image.jpg' },
+        { property: 'og:title', content: 'Serhii Resnianskyi' },
+        { property: 'og:description', content: 'Personal website of Serhii Resnianskyi, an experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical decision-making in complex environments. Expert in React and Vue ecosystems.' },
+        { property: 'og:image', content: 'https://fuad.work/images/og-image.png' },
         
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:url', content: 'https://fuad.work/' },
         { name: 'twitter:title', content: 'Serhii Resnianskyi - Software Engineer' },
-        { name: 'twitter:description', content: 'Personal website of Serhii Resnianskyi, a software engineer specializing in web development and modern technologies.' },
-        { name: 'twitter:image', content: 'https://fuad.work/og-image.jpg' },
+        { name: 'twitter:description', content: 'Personal website of Serhii Resnianskyi, an experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical decision-making in complex environments. Expert in React and Vue ecosystems.' },
+        { name: 'twitter:image', content: 'https://fuad.work/images/og-image.png' },
         
         // Additional SEO
         { name: 'format-detection', content: 'telephone=no' },
@@ -86,6 +89,11 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://fuad.work/' }
       ]
     }
+  },
+
+  site: {
+    url: "https://fuad.work/",
+    name: "Serhii Resnianskyi - Software Engineer"
   },
 
   compatibilityDate: '2025-04-22',

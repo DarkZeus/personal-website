@@ -76,7 +76,7 @@
                 to="/about"
                 class="group relative px-8 py-3 text-base font-medium rounded-md text-primary overflow-hidden"
               >
-                <span class="relative z-10">Learn more</span>
+                <span class="relative z-10">About me</span>
                 <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <!-- Button decoration -->
                 <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20"></div>

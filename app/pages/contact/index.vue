@@ -27,7 +27,12 @@
                     </svg>
                   </template>
                   <template #content>
-                    <a href="mailto:serhii.resnyanskyi@gmail.com" class="text-text-light hover:text-primary transition-colors duration-300 text-pretty">serhii.resnyanskyi@gmail.com</a>
+                    <ClientOnly>
+                      <a href="mailto:serhii.resnyanskyi@gmail.com" class="text-text-light hover:text-primary transition-colors duration-300 text-pretty">serhii.resnyanskyi@gmail.com</a>
+                      <template #fallback>
+                        <span class="email-placeholder">Get in touch</span>
+                      </template>
+                    </ClientOnly>
                   </template>
                 </ContactInfo>
 
@@ -145,15 +150,20 @@
                 </div>
 
                 <div class="pt-4">
-                  <a 
-                    href="mailto:serhii.resnyanskyi@gmail.com" 
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-300"
-                  >
-                    <span>Let's Connect</span>
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </a>
+                  <ClientOnly>
+                    <a 
+                      href="mailto:serhii.resnyanskyi@gmail.com" 
+                      class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-300"
+                    >
+                      <span>Let's Connect</span>
+                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
+                    <template #fallback>
+                      <span class="email-placeholder">Get in touch</span>
+                    </template>
+                  </ClientOnly>
                 </div>
               </div>
             </div>
