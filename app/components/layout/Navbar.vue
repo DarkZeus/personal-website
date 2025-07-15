@@ -1,11 +1,12 @@
 <template>
   <motion.nav 
-    class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full will-change-transform"
+    class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full will-change-transform transition-shadow"
+    :class="isScrolled ? 'ring-1 ring-text/[0.1] shadow-lg' : 'ring-1 ring-transparent shadow-none'"
     :style="{
       width: navWidth,
       y: navOffset,
       borderRadius: navRadius,
-      boxShadow: navShadow,
+      // boxShadow: navShadow,
       backdropFilter: navBlur
     }"
   >
@@ -52,7 +53,7 @@
             class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
             active-class="text-primary [&>div]:opacity-100"
           >
-            <span class="relative z-10">{{ item.label }}</span>
+            <span class="relative z-10 uppercase font-medium text-xs tracking-wide">{{ item.label }}</span>
             <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
           </NuxtLink>
         </div>
@@ -80,7 +81,7 @@
             active-class="text-primary [&>div]:opacity-100"
             @click="isMenuOpen = false"
           >
-            <span class="relative z-10">{{ item.label }}</span>
+            <span class="relative z-10 uppercase tracking-wide">{{ item.label }}</span>
             <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
           </NuxtLink>
         </motion.div>
@@ -94,7 +95,10 @@ import { ref } from 'vue'
 import { motion, useScroll, useMotionValueEvent, AnimatePresence, useTransform } from 'motion-v'
 
 const isMenuOpen = ref(false)
+const isScrolled = ref(false) // Add this Vue ref
 const { scrollY } = useScroll()
+
+useMotionValueEvent(scrollY, "change", (latest) => isScrolled.value = latest > 10)
 
 // Create smooth interpolated values for each animated property
 const navWidth = useTransform(scrollY, 

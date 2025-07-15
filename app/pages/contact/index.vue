@@ -93,12 +93,7 @@
           <!-- Let's Work Together Section -->
           <div class="space-y-8">
             <div class="bg-surface rounded-lg shadow-card p-8">
-              <div class="flex items-center gap-3 mb-6">
-                <div class="flex items-center gap-2 px-3 py-1 bg-green-500/10 rounded-full">
-                  <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span class="text-sm font-medium text-green-500">Open to full-time opportunities</span>
-                </div>
-              </div>
+              <OpenToOpportunities />
               <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Let's Work Together</h2>
               <div class="space-y-6">
                 <div class="space-y-4">
@@ -177,4 +172,5 @@
 <script setup>
 import HeroSection from '~/components/sections/hero-section.vue'
 import ContactInfo from '~/components/ui/contact-info.vue'
+import OpenToOpportunities from '~/components/ui/open-to-opportunities.vue'
 </script> 

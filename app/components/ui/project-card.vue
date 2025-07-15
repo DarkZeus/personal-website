@@ -2,7 +2,7 @@
   <a :href="link" target="_blank" rel="noopener noreferrer" class="block group">
     <div class="bg-surface rounded-lg shadow-card hover:shadow-glass transition-all duration-300 overflow-hidden">
       <div v-if="image" class="aspect-video bg-primary/5 flex items-center justify-center">
-        <img :src="image" :alt="title" class="object-cover w-full h-full" />
+        <img :src="image" :alt="title || 'Project image'" class="object-cover w-full h-full" loading="lazy" decoding="async" width="640" height="360" />
       </div>
       <div v-else class="aspect-video bg-primary/5"></div>
       <div class="p-6">

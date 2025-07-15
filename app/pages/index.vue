@@ -174,7 +174,8 @@
       <div class="absolute -bottom-1/3 -left-1/3 w-[60rem] h-[60rem] rounded-full bg-primary/3 blur-3xl"></div>
       <div class="absolute top-1/2 left-0 w-[30rem] h-[30rem] rounded-full bg-primary/3 blur-2xl opacity-50"></div>
       
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex flex-col items-center justify-center">
+        <OpenToOpportunities />
         <div class="text-center">
           <h2 class="text-4xl font-display font-semibold text-text text-balance relative inline-block">
             Let's Work Together
@@ -203,4 +204,5 @@
 
 <script setup lang="ts">
 import { Motion } from "motion-v"
+import OpenToOpportunities from '~/components/ui/open-to-opportunities.vue'
 </script> 
