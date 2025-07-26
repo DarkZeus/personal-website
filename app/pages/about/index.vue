@@ -435,7 +435,7 @@
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-text">Bachelor's Degree in Mathematical Modeling and Cybersecurity</h3>
-                  <p class="text-sm text-text-light/80">2018 - 2021</p>
+                  <p class="text-sm text-text-light/80">2017 - 2021</p>
                   <p class="text-text-light">Chernihiv Polytechnic National University, Ukraine</p>
                 </div>
               </div>
