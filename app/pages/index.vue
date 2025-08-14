@@ -150,7 +150,7 @@
               bounce: 0,
               delay: index * 0.2
             }"
-            class="group bg-surface rounded-lg shadow-card hover:shadow-glass transition-all duration-300 p-6 relative overflow-hidden"
+            class="group ring-1 ring-text/[0.05] bg-surface rounded-lg shadow-card hover:shadow-glass transition-all duration-300 p-6 relative overflow-hidden"
           >
             <!-- Decorative corner -->
             <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>

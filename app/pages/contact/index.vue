@@ -13,11 +13,11 @@
     <!-- Contact Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       
-      <section class="py-12 relative overflow-hidden">
+      <section class="py-12 relative">
         <div class="grid gap-16 lg:grid-cols-2">
           <!-- Contact Information -->
           <div class="space-y-8">
-            <div class="bg-surface rounded-lg shadow-card p-8">
+            <div class="bg-surface rounded-lg shadow-card p-8 ring-1 ring-text/[0.05]">
               <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Contact Information</h2>
               <div class="space-y-6">
                 <ContactInfo title="Email">
@@ -61,7 +61,7 @@
               </div>
             </div>
 
-            <div class="bg-surface rounded-lg shadow-card p-8">
+            <div class="bg-surface rounded-lg shadow-card p-8 ring-1 ring-text/[0.05]">
               <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Social Media</h2>
               <div class="flex gap-4">
                 <a 
@@ -92,7 +92,7 @@
 
           <!-- Let's Work Together Section -->
           <div class="space-y-8">
-            <div class="bg-surface rounded-lg shadow-card p-8">
+            <div class="bg-surface rounded-lg shadow-card p-8 ring-1 ring-text/[0.05]">
               <OpenToOpportunities />
               <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Let's Work Together</h2>
               <div class="space-y-6">

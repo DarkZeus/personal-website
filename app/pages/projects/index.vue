@@ -46,7 +46,7 @@ const projects = [
     description: "A simple, browser-based video editor built with React and FFmpeg. Trim, convert (TBD), and concatenate (TBD) videos with an intuitive interface and keyboard shortcuts.",
     link: "https://github.com/DarkZeus/yaffw",
     tags: ['React', 'TanStack', 'Hono', 'FFmpeg', 'Tailwind CSS', 'TypeScript', 'Shadcn/UI',],
-    image: "https://github.com/DarkZeus/yaffw/raw/master/public/screenshot.jpg?raw=true",
+    image: "https://raw.githubusercontent.com/DarkZeus/yaffw/refs/heads/master/public/image.png",
     badges: [
       {
         text: "Personal Project",
