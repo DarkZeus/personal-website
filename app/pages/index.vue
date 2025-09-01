@@ -175,7 +175,7 @@
       <div class="absolute top-1/2 left-0 w-[30rem] h-[30rem] rounded-full bg-primary/3 blur-2xl opacity-50"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex flex-col items-center justify-center">
-        <OpenToOpportunities />
+<!--        <OpenToOpportunities />-->
         <div class="text-center">
           <h2 class="text-4xl font-display font-semibold text-text text-balance relative inline-block">
             Let's Work Together

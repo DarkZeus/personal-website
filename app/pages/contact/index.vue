@@ -93,7 +93,7 @@
           <!-- Let's Work Together Section -->
           <div class="space-y-8">
             <div class="bg-surface rounded-lg shadow-card p-8 ring-1 ring-text/[0.05]">
-              <OpenToOpportunities />
+<!--              <OpenToOpportunities />-->
               <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance">Let's Work Together</h2>
               <div class="space-y-6">
                 <div class="space-y-4">

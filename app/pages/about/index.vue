@@ -347,140 +347,34 @@
                 <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
               </h2>
               <div class="space-y-8" role="list" aria-labelledby="experience">
-                <div class="relative pl-8" role="listitem">
+                <div v-for="(experience, index) in cards.workExperience" :key="index" class="relative pl-8"
+                     role="listitem">
                   <div class="absolute left-0 top-3 w-2 h-2 rounded-sm bg-primary" aria-hidden="true"></div>
-                  <div class="absolute left-1 top-4 bottom-0 w-px bg-primary/20" aria-hidden="true"></div>
+                  <div v-if="index !== cards.workExperience.length - 1"
+                       class="absolute left-1 top-4 bottom-0 w-px bg-primary/20" aria-hidden="true"></div>
                   <div>
-                    <h3 class="text-xl font-semibold text-text text-balance">Middle Software Engineer (Web &
-                      Mobile)</h3>
-                    <p class="text-text-light text-pretty">LeverX, Kyiv</p>
-                    <p class="text-sm text-text-light/80 text-pretty">Oct 2021 – Dec 2024 (3 years, 2 months)</p>
-                    <ul class="mt-4 space-y-2 text-text-light" role="list"
+                    <h3 class="text-xl font-semibold text-text text-balance">{{ experience.title }}</h3>
+                    <p class="text-text-light text-pretty">{{ experience.company }}</p>
+                    <p class="text-sm text-text-light/80 text-pretty">{{ experience.duration }}</p>
+
+                    <p v-if="experience.description" class="mt-4 text-text-light">{{ experience.description }}</p>
+
+                    <ul v-if="experience.achievements.length" class="mt-4 space-y-2 text-text-light" role="list"
                         aria-label="Key responsibilities and achievements">
-                      <li class="flex items-start gap-2 text-pretty">
+                      <li v-for="achievement in experience.achievements" :key="achievement"
+                          class="flex items-start gap-2 text-pretty">
                         <span class="text-primary">•</span>
-                        Researched and delivered proof-of-concept offline-first architecture using IndexedDB, enabling
-                        critical functionality during network outages and informing long-term technical strategy
-                      </li>
-                      <li class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary">•</span>
-                        Led performance optimization initiative for data visualization components, collaborating across
-                        design and product teams to deliver 50% rendering improvements through strategic technical
-                        analysis and cross-functional alignment
-                      </li>
-                      <li class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary">•</span>
-                        Drove standardization of core table architecture, eliminating performance bottlenecks and
-                        establishing reusable patterns that accelerated team velocity and improved developer
-                        productivity across multiple product areas
-                      </li>
-                      <li class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary">•</span>
-                        Spearheaded platform modernization efforts including Webpack-to-Vite migration (achieving 60%
-                        build time reduction), React/Material UI framework upgrades, and Vue 2-to-3 architectural
-                        transition, ensuring technical debt reduction and developer experience improvements
-                      </li>
-                      <li class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary">•</span>
-                        Designed and implemented client-side data processing solution, enabling advanced filtering and
-                        pagination capabilities for locally cached data and reducing dependency on server-side
-                        operations
+                        {{ achievement }}
                       </li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2" role="list" aria-label="Technologies used">
-                      <SkillTag role="listitem">
-                        <template #content>React</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Redux</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>SCSS</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Material UI</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Vue 2</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Vuex</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Vue 3</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>TypeScript</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Pinia</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Nuxt 3</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>RESTful APIs</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>CI/CD pipeline</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>GitHub</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>GitHub Actions</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>AWS</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Azure DevOps</template>
-                      </SkillTag>
-                      <SkillTag role="listitem">
-                        <template #content>Azure Blob Storage</template>
-                      </SkillTag>
-                    </div>
-                    <p class="mt-4 text-sm text-text-light/80 italic">Client projects completed under confidentiality
-                      agreements</p>
-                  </div>
-                </div>
 
-                <div class="relative pl-8">
-                  <div class="absolute left-0 top-3 w-2 h-2 rounded-sm bg-primary"></div>
-                  <div class="absolute left-1 top-4 bottom-0 w-px bg-primary/20"></div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-text">Software Engineer</h3>
-                    <p class="text-text-light">PJSC Chernihivoblenergo</p>
-                    <p class="text-sm text-text-light/80">Dec 2018 – Sep 2021 (2 years, 9 months)</p>
-                    <p class="mt-4 text-text-light">Architected and delivered web platform for regional electrical
-                      distribution company, supporting critical business operations including HR management, asset
-                      inventory, and service coordination. Developed full-stack solutions using Laravel and Vue 2 that
-                      enabled efficient management of infrastructure serving residential and commercial customers across
-                      Chernihiv region.</p>
                     <div class="mt-4 flex flex-wrap gap-2" role="list" aria-label="Technologies used">
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">Laravel</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">Vue 2</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">PostgreSQL</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">MySQL</span>
+                      <SkillTag v-for="tech in experience.technologies" :key="tech" role="listitem">
+                        <template #content>{{ tech }}</template>
+                      </SkillTag>
                     </div>
-                  </div>
-                </div>
 
-                <div class="relative pl-8">
-                  <div class="absolute left-0 top-3 w-2 h-2 rounded-sm bg-primary"></div>
-                  <div class="absolute left-1 top-4 bottom-0 w-px bg-primary/20"></div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-text">Web Developer</h3>
-                    <p class="text-text-light">Freelance</p>
-                    <p class="text-sm text-text-light/80">Jan 2017 – Aug 2018 (1 year, 8 months)</p>
-                    <p class="mt-4 text-text-light">Delivered frontend solutions across diverse client projects,
-                      focusing on user experience optimization and responsive interface design.</p>
-                    <div class="mt-4 flex flex-wrap gap-2" role="list" aria-label="Technologies used">
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">HTML/CSS</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">JavaScript</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">jQuery</span>
-                      <span class="px-3 py-1 rounded-md text-sm font-medium bg-primary/10 text-primary" role="listitem">Vue 2</span>
-                    </div>
+                    <p v-if="experience.note" class="mt-4 text-sm text-text-light/80 italic">{{ experience.note }}</p>
                   </div>
                 </div>
               </div>
@@ -532,7 +426,7 @@
                         rel="noopener noreferrer"
                         :href="item.certificateUrl">
                       {{ item.title }}
-                    <span class="size-4  inline-flex transform-gpu translate-y-[2px]">
+                      <span class="size-4  inline-flex transform-gpu translate-y-[2px]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                              stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -560,7 +454,9 @@ import HeroSection from '~/components/sections/hero-section.vue'
 import SkillTag from '~/components/ui/skill-tag.vue'
 import {CodeBracketIcon, BoltIcon, UsersIcon, PuzzlePieceIcon} from '@heroicons/vue/24/outline'
 import {motion} from "motion-v"
+import {useDuration} from "../../composables/useDuration.js";
 
+// Add this to your script setup section
 const cards = {
   qualities: [
     {
@@ -587,7 +483,7 @@ const cards = {
   courses: [
     {
       title: 'Bare Metal JavaScript: The JavaScript Virtual Machine',
-      author: 'Miško Hevery, FrontendMasters',
+      author: 'MiÅ¡ko Hevery, FrontendMasters',
       date: 'Aug 2025',
       certificateUrl: 'https://static.frontendmasters.com/ud/c/bae1a70cbd/svRMuXHpHA/javascript-cpu-vm.pdf',
     },
@@ -603,6 +499,54 @@ const cards = {
       date: 'Feb 2025',
       certificateUrl: 'https://animations.dev/certificate/c1c416ee-96cf-4e70-9269-78e3b4404e68',
     }
-  ]
-}
+  ],
+  workExperience: [
+    {
+      title: 'Middle Frontend Developer',
+      company: 'Paybis',
+      duration: useDuration('2025-09-01'),
+      description: null,
+      achievements: [],
+      technologies: ['Vue 3', 'Pinia', 'Vue router', 'Vuex', 'TailwindCSS'],
+      note: null
+    },
+    {
+      title: 'Middle Software Engineer (Web & Mobile)',
+      company: 'LeverX, Kyiv',
+      duration: 'Oct 2021 — Dec 2024 (3 years, 2 months)',
+      description: null,
+      achievements: [
+        'Researched and delivered proof-of-concept offline-first architecture using IndexedDB, enabling critical functionality during network outages and informing long-term technical strategy',
+        'Led performance optimization initiative for data visualization components, collaborating across design and product teams to deliver 50% rendering improvements through strategic technical analysis and cross-functional alignment',
+        'Drove standardization of core table architecture, eliminating performance bottlenecks and establishing reusable patterns that accelerated team velocity and improved developer productivity across multiple product areas',
+        'Spearheaded platform modernization efforts including Webpack-to-Vite migration (achieving 60% build time reduction), React/Material UI framework upgrades, and Vue 2-to-3 architectural transition, ensuring technical debt reduction and developer experience improvements',
+        'Designed and implemented client-side data processing solution, enabling advanced filtering and pagination capabilities for locally cached data and reducing dependency on server-side operations'
+      ],
+      technologies: [
+        'React', 'Redux', 'SCSS', 'Material UI', 'Vue 2', 'Vuex', 'Vue 3',
+        'TypeScript', 'Pinia', 'Nuxt 3', 'RESTful APIs', 'CI/CD pipeline',
+        'GitHub', 'GitHub Actions', 'AWS', 'Azure DevOps', 'Azure Blob Storage'
+      ],
+      note: 'Client projects completed under confidentiality agreements'
+    },
+    {
+      title: 'Software Engineer',
+      company: 'PJSC Chernihivoblenergo',
+      duration: 'Dec 2018 — Sep 2021 (2 years, 9 months)',
+      description: 'Architected and delivered web platform for regional electrical distribution company, supporting critical business operations including HR management, asset inventory, and service coordination. Developed full-stack solutions using Laravel and Vue 2 that enabled efficient management of infrastructure serving residential and commercial customers across Chernihiv region.',
+      achievements: [],
+      technologies: ['Laravel', 'Vue 2', 'PostgreSQL', 'MySQL'],
+      note: null
+    },
+    {
+      title: 'Web Developer',
+      company: 'Freelance',
+      duration: 'Jan 2017 — Aug 2018 (1 year, 8 months)',
+      description: 'Delivered frontend solutions across diverse client projects, focusing on user experience optimization and responsive interface design.',
+      achievements: [],
+      technologies: ['HTML/CSS', 'JavaScript', 'jQuery', 'Vue 2'],
+      note: null
+    }
+  ],
+};
 </script>
