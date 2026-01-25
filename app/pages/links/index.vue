@@ -11,7 +11,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <!-- Featured Links -->
       <section class="py-12">
-        <h2 class="text-2xl font-display font-semibold text-text mb-8">Featured</h2>
+        <h2 class="text-2xl font-display font-semibold text-text dark:text-text-dark mb-8">Featured</h2>
         <div class="grid gap-4 sm:grid-cols-2">
           <LinkCard
             v-for="link in featuredLinks"
@@ -25,8 +25,8 @@
       </section>
 
       <!-- More Links -->
-      <section class="py-12 border-t border-text/[0.05]">
-        <h2 class="text-2xl font-display font-semibold text-text mb-8">More</h2>
+      <section class="py-12 border-t border-text/[0.05] dark:border-border-dark">
+        <h2 class="text-2xl font-display font-semibold text-text dark:text-text-dark mb-8">More</h2>
         <div class="grid gap-4 sm:grid-cols-2">
           <LinkCard
             v-for="link in moreLinks"

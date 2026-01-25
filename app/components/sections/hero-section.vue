@@ -10,10 +10,10 @@
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
       <div class="text-center">
-        <h1 class="text-4xl font-display font-semibold text-text sm:text-5xl md:text-6xl text-balance">
+        <h1 class="text-4xl font-display font-semibold text-text dark:text-text-dark sm:text-5xl md:text-6xl text-balance">
           <slot name="title" />
         </h1>
-        <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl leading-relaxed text-pretty">
+        <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light dark:text-text-light-dark sm:text-xl leading-relaxed text-pretty">
           <slot name="description" />
         </p>
       </div>

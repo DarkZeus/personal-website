@@ -1,7 +1,7 @@
 <template>
   <motion.nav 
     class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full will-change-transform transition-shadow"
-    :class="isScrolled ? 'ring-1 ring-text/[0.1] shadow-lg' : 'ring-1 ring-transparent shadow-none'"
+    :class="isScrolled ? 'ring-1 ring-text/[0.1] dark:ring-border-dark shadow-lg dark:shadow-glass-dark' : 'ring-1 ring-transparent shadow-none'"
     :style="{
       width: navWidth,
       y: navOffset,
@@ -10,18 +10,18 @@
       backdropFilter: navBlur
     }"
   >
-    <div class="bg-soft-titanium/50 backdrop-blur-sm px-4 sm:px-6 py-3 will-change-transform rounded-[inherit]">
+    <div class="bg-soft-titanium/50 dark:bg-void-black/50 backdrop-blur-sm px-4 sm:px-6 py-3 will-change-transform rounded-[inherit]">
       <div class="flex items-center justify-between">
-        <NuxtLink to="/" class="text-primary font-display font-medium text-xl tracking-tight hover:opacity-80 transition-opacity will-change-opacity">Serhii Resnianskyi</NuxtLink>
+        <NuxtLink to="/" class="text-primary dark:text-primary-light font-display font-medium text-xl tracking-tight hover:opacity-80 transition-opacity will-change-opacity">Serhii Resnianskyi</NuxtLink>
         
         <!-- Mobile menu button -->
         <button 
           @click="isMenuOpen = !isMenuOpen"
-          class="sm:hidden p-2 rounded-md hover:bg-primary/5 active:bg-primary/10 transition-colors duration-150 will-change-transform"
+          class="sm:hidden p-2 rounded-md hover:bg-primary/5 dark:hover:bg-primary/10 active:bg-primary/10 dark:active:bg-primary/20 transition-colors duration-150 will-change-transform"
           aria-label="Toggle menu"
         >
           <svg 
-            class="w-6 h-6 text-text-light will-change-transform" 
+            class="w-6 h-6 text-text-light dark:text-text-light-dark will-change-transform" 
             :class="{ 'rotate-90': isMenuOpen }"
             fill="none" 
             stroke="currentColor" 
@@ -50,11 +50,11 @@
             v-for="item in menuItems"
             :key="item.path"
             :to="item.path" 
-            class="group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-            active-class="text-primary [&>div]:opacity-100"
+            class="group relative px-4 py-2 text-text-light dark:text-text-light-dark hover:text-primary dark:hover:text-primary-light active:text-primary/80 dark:active:text-primary-light/80 transition-colors duration-150"
+            active-class="text-primary dark:text-primary-light [&>div]:opacity-100"
           >
             <span class="relative z-10 uppercase font-medium text-xs tracking-wide">{{ item.label }}</span>
-            <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+            <div class="absolute inset-0 bg-primary/5 dark:bg-primary-light/10 opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
           </NuxtLink>
         </div>
       </div>
@@ -77,12 +77,12 @@
             v-for="item in menuItems"
             :key="item.path"
             :to="item.path" 
-            class="block group relative px-4 py-2 text-text-light hover:text-primary active:text-primary/80 transition-colors duration-150"
-            active-class="text-primary [&>div]:opacity-100"
+            class="block group relative px-4 py-2 text-text-light dark:text-text-light-dark hover:text-primary dark:hover:text-primary-light active:text-primary/80 dark:active:text-primary-light/80 transition-colors duration-150"
+            active-class="text-primary dark:text-primary-light [&>div]:opacity-100"
             @click="isMenuOpen = false"
           >
             <span class="relative z-10 uppercase tracking-wide">{{ item.label }}</span>
-            <div class="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
+            <div class="absolute inset-0 bg-primary/5 dark:bg-primary-light/10 rounded-md opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-opacity duration-150"></div>
           </NuxtLink>
         </motion.div>
       </AnimatePresence>

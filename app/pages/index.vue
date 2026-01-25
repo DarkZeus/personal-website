@@ -22,13 +22,13 @@
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
           <div class="text-center relative">
-            <h1 class="text-5xl font-display font-semibold text-text sm:text-6xl md:text-7xl text-balance">
+            <h1 class="text-5xl font-display font-semibold text-text dark:text-text-dark sm:text-6xl md:text-7xl text-balance">
               <span class="block">Hi, I'm</span>
-              <span class="block text-primary mt-2 relative">
+              <span class="block text-primary dark:text-primary-light mt-2 relative">
                 Serhii Resnianskyi
               </span>
             </h1>
-            <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light sm:text-xl leading-relaxed text-pretty">
+            <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light dark:text-text-light-dark sm:text-xl leading-relaxed text-pretty">
               Experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical decision-making in complex environments. Expert in
               <span class="inline-flex items-center gap-1.5 -mt-4 px-4 py-0.5 rounded-full text-sm border bg-[#61DAFB]/10 border border-[#61DAFB]">
                 <svg class="w-4 h-4" viewBox="0 0 569 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -60,28 +60,13 @@
                   damping: 17,
                 }"
               >
-                <NuxtLink
-                  to="/contact"
-                  class="group relative px-8 py-3 text-base font-medium rounded-md text-white overflow-hidden"
-                >
-                  <span class="relative z-10">Get in touch</span>
-                  <div class="absolute inset-0 bg-primary opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
-                  <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <!-- Button decoration -->
-                  <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20"></div>
-                  <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20"></div>
-                </NuxtLink>
+                <UiButton as="NuxtLink" to="/contact" variant="primary">
+                  Get in touch
+                </UiButton>
               </Motion>
-              <NuxtLink
-                to="/about"
-                class="group relative px-8 py-3 text-base font-medium rounded-md text-primary overflow-hidden"
-              >
-                <span class="relative z-10">About me</span>
-                <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <!-- Button decoration -->
-                <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20"></div>
-                <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20"></div>
-              </NuxtLink>
+              <UiButton as="NuxtLink" to="/about" variant="ghost">
+                About me
+              </UiButton>
             </div>
           </div>
         </div>
@@ -91,8 +76,8 @@
     <!-- What I Do Section -->
     <section class="relative overflow-hidden py-40">
       <!-- Gradient overlay for smooth transition -->
-      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-soft-titanium to-transparent"></div>
-      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft-titanium to-transparent"></div>
+      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-soft-titanium dark:from-void-black to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft-titanium dark:from-void-black to-transparent"></div>
       
       <!-- Grid pattern background -->
       <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
@@ -103,12 +88,12 @@
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center">
-          <h2 class="text-4xl font-display font-semibold text-text text-balance relative inline-block">
+          <h2 class="text-4xl font-display font-semibold text-text dark:text-text-dark text-balance relative inline-block">
             What I Do
             <!-- Decorative line -->
             <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-primary/20"></span>
           </h2>
-          <p class="mt-4 text-lg text-text-light text-pretty">Building modern web applications with a focus on performance and user experience</p>
+          <p class="mt-4 text-lg text-text-light dark:text-text-light-dark text-pretty">Building modern web applications with a focus on performance and user experience</p>
         </div>
         <Motion
           as="div"
@@ -150,12 +135,12 @@
               bounce: 0,
               delay: index * 0.2
             }"
-            class="group ring-1 ring-text/[0.05] bg-surface rounded-lg shadow-card hover:shadow-glass transition-all duration-300 p-6 relative overflow-hidden"
+            class="group ring-1 ring-text/[0.05] dark:ring-border-dark bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark hover:shadow-glass dark:hover:shadow-glass-dark transition-all duration-300 p-6 relative overflow-hidden"
           >
             <!-- Decorative corner -->
-            <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>
-            <h3 class="text-xl font-semibold text-text relative">{{ item.title }}</h3>
-            <p class="mt-4 text-text-light">{{ item.description }}</p>
+            <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full"></div>
+            <h3 class="text-xl font-semibold text-text dark:text-text-dark relative">{{ item.title }}</h3>
+            <p class="mt-4 text-text-light dark:text-text-light-dark">{{ item.description }}</p>
           </Motion>
         </Motion>
       </div>
@@ -164,8 +149,8 @@
     <!-- Let's Work Together -->
     <section class="relative overflow-hidden py-40">
       <!-- Gradient overlay for smooth transition -->
-      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-soft-titanium to-transparent"></div>
-      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft-titanium to-transparent"></div>
+      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-soft-titanium dark:from-void-black to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft-titanium dark:from-void-black to-transparent"></div>
       
       <!-- Grid pattern background -->
       <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
@@ -177,24 +162,16 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex flex-col items-center justify-center">
 <!--        <OpenToOpportunities />-->
         <div class="text-center">
-          <h2 class="text-4xl font-display font-semibold text-text text-balance relative inline-block">
+          <h2 class="text-4xl font-display font-semibold text-text dark:text-text-dark text-balance relative inline-block">
             Let's Work Together
             <!-- Decorative line -->
             <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-primary/20"></span>
           </h2>
-          <p class="mt-4 text-lg text-text-light text-pretty">Have a project in mind? I'd love to hear about it.</p>
+          <p class="mt-4 text-lg text-text-light dark:text-text-light-dark text-pretty">Have a project in mind? I'd love to hear about it.</p>
           <div class="mt-8">
-            <NuxtLink
-              to="/contact"
-              class="group relative inline-flex px-8 py-3 text-base font-medium rounded-md text-white overflow-hidden"
-            >
-              <span class="relative z-10">Start a Conversation</span>
-              <div class="absolute inset-0 bg-primary opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
-              <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <!-- Button decoration -->
-              <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20"></div>
-              <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20"></div>
-            </NuxtLink>
+            <UiButton as="NuxtLink" to="/contact" variant="primary">
+              Start a Conversation
+            </UiButton>
           </div>
         </div>
       </div>
@@ -205,4 +182,5 @@
 <script setup lang="ts">
 import { Motion } from "motion-v"
 import OpenToOpportunities from '~/components/ui/open-to-opportunities.vue'
+import UiButton from '~/components/ui/UiButton.vue'
 </script> 
