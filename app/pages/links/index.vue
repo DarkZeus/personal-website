@@ -85,13 +85,13 @@ const featuredLinks = [
   {
     title: 'Email',
     description: 'Get in touch directly',
-    url: 'mailto:hello@fuad.work',
+    url: 'mailto:serhii.resnyanskyi@gmail.com',
     icon: EnvelopeIcon
   },
   {
     title: 'Resume / CV',
     description: 'Download my resume',
-    url: '#',
+    url: '/Serhii_Resnianskyi_CV.pdf',
     icon: DocumentIcon
   },
 ]
