@@ -1,10 +1,10 @@
 <template>
   <div class="flex items-start gap-4">
-    <div class="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center">
+    <div class="w-12 h-12 rounded-md bg-primary/10 dark:bg-primary-light/15 flex items-center justify-center">
       <slot name="icon"></slot>
     </div>
     <div>
-      <h3 class="text-lg font-semibold text-text">{{ title }}</h3>
+      <h3 class="text-lg font-semibold text-text dark:text-text-dark">{{ title }}</h3>
       <slot name="content"></slot>
     </div>
   </div>

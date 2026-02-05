@@ -1,22 +1,79 @@
 @import "tailwindcss";
 
 @theme {
+  /* ===========================================
+     LIGHT MODE - Clean, bright, professional
+     =========================================== */
   --color-soft-titanium: oklch(0.97 0.01 250);
   --color-blue-horizon: oklch(0.45 0.2 250);
-  --color-surface: oklch(0.98 0.01 250);
-  --color-surface-dark: oklch(0.95 0.01 250);
-  --color-primary: oklch(0.45 0.2 250);
-  --color-primary-dark: oklch(0.35 0.2 250);
-  --color-text: oklch(0.2 0.01 250);
-  --color-text-light: oklch(0.4 0.01 250);
+  --color-surface: oklch(0.99 0.005 250);
+  --color-surface-elevated: oklch(0.96 0.005 250);
+  --color-primary: oklch(0.50 0.2 250);
+  --color-primary-dark: oklch(0.40 0.22 250);
+  --color-text: oklch(0.18 0.01 250);
+  --color-text-light: oklch(0.42 0.01 250);
 
+  /* ===========================================
+     DARK MODE - Warm slate, refined, not black
+     Inspired by Linear, Raycast, Notion dark
+     =========================================== */
+
+  /* Background hierarchy - warm slate with subtle blue undertone */
+  --color-void-black: oklch(0.20 0.015 265);
+  --color-surface-dark: oklch(0.24 0.015 265);
+  --color-surface-elevated-dark: oklch(0.28 0.012 265);
+
+  /* Primary for dark - luminous, vibrant blue that pops */
+  --color-primary-light: oklch(0.65 0.20 250);
+  --color-primary-glow: oklch(0.55 0.22 250);
+
+  /* Text - warm off-white, excellent readability */
+  --color-text-dark: oklch(0.94 0.008 90);
+  --color-text-light-dark: oklch(0.70 0.01 250);
+  --color-text-muted-dark: oklch(0.50 0.01 250);
+
+  /* Borders - subtle but visible definition */
+  --color-border-dark: oklch(0.32 0.015 265);
+  --color-border-subtle-dark: oklch(0.28 0.01 265);
+
+  /* Accent colors for dark mode */
+  --color-accent-glow: oklch(0.60 0.18 250 / 0.15);
+
+  /* Focus ring */
+  --color-focus-ring: oklch(0.60 0.2 250);
+
+  /* ===========================================
+     TYPOGRAPHY
+     =========================================== */
   --font-sans: "SF Pro", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
+  --text-display: 4.5rem;
+  --text-h1: 3rem;
+  --text-h2: 2.25rem;
+  --text-h3: 1.5rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+
   --border-radius-3xl: 2rem;
 
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  /* ===========================================
+     SHADOWS & EFFECTS
+     =========================================== */
+
+  /* Light mode - subtle depth */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+
+  /* Dark mode - inner glow + ambient lighting effect */
+  --shadow-card-dark:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-glass-dark:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 8px 40px -8px rgba(0, 0, 0, 0.5),
+    0 0 80px -20px rgba(99, 155, 255, 0.12);
 
   --backdrop-blur-xs: 2px;
 }
@@ -35,11 +92,20 @@ html {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+}
+
+/* Dark mode gradient uses lighter, more vibrant primary */
+@media (prefers-color-scheme: dark) {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
 }
 
 .text-balance {

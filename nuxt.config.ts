@@ -96,8 +96,5 @@ export default defineNuxtConfig({
     name: "Serhii Resnianskyi - Software Engineer"
   },
 
-  compatibilityDate: '2025-04-22',
-  future: {
-    compatibilityVersion: 4,
-  },
+  compatibilityDate: '2026-01-25',
 })

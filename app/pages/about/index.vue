@@ -21,11 +21,11 @@
         <div
             v-for="item in cards.qualities"
             :key="item.title"
-            class="bg-surface rounded-lg shadow-card flex flex-col items-start gap-4 ring-1 ring-text/[0.05] group hover:shadow-glass transition-all duration-300 p-6 relative overflow-hidden"
+            class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark flex flex-col items-start gap-4 ring-1 ring-text/[0.05] dark:ring-border-dark group hover:shadow-glass dark:hover:shadow-glass-dark transition-all duration-300 p-6 relative overflow-hidden"
         >
-          <component :is="item.icon" class="w-7 h-7 text-primary"/>
-          <h3 class="text-2xl font-semibold text-text">{{ item.title }}</h3>
-          <p class="text-text-light text-base">{{ item.description }}</p>
+          <component :is="item.icon" class="w-7 h-7 text-primary dark:text-primary-light"/>
+          <h3 class="text-2xl font-semibold text-text dark:text-text-dark">{{ item.title }}</h3>
+          <p class="text-text-light dark:text-text-light-dark text-base">{{ item.description }}</p>
         </div>
       </div>
 
@@ -34,15 +34,15 @@
         <div class="grid gap-16 lg:grid-cols-2">
           <!-- Left Column -->
           <div class="space-y-8" role="complementary" aria-label="Personal information">
-            <div class="bg-surface rounded-lg shadow-card p-8 relative overflow-hidden ring-1 ring-text/[0.05]">
+            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
               <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full" aria-hidden="true"></div>
-              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance relative inline-block"
+              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full" aria-hidden="true"></div>
+              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block"
                   id="about-me">
                 Who I Am
                 <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
               </h2>
-              <p class="text-lg text-text-light leading-relaxed text-pretty" aria-labelledby="about-me">
+              <p class="text-lg text-text-light dark:text-text-light-dark leading-relaxed text-pretty" aria-labelledby="about-me">
                 Experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical
                 decision-making in complex environments. Expert in
                 <span
@@ -78,16 +78,16 @@
               </p>
             </div>
 
-            <div class="bg-surface rounded-lg shadow-card p-8 relative overflow-hidden ring-1 ring-text/[0.05]">
+            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
               <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>
-              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance relative inline-block">
+              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full"></div>
+              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block">
                 My Skills
                 <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20"></span>
               </h2>
               <div class="space-y-6">
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Frontend Development</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Frontend Development</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Frontend Development skills">
                     <SkillTag class="text-pretty" role="listitem">
                       <template #content><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript
@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Backend Development</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Backend Development</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Backend Development skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://nodejs.org/">Node.js (Hono, Express, NestJS)</a></template>
@@ -146,7 +146,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Full-Stack Frameworks</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Full-Stack Frameworks</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Full-Stack Framework skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://tanstack.com/start">TanStack Start</a></template>
@@ -160,7 +160,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">UI Libraries & Design</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">UI Libraries & Design</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="UI Libraries and Design skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://mui.com/">Material UI</a></template>
@@ -180,7 +180,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Build Tools</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Build Tools</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Build Tools skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://webpack.js.org/">Webpack</a></template>
@@ -194,7 +194,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Testing</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Testing</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Testing skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://enzymejs.github.io/enzyme/">Enzyme</a></template>
@@ -205,7 +205,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Databases</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Databases</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Database skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://www.postgresql.org/">PostgreSQL</a></template>
@@ -226,7 +226,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">DevOps & Tools</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">DevOps & Tools</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="DevOps and Tools skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://git-scm.com/">Git</a></template>
@@ -246,7 +246,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Cloud & Infrastructure</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Cloud & Infrastructure</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Cloud and Infrastructure skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://vercel.com/">Vercel</a></template>
@@ -264,7 +264,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">Professional Tools</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Professional Tools</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="Professional Tools skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://www.figma.com/">Figma</a></template>
@@ -307,7 +307,7 @@
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text mb-4 text-balance">AI & ML</h3>
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">AI & ML</h3>
                   <div class="flex flex-wrap gap-2" role="list" aria-label="AI and ML skills">
                     <SkillTag role="listitem">
                       <template #content><a href="https://ollama.ai/">Ollama (self-hosted models)</a></template>
@@ -338,10 +338,10 @@
 
           <!-- Right Column -->
           <div class="space-y-8" role="complementary" aria-label="Professional experience">
-            <div class="bg-surface rounded-lg shadow-card p-8 relative overflow-hidden ring-1 ring-text/[0.05]">
+            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
               <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full" aria-hidden="true"></div>
-              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance relative inline-block"
+              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full" aria-hidden="true"></div>
+              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block"
                   id="experience">
                 Experience
                 <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
@@ -353,17 +353,17 @@
                   <div v-if="index !== cards.workExperience.length - 1"
                        class="absolute left-1 top-4 bottom-0 w-px bg-primary/20" aria-hidden="true"></div>
                   <div>
-                    <h3 class="text-xl font-semibold text-text text-balance">{{ experience.title }}</h3>
-                    <p class="text-text-light text-pretty">{{ experience.company }}</p>
-                    <p class="text-sm text-text-light/80 text-pretty">{{ experience.duration }}</p>
+                    <h3 class="text-xl font-semibold text-text dark:text-text-dark text-balance">{{ experience.title }}</h3>
+                    <p class="text-text-light dark:text-text-light-dark text-pretty">{{ experience.company }}</p>
+                    <p class="text-sm text-text-light/80 dark:text-text-light-dark/80 text-pretty">{{ experience.duration }}</p>
 
-                    <p v-if="experience.description" class="mt-4 text-text-light">{{ experience.description }}</p>
+                    <p v-if="experience.description" class="mt-4 text-text-light dark:text-text-light-dark">{{ experience.description }}</p>
 
-                    <ul v-if="experience.achievements.length" class="mt-4 space-y-2 text-text-light" role="list"
+                    <ul v-if="experience.achievements.length" class="mt-4 space-y-2 text-text-light dark:text-text-light-dark" role="list"
                         aria-label="Key responsibilities and achievements">
                       <li v-for="achievement in experience.achievements" :key="achievement"
                           class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary">•</span>
+                        <span class="text-primary dark:text-primary-light">•</span>
                         {{ achievement }}
                       </li>
                     </ul>
@@ -374,23 +374,23 @@
                       </SkillTag>
                     </div>
 
-                    <p v-if="experience.note" class="mt-4 text-sm text-text-light/80 italic">{{ experience.note }}</p>
+                    <p v-if="experience.note" class="mt-4 text-sm text-text-light/80 dark:text-text-light-dark/80 italic">{{ experience.note }}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="bg-surface rounded-lg shadow-card p-8 relative overflow-hidden ring-1 ring-text/[0.05]">
+            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
               <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full"></div>
-              <h2 class="text-3xl font-display font-semibold text-text mb-6 text-balance relative inline-block">
+              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full"></div>
+              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block">
                 Education
                 <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20"></span>
               </h2>
               <div class="flex items-start gap-4" role="list" aria-label="Education details">
-                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0"
+                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0"
                      aria-hidden="true">
-                  <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                        aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -398,21 +398,21 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold text-text">Bachelor's Degree in Mathematical Modeling and
+                  <h3 class="text-xl font-semibold text-text dark:text-text-dark">Bachelor's Degree in Mathematical Modeling and
                     Cybersecurity</h3>
-                  <p class="text-sm text-text-light/80">2017 - 2021</p>
-                  <p class="text-text-light">Chernihiv Polytechnic National University, Ukraine</p>
+                  <p class="text-sm text-text-light/80 dark:text-text-light-dark/80">2017 - 2021</p>
+                  <p class="text-text-light dark:text-text-light-dark">Chernihiv Polytechnic National University, Ukraine</p>
                 </div>
               </div>
 
-              <h2 class="text-3xl font-display font-semibold text-text mt-10 mb-6 text-balance relative inline-block">
+              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mt-10 mb-6 text-balance relative inline-block">
                 MOOC & Certifications
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20"></span>
+                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20 dark:bg-primary-light/20"></span>
               </h2>
               <div class="flex items-start gap-4" role="list" aria-label="MOOC and certification details">
-                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0"
+                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 dark:bg-primary-light/15 flex items-center justify-center flex-shrink-0"
                      aria-hidden="true">
-                  <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                        aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -420,8 +420,8 @@
                 </div>
                 <div class="flex flex-col space-y-4">
                   <div v-for="item in cards.courses" :key="item.title">
-                    <h3 class="text-xl font-semibold text-text "><a
-                        class=" border-b-2 border-b-transparent hover:text-primary hover:border-b-primary transition-colors"
+                    <h3 class="text-xl font-semibold text-text dark:text-text-dark "><a
+                        class="border-b-2 border-b-transparent hover:text-primary dark:hover:text-primary-light hover:border-b-primary dark:hover:border-b-primary-light transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
                         :href="item.certificateUrl">
@@ -436,8 +436,8 @@
                     </a>
 
                     </h3>
-                    <p class="space-x-3"><span class="text-text-light">{{ item.author }}</span><span
-                        class="text-sm text-text-light/80">{{ item.date }}</span></p>
+                    <p class="space-x-3"><span class="text-text-light dark:text-text-light-dark">{{ item.author }}</span><span
+                        class="text-sm text-text-light/80 dark:text-text-light-dark/80">{{ item.date }}</span></p>
                   </div>
                 </div>
               </div>
