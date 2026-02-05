@@ -12,12 +12,21 @@
     >
       <div class="bg-surface dark:bg-surface-dark rounded-xl shadow-card dark:shadow-card-dark hover:shadow-glass dark:hover:shadow-glass-dark transition-all duration-300 overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
         <!-- Image -->
-        <div class="aspect-square bg-primary/5 dark:bg-surface-elevated-dark flex items-center justify-center overflow-hidden">
+        <div class="gear-card__image-area aspect-square flex items-center justify-center overflow-hidden">
+          <!-- Blurred background image -->
+          <img
+            v-if="image"
+            :src="image"
+            :alt="''"
+            aria-hidden="true"
+            class="gear-card__image-bg"
+          />
+          <!-- Main image -->
           <img
             v-if="image"
             :src="image"
             :alt="name"
-            class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+            class="gear-card__image group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
             decoding="async"
           />
@@ -90,3 +99,35 @@ defineProps({
   }
 })
 </script>
+
+<style scoped>
+.gear-card__image-area {
+  position: relative;
+  background: oklch(0.96 0.005 250);
+}
+
+@media (prefers-color-scheme: dark) {
+  .gear-card__image-area {
+    background: var(--color-surface-elevated-dark);
+  }
+}
+
+.gear-card__image-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(25px) saturate(1.5);
+  transform: scale(1.2);
+  opacity: 0.6;
+}
+
+.gear-card__image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1.5rem;
+}
+</style>

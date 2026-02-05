@@ -23,21 +23,6 @@
           />
         </div>
       </section>
-
-      <!-- More Links -->
-      <section class="py-12 border-t border-text/[0.05] dark:border-border-dark">
-        <h2 class="text-2xl font-display font-semibold text-text dark:text-text-dark mb-8">More</h2>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <LinkCard
-            v-for="link in moreLinks"
-            :key="link.title"
-            :title="link.title"
-            :description="link.description"
-            :url="link.url"
-            :icon="link.icon"
-          />
-        </div>
-      </section>
     </div>
   </div>
 </template>
@@ -78,12 +63,6 @@ const DocumentIcon = {
   ])
 }
 
-const BookOpenIcon = {
-  render: () => h('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }, [
-    h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', d: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25' })
-  ])
-}
-
 const featuredLinks = [
   {
     title: 'GitHub',
@@ -94,13 +73,13 @@ const featuredLinks = [
   {
     title: 'LinkedIn',
     description: 'Professional network and experience',
-    url: 'https://linkedin.com/in/',
+    url: 'https://www.linkedin.com/in/serhii-resnianskyi/',
     icon: LinkedInIcon
   },
   {
     title: 'Twitter / X',
     description: 'Thoughts and updates',
-    url: 'https://twitter.com/',
+    url: 'https://twitter.com/first_fuad',
     icon: TwitterIcon
   },
   {
@@ -108,21 +87,12 @@ const featuredLinks = [
     description: 'Get in touch directly',
     url: 'mailto:hello@fuad.work',
     icon: EnvelopeIcon
-  }
-]
-
-const moreLinks = [
+  },
   {
     title: 'Resume / CV',
     description: 'Download my resume',
     url: '#',
     icon: DocumentIcon
   },
-  {
-    title: 'Blog',
-    description: 'Articles and tutorials',
-    url: '#',
-    icon: BookOpenIcon
-  }
 ]
 </script>

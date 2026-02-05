@@ -19,7 +19,6 @@
             :category="item.category"
             :description="item.description"
             :image="item.image"
-            :link="item.link"
             :specs="item.specs"
           />
         </div>
@@ -35,7 +34,20 @@
             :category="item.category"
             :description="item.description"
             :image="item.image"
-            :link="item.link"
+            :specs="item.specs"
+          />
+        </div>
+      </CategorySection>
+
+      <!-- PC Hardware -->
+      <CategorySection title="PC Hardware" :icon="CpuChipIcon">
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <PcHardwareCard
+            v-for="item in gear.pcHardware"
+            :key="item.name"
+            :name="item.name"
+            :category="item.category"
+            :image="item.image"
             :specs="item.specs"
           />
         </div>
@@ -51,7 +63,6 @@
             :category="item.category"
             :description="item.description"
             :image="item.image"
-            :link="item.link"
             :specs="item.specs"
           />
         </div>
@@ -59,16 +70,14 @@
 
       <!-- Software -->
       <CategorySection title="Software" :icon="CommandLineIcon">
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <GearCard
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <SoftwareCard
             v-for="item in gear.software"
             :key="item.name"
             :name="item.name"
             :category="item.category"
             :description="item.description"
-            :image="item.image"
-            :link="item.link"
-            :specs="item.specs"
+            :icon="item.icon"
           />
         </div>
       </CategorySection>
@@ -81,139 +90,245 @@ import {
   ComputerDesktopIcon,
   CursorArrowRaysIcon,
   SpeakerWaveIcon,
-  CommandLineIcon
+  CommandLineIcon,
+  CpuChipIcon
 } from '@heroicons/vue/24/outline'
 import HeroSection from '~/components/sections/hero-section.vue'
 import GearCard from '~/components/ui/gear-card.vue'
+import SoftwareCard from '~/components/ui/software-card.vue'
+import PcHardwareCard from '~/components/ui/pc-hardware-card.vue'
 import CategorySection from '~/components/ui/category-section.vue'
 
 const gear = {
+  pcHardware: [
+    {
+      name: 'NCASE M2',
+      category: 'Case',
+      image: 'https://ncased.com/cdn/shop/files/M2_R_GMG_TG_1_20250808.jpg?v=1759164274',
+      specs: [
+        { label: 'Form', value: 'SFF' }
+      ]
+    },
+    {
+      name: 'AMD Ryzen 9700X',
+      category: 'CPU',
+      image: '//cdna.pcpartpicker.com/static/forever/images/product/a0f5a161d8c7ff3c6b0827423537a029.1600.jpg',
+      specs: [
+        { label: 'Cores', value: '8C/16T' },
+        { label: 'Arch', value: 'Zen 5' }
+      ]
+    },
+    {
+      name: 'Inno3D iChill X3 RTX 3090',
+      category: 'GPU',
+      image: 'https://cdna.pcpartpicker.com/static/forever/images/product/011fa7bb0d458ed609df0f96ad640db6.1600.jpg',
+      specs: [
+        { label: 'VRAM', value: '24GB' }
+      ]
+    },
+    {
+      name: 'Corsair Vengeance DDR5',
+      category: 'RAM',
+      image: 'https://cdna.pcpartpicker.com/static/forever/images/product/894ce2f4aaaf96e8a0cc61288f9ff27d.1600.jpg',
+      specs: [
+        { label: 'Capacity', value: '64GB' },
+        { label: 'Speed', value: '6400 MHz' },
+        { label: 'Config', value: '2x32GB' }
+      ]
+    },
+    {
+      name: 'ASUS TUF Gaming B650M-Plus',
+      category: 'Motherboard',
+      image: 'https://cdna.pcpartpicker.com/static/forever/images/product/41f2fc275ab34cc9fcd97bea2a63ba7d.1600.jpg',
+      specs: [
+        { label: 'Socket', value: 'AM5' },
+        { label: 'Form', value: 'mATX' },
+        { label: 'WiFi', value: 'Yes' }
+      ]
+    },
+    {
+      name: 'Noctua NH-D12L',
+      category: 'CPU Cooler',
+      image: 'https://m.media-amazon.com/images/I/51d7un7JmNL.jpg',
+      specs: [
+        { label: 'Type', value: 'Air' }
+      ]
+    },
+    {
+      name: 'Noctua NF-A12x25',
+      category: 'Case Fan',
+      image: 'https://m.media-amazon.com/images/I/41ZywTiOj0L.jpg',
+      specs: [
+        { label: 'Size', value: '120mm' }
+      ]
+    },
+    {
+      name: 'CoolerMaster V SFX Platinum',
+      category: 'PSU',
+      image: 'https://cdna.pcpartpicker.com/static/forever/images/product/b27076b32ce1d0b5258e14594db71c8a.1600.jpg',
+      specs: [
+        { label: 'Wattage', value: '1300W' },
+        { label: 'Form', value: 'SFX' },
+        { label: 'Rating', value: '80+ Plat' }
+      ]
+    },
+    {
+      name: 'Lexar NM790',
+      category: 'SSD',
+      image: 'https://m.media-amazon.com/images/I/21voKXWSvhL.jpg',
+      specs: [
+        { label: 'Capacity', value: '4TB' },
+        { label: 'Type', value: 'NVMe' }
+      ]
+    },
+    {
+      name: 'Crucial P3 Plus',
+      category: 'SSD',
+      image: 'https://cdna.pcpartpicker.com/static/forever/images/product/2830bf3ba317c794ccde742efe4304be.1600.jpg',
+      specs: [
+        { label: 'Capacity', value: '1TB' },
+        { label: 'Type', value: 'NVMe' }
+      ]
+    }
+  ],
   computer: [
     {
-      name: 'MacBook Pro 14"',
+      name: 'MacBook Air M4 13"',
       category: 'Laptop',
-      description: 'My main development machine with excellent performance and battery life',
-      image: '',
-      specs: ['M3 Pro', '18GB RAM', '512GB SSD'],
-      link: '#'
+      description: 'Main development machine',
+      image: 'https://m.media-amazon.com/images/I/712dp0yAydL._AC_SL1500_.jpg',
+      specs: ['M4', '24GB RAM']
     },
     {
-      name: 'Dell UltraSharp U2723QE',
+      name: 'Samsung Odyssey OLED G6',
       category: 'Monitor',
-      description: '27-inch 4K USB-C monitor with excellent color accuracy',
-      image: '',
-      specs: ['27"', '4K', 'USB-C', 'IPS'],
-      link: '#'
+      description: 'Primary 27" OLED gaming monitor',
+      image: 'https://m.media-amazon.com/images/I/8127skgs+ML._AC_SL1500_.jpg',
+      specs: ['27"', 'OLED', '360Hz']
     },
     {
-      name: 'IKEA BEKANT',
+      name: 'Asus TUF Gaming VG27AQ',
+      category: 'Monitor',
+      description: 'Secondary 27" IPS monitor',
+      image: 'https://m.media-amazon.com/images/I/71bw2y-2ZRL._AC_SL1500_.jpg',
+      specs: ['27"', 'IPS', '165Hz']
+    },
+    {
+      name: 'Ultradesk UPLIFT Black',
       category: 'Desk',
-      description: 'Sit/stand desk for ergonomic working throughout the day',
-      image: '',
-      specs: ['160x80cm', 'Electric', 'White'],
-      link: '#'
+      description: 'Electric sit/stand desk',
+      image: 'https://ultra-desk.com/wp-content/uploads/2023/07/wd-4.png',
+      specs: ['Electric', 'Black']
     }
   ],
   peripherals: [
     {
-      name: 'Logitech MX Master 3S',
-      category: 'Mouse',
-      description: 'Wireless ergonomic mouse with excellent scrolling and multi-device support',
-      image: '',
-      specs: ['Wireless', 'USB-C', '8K DPI'],
-      link: '#'
-    },
-    {
-      name: 'Keychron K2 Pro',
+      name: 'Keychron K1',
       category: 'Keyboard',
-      description: 'Wireless mechanical keyboard with hot-swappable switches',
-      image: '',
-      specs: ['75%', 'Wireless', 'Hot-swap'],
-      link: '#'
+      description: 'Low-profile mechanical keyboard',
+      image: 'https://www.keychron.com/cdn/shop/products/keychron-k1-v5-ultra-slim-wireless-mechanical-keyboard-87-keys-white-backlight-gateron-mechanical-low-profile-brown-switch.jpg?v=1638354448&width=900',
+      specs: ['Gateron Brown', 'Wireless']
     },
     {
-      name: 'Logitech MX Palm Rest',
-      category: 'Accessory',
-      description: 'Memory foam palm rest for comfortable typing',
-      image: '',
-      specs: ['Memory Foam', 'Anti-slip'],
-      link: '#'
+      name: 'Leopold FC750RBT',
+      category: 'Keyboard',
+      description: 'Premium tenkeyless mechanical',
+      image: 'https://mechanicalkeyboards.com/cdn/shop/files/6162_62a3d1ca32231_FC750RBT-Bluetooth-GrayBlue-PD.jpg?v=1707269949&width=2400',
+      specs: ['Cherry MX Brown', 'Bluetooth']
+    },
+    {
+      name: 'Keychron M6',
+      category: 'Mouse',
+      description: 'High-performance wireless mouse',
+      image: 'https://www.keychron.com/cdn/shop/files/Keychron-M6-wireless-8K-mouse-white..jpg?v=1762586831&width=900',
+      specs: ['8K polling', 'Wireless']
     }
   ],
   audio: [
     {
-      name: 'Sony WH-1000XM5',
+      name: 'Steinberg UR22C',
+      category: 'Audio Interface',
+      description: 'USB-C audio interface for recording',
+      image: 'https://ocl-steinberg-live.steinberg.net/_storage/asset/260287/storage/PNG_extra-large_5500px/260287-extra-large.png',
+      specs: ['USB-C', '32-bit/192kHz']
+    },
+    {
+      name: 'AKG K240 Mk.II',
       category: 'Headphones',
-      description: 'Industry-leading noise cancellation for focused work',
-      image: '',
-      specs: ['ANC', 'Wireless', '30h Battery'],
-      link: '#'
+      description: 'Semi-open studio headphones',
+      image: 'https://www.akg.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwe2efc33e/AKG_k240mkII_white1.png?sw=1605&sh=1605',
+      specs: ['55 Ohm', 'Semi-open']
     },
     {
-      name: 'Blue Yeti X',
+      name: 'Rode NT1',
       category: 'Microphone',
-      description: 'USB condenser microphone for calls and recordings',
-      image: '',
-      specs: ['USB', 'Condenser', '4 Patterns'],
-      link: '#'
+      description: 'Large diaphragm condenser mic',
+      image: 'https://edge.rode.com/images/page/1856/modules/4368/R%C3%98DE_NT1_SM6_KIT_3-QUARTER_LEFT_FRONT_1080x1080.png',
+      specs: ['Cardioid', 'Low noise']
     },
     {
-      name: 'Elgato Wave Mic Arm',
-      category: 'Accessory',
-      description: 'Low-profile boom arm for clean desk setup',
-      image: '',
-      specs: ['Low Profile', 'Cable Channel'],
-      link: '#'
+      name: 'Apple AirPods 4',
+      category: 'Earbuds',
+      description: 'Wireless earbuds for mobile',
+      image: 'https://m.media-amazon.com/images/I/51ppBwqC4xL._AC_SL1500_.jpg',
+      specs: ['Spatial Audio']
+    },
+    {
+      name: 'KZ ZS10 Pro',
+      category: 'IEMs',
+      description: 'In-ear monitors',
+      image: 'https://kz-audio.com/images/kz-zs10pro-s13-01.jpg',
+      specs: ['4BA+1DD', 'Hybrid']
     }
   ],
   software: [
     {
+      name: 'WebStorm',
+      category: 'IDE',
+      description: 'JetBrains IDE for web development',
+      icon: ''
+    },
+    {
       name: 'VS Code',
       category: 'Editor',
-      description: 'Primary code editor with extensive extension ecosystem',
-      image: '',
-      specs: ['Free', 'Cross-platform'],
-      link: 'https://code.visualstudio.com/'
+      description: 'Lightweight code editor',
+      icon: ''
     },
     {
-      name: 'Figma',
-      category: 'Design',
-      description: 'Collaborative design tool for UI/UX work',
-      image: '',
-      specs: ['Free tier', 'Web-based'],
-      link: 'https://figma.com/'
+      name: 'Claude Code',
+      category: 'AI Coding',
+      description: 'AI-powered coding assistant',
+      icon: ''
     },
     {
-      name: 'Warp',
+      name: 'Ghostty',
       category: 'Terminal',
-      description: 'Modern terminal with AI-powered features',
-      image: '',
-      specs: ['macOS', 'AI-powered'],
-      link: 'https://warp.dev/'
+      description: 'GPU-accelerated terminal',
+      icon: ''
     },
     {
-      name: 'Arc',
+      name: 'Brave',
       category: 'Browser',
-      description: 'Innovative browser that reimagines web browsing',
-      image: '',
-      specs: ['Free', 'Chromium-based'],
-      link: 'https://arc.net/'
+      description: 'Privacy-focused browser',
+      icon: ''
+    },
+    {
+      name: 'Chrome',
+      category: 'Browser',
+      description: 'Web development & testing',
+      icon: ''
     },
     {
       name: 'Raycast',
       category: 'Productivity',
-      description: 'Spotlight replacement with powerful extensions',
-      image: '',
-      specs: ['Free', 'macOS'],
-      link: 'https://raycast.com/'
+      description: 'Spotlight replacement with extensions',
+      icon: ''
     },
     {
-      name: '1Password',
-      category: 'Security',
-      description: 'Password manager for secure credential storage',
-      image: '',
-      specs: ['Cross-platform', 'Team sharing'],
-      link: 'https://1password.com/'
+      name: 'Obsidian',
+      category: 'Notes',
+      description: 'Local-first markdown notes',
+      icon: ''
     }
   ]
 }
