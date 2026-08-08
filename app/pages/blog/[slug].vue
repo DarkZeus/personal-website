@@ -28,7 +28,11 @@
 
     <section class="pb-24 sm:pb-32">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ContentRenderer :value="post" class="blog-content" />
+        <ContentRenderer
+          :value="post"
+          :components="contentComponents"
+          class="blog-content"
+        />
       </div>
     </section>
   </article>
@@ -37,7 +41,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import { ContentRenderer } from '#components'
+import { ContentRenderer, NuxtPicture } from '#components'
+import ThemePicture from '~/components/content/ThemePicture.vue'
+
+const contentComponents = {
+  'nuxt-picture': NuxtPicture,
+  'theme-picture': ThemePicture,
+}
 
 const route = useRoute()
 const postPath = computed(() => `/blog/${route.params.slug}`)

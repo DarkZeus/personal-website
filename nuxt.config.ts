@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   components: false,
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
-  modules: ['motion-v/nuxt', '@nuxt/content', '@nuxtjs/seo', '@nuxtjs/sitemap', 'nuxt-og-image', '@nuxtjs/color-mode'],
+  modules: ['motion-v/nuxt', '@nuxt/content', '@nuxt/image', '@nuxtjs/seo', '@nuxtjs/sitemap', 'nuxt-og-image', '@nuxtjs/color-mode'],
 
   experimental: {
     viewTransition: true,
