@@ -3,11 +3,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "nuxt generate",
-		"deploy": "pnpm build && wrangler deploy",
+		"build": "nuxt generate --preset static",
+		"deploy": "pnpm build && wrangler deploy --config wrangler.jsonc",
 		"dev": "nuxt dev --port 3000",
-		"generate": "nuxt generate",
-		"preview": "pnpm build && wrangler dev",
+		"generate": "nuxt generate --preset static",
+		"preview": "pnpm build && wrangler dev --config wrangler.jsonc",
 		"postinstall": "nuxt prepare"
 	},
 	"devDependencies": {

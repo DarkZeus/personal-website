@@ -2,6 +2,8 @@
 
 This site is generated ahead of time and deployed as a static-assets-only Cloudflare Worker. No Worker script or Node.js compatibility layer is needed.
 
+The build command pins Nitro's `static` preset so platform auto-detection cannot replace the assets-only deployment with a server Worker.
+
 ## Local commands
 
 ```bash
@@ -19,8 +21,8 @@ Create a Worker by importing the GitHub repository in **Workers & Pages**, or co
 - Worker name: `fuad-work`
 - Production branch: `master`
 - Build command: `pnpm build`
-- Deploy command: `pnpm exec wrangler deploy`
-- Non-production deploy command: `pnpm exec wrangler versions upload`
+- Deploy command: `pnpm exec wrangler deploy --config wrangler.jsonc`
+- Non-production deploy command: `pnpm exec wrangler versions upload --config wrangler.jsonc`
 
 The Worker name must match the `name` in `wrangler.jsonc`.
 
