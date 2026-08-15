@@ -8,6 +8,7 @@ node_modules
 .output
 .nuxt
 .nitro
+.wrangler
 .cache
 .data
 dist

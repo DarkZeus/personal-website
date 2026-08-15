@@ -4,15 +4,17 @@
 	"type": "module",
 	"scripts": {
 		"build": "nuxt generate",
+		"deploy": "pnpm build && wrangler deploy",
 		"dev": "nuxt dev --port 3000",
 		"generate": "nuxt generate",
-		"preview": "nuxt preview",
+		"preview": "pnpm build && wrangler dev",
 		"postinstall": "nuxt prepare"
 	},
 	"devDependencies": {
 		"@nuxtjs/color-mode": "4.0.0",
 		"autoprefixer": "^10.4.21",
-		"nuxt": "^4.3.0"
+		"nuxt": "^4.3.0",
+		"wrangler": "^4.123.0"
 	},
 	"dependencies": {
 		"@heroicons/vue": "^2.2.0",

@@ -34,27 +34,9 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    compressPublicAssets: true,
     minify: true,
     prerender: {
       crawlLinks: true,
-    },
-    routeRules: {
-      '/_nuxt/**': {
-        headers: {
-          'Cache-Control': 'public, max-age=31536000, immutable',
-        },
-      },
-      '/images/**': {
-        headers: {
-          'Cache-Control': 'public, max-age=31536000, immutable',
-        },
-      },
-      '/**': {
-        headers: {
-          'Cache-Control': 'public, max-age=3600, must-revalidate',
-        },
-      },
     },
   },
 
