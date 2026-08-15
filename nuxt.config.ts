@@ -53,6 +53,10 @@ export default defineNuxtConfig({
     },
   },
 
+  sitemap: {
+    zeroRuntime: true,
+  },
+
   app: {
     head: {
       title: 'Serhii Resnianskyi - Software Engineer',

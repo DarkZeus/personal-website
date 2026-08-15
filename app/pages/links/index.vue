@@ -91,7 +91,7 @@ const featuredLinks = [
   {
     title: 'Resume / CV',
     description: 'Download my resume',
-    url: '/Serhii_Resnianskyi_CV.pdf',
+    url: '/serhii-resnianskyi-cv.pdf',
     icon: DocumentIcon
   },
 ]
