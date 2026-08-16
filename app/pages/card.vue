@@ -1,0 +1,422 @@
+<template>
+  <div class="card-page">
+    <main class="card-stage" aria-labelledby="card-name">
+      <HoloIdentityCard>
+        <article class="credential-face">
+          <header class="credential-header">
+            <div class="identity-mark" aria-hidden="true"><span>SR</span><i></i></div>
+            <p class="availability"><i aria-hidden="true"></i> Open to opportunities</p>
+          </header>
+
+          <div class="credential-main">
+            <section class="identity-copy">
+              <h1 id="card-name"><span>Serhii</span><span>Resnianskyi</span></h1>
+              <p class="role">Software Engineer · Chernihiv, Ukraine</p>
+              <a class="email-link focus-ring" href="mailto:serhii.resnyanskyi@gmail.com">
+                <span>Start a conversation</span>
+                <strong>serhii.resnyanskyi@gmail.com</strong>
+                <ArrowUpRightIcon aria-hidden="true" />
+              </a>
+            </section>
+
+            <a
+              class="qr-tile focus-ring"
+              href="/serhii-resnianskyi.vcf"
+              download
+              aria-label="Download Serhii Resnianskyi's contact card"
+            >
+              <div class="qr-heading">
+                <span>Scan to connect</span>
+                <ArrowDownTrayIcon aria-hidden="true" />
+              </div>
+              <div class="qr-code" role="img" aria-label="QR code to save Serhii Resnianskyi as a contact">
+                <QrcodeVue
+                  value="https://fuad.work/serhii-resnianskyi.vcf"
+                  :size="252"
+                  :margin="1"
+                  level="M"
+                  render-as="svg"
+                  background="#ffffff"
+                  foreground="#16131d"
+                />
+              </div>
+              <span class="qr-caption">Contact · .VCF</span>
+            </a>
+          </div>
+
+          <footer class="credential-footer">
+            <a
+              v-for="contact in contacts"
+              :key="contact.label"
+              class="contact-link focus-ring"
+              :href="contact.href"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{{ contact.label }}</span>
+              <strong>{{ contact.value }}</strong>
+              <ArrowUpRightIcon aria-hidden="true" />
+            </a>
+          </footer>
+        </article>
+      </HoloIdentityCard>
+    </main>
+  </div>
+</template>
+
+<script setup lang="ts">
+import QrcodeVue from 'qrcode.vue'
+import { ArrowDownTrayIcon, ArrowUpRightIcon } from '@heroicons/vue/24/outline'
+import HoloIdentityCard from '~/components/business-card/HoloIdentityCard.vue'
+
+definePageMeta({ layout: 'card' })
+
+useSeoMeta({
+  title: 'Business Card — Serhii Resnianskyi',
+  description: 'Contact Serhii Resnianskyi through an interactive holographic business card.',
+  ogTitle: 'Serhii Resnianskyi — Software Engineer',
+  ogDescription: 'An interactive digital business card and direct contact channels.',
+  twitterCard: 'summary_large_image',
+})
+
+useHead({
+  bodyAttrs: { class: 'business-card-body' },
+  meta: [{ name: 'theme-color', content: '#000000' }],
+  link: [{ rel: 'canonical', href: 'https://fuad.work/card' }],
+})
+
+const contacts = [
+  { label: 'Telegram', value: '@fuad_first', href: 'https://t.me/fuad_first' },
+  { label: 'LinkedIn', value: '/in/serhii-resnianskyi', href: 'https://www.linkedin.com/in/serhii-resnianskyi' },
+  { label: 'GitHub', value: '@DarkZeus', href: 'https://github.com/DarkZeus' },
+  { label: 'Web', value: 'fuad.work', href: '/' },
+]
+</script>
+
+<style scoped>
+:global(.business-card-body) {
+  margin: 0;
+  overflow-x: hidden;
+  background: #000;
+}
+
+:global(.business-card-body ::selection) {
+  background: #5939ff;
+  color: #fff;
+}
+
+.card-page {
+  --ink: #17141e;
+  --muted: #696470;
+  display: grid;
+  width: 100%;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(1rem, 2vw, 2rem);
+  overflow: hidden;
+  background: #000;
+  color: var(--ink);
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+}
+
+.card-stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: min(72rem, calc(100vw - 4rem), calc((100svh - 4rem) * 1.58));
+  min-width: 42rem;
+  margin: 0;
+}
+
+.credential-face {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  padding: clamp(1.4rem, 3.2vw, 2.8rem);
+  color: var(--ink);
+}
+
+.credential-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: clamp(0.8rem, 1.6vw, 1.5rem);
+}
+
+.identity-mark {
+  position: relative;
+  display: grid;
+  width: clamp(2.5rem, 4.5vw, 3.75rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgb(23 20 30 / 0.65);
+  border-radius: 50%;
+  font-size: clamp(0.66rem, 1vw, 0.82rem);
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.identity-mark i {
+  position: absolute;
+  top: 9%;
+  right: 9%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: #6854ef;
+  box-shadow: 0 0 0 3px rgb(104 84 239 / 0.14);
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.55rem;
+  margin: 0;
+  font-size: clamp(0.64rem, 0.9vw, 0.75rem);
+  font-weight: 680;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.availability i {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #1eaf6d;
+  box-shadow: 0 0 0 0.24rem rgb(30 175 109 / 0.12);
+}
+
+.credential-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: clamp(1.4rem, 3vw, 2.8rem);
+}
+
+.identity-copy { min-width: 0; }
+
+h1 {
+  margin: 0;
+  font-size: clamp(3.25rem, 7.3vw, 6.35rem);
+  font-weight: 590;
+  letter-spacing: -0.065em;
+  line-height: 0.78;
+}
+
+h1 span { display: block; }
+
+h1 span:last-child {
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.12vw, 1.5px) var(--ink);
+}
+
+.role {
+  margin: clamp(1.2rem, 2.4vw, 2rem) 0 0;
+  font-size: clamp(0.82rem, 1.2vw, 1rem);
+  font-weight: 650;
+}
+
+.email-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.28rem 1rem;
+  width: min(29rem, 100%);
+  margin-top: clamp(1rem, 2vw, 1.8rem);
+  padding: 0.8rem 2.4rem 0.8rem 0;
+  border-top: 1px solid rgb(23 20 30 / 0.28);
+  border-bottom: 1px solid rgb(23 20 30 / 0.28);
+  color: inherit;
+  text-decoration: none;
+}
+
+.email-link span {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.email-link strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(0.72rem, 1.12vw, 0.92rem);
+  font-weight: 680;
+}
+
+.email-link svg {
+  position: absolute;
+  right: 0;
+  bottom: 0.9rem;
+  width: 1rem;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.email-link:hover svg,
+.contact-link:hover svg { transform: translate(0.12rem, -0.12rem); }
+
+.qr-tile {
+  display: block;
+  width: clamp(11rem, 20.5vw, 15.75rem);
+  padding: clamp(0.55rem, 1.2vw, 0.9rem);
+  border: 1px solid rgb(23 20 30 / 0.09);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 0.8rem 2.3rem rgb(49 43 74 / 0.14);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.qr-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.18rem 0.55rem;
+  font-size: clamp(0.58rem, 0.8vw, 0.68rem);
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.qr-heading svg { width: 0.9rem; }
+
+.qr-code,
+.qr-code :deep(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.qr-caption {
+  display: block;
+  padding: 0.45rem 0.18rem 0;
+  color: var(--muted);
+  font-size: 0.6rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.credential-footer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgb(23 20 30 / 0.34);
+}
+
+.contact-link {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: clamp(0.8rem, 1.45vw, 1.2rem) clamp(0.7rem, 1.35vw, 1.1rem) 0 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-link:not(:first-child) {
+  padding-left: clamp(0.7rem, 1.35vw, 1.1rem);
+  border-left: 1px solid rgb(23 20 30 / 0.18);
+}
+
+.contact-link span {
+  color: var(--muted);
+  font-size: clamp(0.56rem, 0.78vw, 0.66rem);
+  font-weight: 690;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-link strong {
+  overflow: hidden;
+  font-size: clamp(0.63rem, 0.95vw, 0.8rem);
+  font-weight: 680;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-link svg {
+  position: absolute;
+  top: clamp(0.8rem, 1.45vw, 1.2rem);
+  right: clamp(0.7rem, 1.35vw, 1.1rem);
+  width: 0.75rem;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.focus-ring:focus-visible {
+  border-radius: 0.25rem;
+  outline: 3px solid #684cff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 42rem) {
+  .card-page { padding: 0.75rem; }
+
+  .card-stage {
+    width: min(28rem, calc(100vw - 1.5rem));
+    min-width: 0;
+    margin: 0;
+  }
+
+  .credential-face { padding: 1.25rem; }
+  .credential-header { grid-template-columns: auto 1fr; }
+
+  .credential-main {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 1.2rem;
+    padding-block: 1.15rem;
+  }
+
+  h1 { font-size: clamp(2.8rem, 13.4vw, 4.1rem); }
+  .role { margin-top: 1rem; }
+
+  .email-link {
+    margin-top: 0.85rem;
+    padding-block: 0.65rem;
+  }
+
+  .email-link svg { bottom: 0.75rem; }
+
+  .qr-tile {
+    width: clamp(9.5rem, 48vw, 13rem);
+    justify-self: end;
+    padding: 0.55rem;
+  }
+
+  .credential-footer { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .contact-link { padding: 0.7rem 1rem 0.55rem 0; }
+  .contact-link:not(:first-child) { padding-left: 0.75rem; }
+
+  .contact-link:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .contact-link:nth-child(n + 3) { border-top: 1px solid rgb(23 20 30 / 0.18); }
+
+  .contact-link svg {
+    top: 0.7rem;
+    right: 0.55rem;
+  }
+
+}
+
+@media (max-width: 25rem) {
+  .card-stage {
+    width: min(calc(100vw - 1.5rem), calc((100svh - 1.5rem) * 0.56));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-link svg,
+  .contact-link svg { transition: none; }
+}
+</style>

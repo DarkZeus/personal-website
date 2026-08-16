@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Resnianskyi;Serhii;;;
+FN:Serhii Resnianskyi
+TITLE:Software Engineer
+EMAIL;TYPE=INTERNET:serhii.resnyanskyi@gmail.com
+URL:https://fuad.work
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/serhii-resnianskyi/
+URL;TYPE=GitHub:https://github.com/DarkZeus
+X-SOCIALPROFILE;TYPE=telegram:https://t.me/fuad_first
+ADR;TYPE=HOME:;;Chernihiv;;;Ukraine
+END:VCARD

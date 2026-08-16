@@ -16,6 +16,12 @@ colors:
   warm-white: "#f0f4fa"
   dark-muted-slate: "#aeb9ca"
   dark-border: "#2b394c"
+  card-stage-black: "#000000"
+  card-pearl-stock: "#e9e5f3"
+  card-ink: "#17141e"
+  card-muted: "#696470"
+  card-violet-focus: "#684cff"
+  card-qr-white: "#ffffff"
 typography:
   display:
     fontFamily: "Archivo, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
@@ -63,6 +69,8 @@ typography:
 rounded:
   compact: "0.375rem"
   control: "0.5rem"
+  holo-credential: "clamp(1.25rem, 2.2vw, 2rem)"
+  qr-tile: "0.75rem"
   full: "9999px"
 spacing:
   xs: "0.5rem"
@@ -124,6 +132,7 @@ The palette is cool, quiet, and role-driven: cobalt signals interaction, while p
 - **Signal Cobalt:** Links, primary actions, active navigation, bullets, title accents, and keyboard focus.
 - **Signal Cobalt Deep:** Stronger hover state for primary controls in light mode.
 - **Signal Cobalt Light:** The luminous counterpart for interaction and emphasis on dark surfaces.
+- **Card Violet Focus:** The dedicated selection and keyboard-focus signal on `/card`; it does not replace Signal Cobalt elsewhere.
 
 ### Neutral
 
@@ -137,8 +146,13 @@ The palette is cool, quiet, and role-driven: cobalt signals interaction, while p
 - **Warm White:** Primary dark-theme text.
 - **Dark Muted Slate:** Secondary dark-theme copy.
 - **Dark Border:** Structural separation on elevated dark surfaces.
+- **Card Stage Black:** The absolute-black, empty field surrounding `/card`'s credential.
+- **Card Pearl Stock:** The pale lavender-gray base material beneath `/card`'s foil.
+- **Card Ink:** Near-black fixed print, rules, QR foreground, and save-action surface on `/card`.
+- **Card Muted:** Supporting identity labels and interaction instructions on `/card`.
+- **Card QR White:** The opaque tile that isolates the QR from every reflective layer.
 
-**The One Signal Rule.** Signal Cobalt is the only decorative and interactive accent. Green is permitted only when it communicates real availability or status.
+**The One Signal Rule.** Signal Cobalt is the only decorative and interactive accent on the standard portfolio. `/card` may use its isolated spectral foil and Card Violet Focus inside the holographic credential; green remains reserved for genuine availability or live status.
 
 **The Parallel Theme Rule.** Preserve page, surface, text, border, and signal roles across themes; do not treat dark mode as a simple inversion.
 
@@ -191,7 +205,7 @@ The system is flat by default. Fine low-contrast rules and tonal surface changes
 
 ## Shapes
 
-Controls and navigation use modest 0.5rem corners. The mobile menu control may use the more compact 0.375rem radius, while availability status and decorative circles use the full pill/circle radius. Project image fields, evidence rows, and section boundaries stay square so the composition reads as editorial structure rather than a stack of soft cards.
+Controls and navigation use modest 0.5rem corners. The mobile menu control may use the more compact 0.375rem radius, while availability status and decorative circles use the full pill/circle radius. Project image fields, evidence rows, and section boundaries stay square so the composition reads as editorial structure rather than a stack of soft cards. `/card` reserves a larger responsive corner for its physical credential and a compact 0.75rem corner for the opaque QR tile.
 
 Clipped circles are large, faint cobalt fields positioned partly outside the shell or viewport. They remain non-interactive, carry no meaning, and never interrupt reading contrast.
 
@@ -226,6 +240,16 @@ Capability, experience, gear, link, Blog, and contact collections share a ruled 
 
 Availability is a compact full pill with a green semantic dot and faint green field. Its pulse is subtle and stops under reduced motion. It is the intentional exception to the one-signal-color rule.
 
+### Digital Business Card
+
+`/card` is an intentional experiential exception to the standard page family and stays absent from global navigation. Its dedicated layout removes all page chrome and centers one pale pearl holographic credential on an otherwise empty `#000000` field. Archivo, near-black fixed print, restrained rules, and static contact details keep the object tactile and legible instead of turning it into interface chrome.
+
+The credential, immediate glare, delayed spectral foil, and independent edge catches respond to one normalized pointer or device-orientation input at different rates. Card tilt follows through a spring while the laminate follows more slowly, so the foil appears to carry mass; device orientation zeroes itself on the first reading, and iOS permission is requested only from a user gesture. The printed face stays crisp above every reflective layer, every contact remains a normal link, and the QR sits on an opaque white tile so no foil or glare can compromise scanning.
+
+The credential keeps a landscape ratio on desktop and becomes portrait on mobile, preserving comfortable type, contact targets, and a camera-readable QR instead of compressing the desktop composition. Reduced motion renders a static face-on card, and animation pauses while the page is hidden or the card is off-screen.
+
+**The Real Material Rule.** The card's spectacle comes from one coherent physical illusion: fixed print above pearl stock, foil with delayed momentum, direct glare, and directional edge light. Do not replace it with a dark sci-fi console, HUD grid, faux diagnostics, or ornamental technical chrome.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -234,14 +258,16 @@ Availability is a compact full pill with a green semantic dot and faint green fi
 - **Do** structure evidence with open space, fine rules, asymmetric columns, and clear reading measures.
 - **Do** keep the first viewport focused on identity, concrete capability evidence, and a direct contact route.
 - **Do** preserve semantic light/dark role mapping and WCAG 2.2 AA contrast.
-- **Do** keep motion short, functional, and removable under reduced-motion preferences.
+- **Do** keep standard-page motion short and functional; on `/card`, let the credential and foil respond at different rates, then render the object static and face-on under reduced motion.
 - **Do** keep decorative circles clipped, faint, and subordinate to content.
+- **Do** keep `/card`'s printed identity, contact links, QR, and save action crisp, high contrast, and usable without motion input.
 
 ### Don't:
 
 - **Don't** convert ruled evidence collections into repeated floating cards.
-- **Don't** introduce gradients, ornamental corner flourishes, or decorative accent hues that compete with Signal Cobalt.
+- **Don't** introduce gradients, ornamental corner flourishes, or decorative accent hues that compete with Signal Cobalt on standard portfolio surfaces; `/card`'s isolated spectral foil is the deliberate exception.
 - **Don't** use persistent shadows on ordinary content surfaces.
 - **Don't** round project media, evidence rows, or section boundaries.
 - **Don't** use pure black for the dark page or pure white for primary dark-theme text.
 - **Don't** make meaning depend on color, hover, motion, or pointer input alone.
+- **Don't** translate `/card` back into a dark identity console, HUD, technical grid, or simulated instrumentation.

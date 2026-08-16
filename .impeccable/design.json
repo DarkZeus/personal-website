@@ -1,92 +1,108 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-09T16:18:16Z",
+  "generatedAt": "2026-08-16T17:12:04Z",
   "title": "Design System: Quiet Systems Studio",
   "extensions": {
     "colorMeta": {
       "signal-cobalt": {
         "role": "primary",
         "displayName": "Signal Cobalt",
-        "canonical": "#155ecc",
         "tonalRamp": ["oklch(0.15 0.16 255)", "oklch(0.25 0.16 255)", "oklch(0.35 0.16 255)", "oklch(0.45 0.16 255)", "oklch(0.55 0.16 255)", "oklch(0.70 0.14 255)", "oklch(0.85 0.08 255)", "oklch(0.95 0.03 255)"]
       },
       "signal-cobalt-deep": {
         "role": "primary",
         "displayName": "Deep Signal Cobalt",
-        "canonical": "#104fae",
         "tonalRamp": ["oklch(0.15 0.15 255)", "oklch(0.25 0.15 255)", "oklch(0.35 0.15 255)", "oklch(0.45 0.15 255)", "oklch(0.55 0.15 255)", "oklch(0.70 0.13 255)", "oklch(0.85 0.07 255)", "oklch(0.95 0.03 255)"]
       },
       "signal-cobalt-light": {
         "role": "primary",
         "displayName": "Luminous Signal Cobalt",
-        "canonical": "#73a7f5",
         "tonalRamp": ["oklch(0.15 0.11 255)", "oklch(0.25 0.11 255)", "oklch(0.35 0.11 255)", "oklch(0.45 0.11 255)", "oklch(0.55 0.11 255)", "oklch(0.70 0.11 255)", "oklch(0.85 0.07 255)", "oklch(0.95 0.025 255)"]
       },
       "cool-paper": {
         "role": "neutral",
         "displayName": "Cool Paper",
-        "canonical": "#f4f7fb",
         "tonalRamp": ["oklch(0.15 0.01 250)", "oklch(0.25 0.01 250)", "oklch(0.35 0.01 250)", "oklch(0.45 0.01 250)", "oklch(0.55 0.01 250)", "oklch(0.70 0.01 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.01 250)"]
       },
       "frosted-surface": {
         "role": "neutral",
         "displayName": "Frosted Surface",
-        "canonical": "#fbfcfe",
         "tonalRamp": ["oklch(0.15 0.006 250)", "oklch(0.25 0.006 250)", "oklch(0.35 0.006 250)", "oklch(0.45 0.006 250)", "oklch(0.55 0.006 250)", "oklch(0.70 0.006 250)", "oklch(0.85 0.006 250)", "oklch(0.95 0.006 250)"]
       },
       "surface-elevated": {
         "role": "neutral",
         "displayName": "Elevated Paper",
-        "canonical": "#edf2f8",
         "tonalRamp": ["oklch(0.15 0.012 250)", "oklch(0.25 0.012 250)", "oklch(0.35 0.012 250)", "oklch(0.45 0.012 250)", "oklch(0.55 0.012 250)", "oklch(0.70 0.012 250)", "oklch(0.85 0.012 250)", "oklch(0.95 0.012 250)"]
       },
       "midnight-slate": {
         "role": "neutral",
         "displayName": "Midnight Slate",
-        "canonical": "#172234",
         "tonalRamp": ["oklch(0.15 0.025 255)", "oklch(0.25 0.025 255)", "oklch(0.35 0.025 255)", "oklch(0.45 0.025 255)", "oklch(0.55 0.025 255)", "oklch(0.70 0.02 255)", "oklch(0.85 0.012 255)", "oklch(0.95 0.006 255)"]
       },
       "muted-slate": {
         "role": "neutral",
         "displayName": "Muted Slate",
-        "canonical": "#5d6b80",
         "tonalRamp": ["oklch(0.15 0.02 250)", "oklch(0.25 0.02 250)", "oklch(0.35 0.02 250)", "oklch(0.45 0.02 250)", "oklch(0.55 0.02 250)", "oklch(0.70 0.018 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.005 250)"]
       },
       "warm-void": {
         "role": "neutral",
         "displayName": "Warm Void",
-        "canonical": "#101722",
         "tonalRamp": ["oklch(0.15 0.018 255)", "oklch(0.25 0.018 255)", "oklch(0.35 0.018 255)", "oklch(0.45 0.018 255)", "oklch(0.55 0.018 255)", "oklch(0.70 0.015 255)", "oklch(0.85 0.009 255)", "oklch(0.95 0.004 255)"]
       },
       "dark-surface": {
         "role": "neutral",
         "displayName": "Dark Surface",
-        "canonical": "#172131",
         "tonalRamp": ["oklch(0.15 0.02 255)", "oklch(0.25 0.02 255)", "oklch(0.35 0.02 255)", "oklch(0.45 0.02 255)", "oklch(0.55 0.02 255)", "oklch(0.70 0.016 255)", "oklch(0.85 0.009 255)", "oklch(0.95 0.004 255)"]
       },
       "dark-surface-elevated": {
         "role": "neutral",
         "displayName": "Elevated Dark Surface",
-        "canonical": "#1d2a3d",
         "tonalRamp": ["oklch(0.15 0.025 255)", "oklch(0.25 0.025 255)", "oklch(0.35 0.025 255)", "oklch(0.45 0.025 255)", "oklch(0.55 0.025 255)", "oklch(0.70 0.018 255)", "oklch(0.85 0.01 255)", "oklch(0.95 0.005 255)"]
       },
       "warm-white": {
         "role": "neutral",
         "displayName": "Warm White",
-        "canonical": "#f0f4fa",
         "tonalRamp": ["oklch(0.15 0.008 250)", "oklch(0.25 0.008 250)", "oklch(0.35 0.008 250)", "oklch(0.45 0.008 250)", "oklch(0.55 0.008 250)", "oklch(0.70 0.008 250)", "oklch(0.85 0.008 250)", "oklch(0.95 0.008 250)"]
       },
       "dark-muted-slate": {
         "role": "neutral",
         "displayName": "Dark Muted Slate",
-        "canonical": "#aeb9ca",
         "tonalRamp": ["oklch(0.15 0.015 250)", "oklch(0.25 0.015 250)", "oklch(0.35 0.015 250)", "oklch(0.45 0.015 250)", "oklch(0.55 0.015 250)", "oklch(0.70 0.015 250)", "oklch(0.85 0.012 250)", "oklch(0.95 0.006 250)"]
       },
       "dark-border": {
         "role": "neutral",
         "displayName": "Dark Structural Border",
-        "canonical": "#2b394c",
         "tonalRamp": ["oklch(0.15 0.025 250)", "oklch(0.25 0.025 250)", "oklch(0.35 0.025 250)", "oklch(0.45 0.025 250)", "oklch(0.55 0.025 250)", "oklch(0.70 0.018 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.005 250)"]
+      },
+      "card-stage-black": {
+        "role": "neutral",
+        "displayName": "Card Stage Black",
+        "tonalRamp": ["#000000", "oklch(0.15 0 0)", "oklch(0.25 0 0)", "oklch(0.35 0 0)", "oklch(0.45 0 0)", "oklch(0.55 0 0)", "oklch(0.70 0 0)", "oklch(0.85 0 0)"]
+      },
+      "card-pearl-stock": {
+        "role": "neutral",
+        "displayName": "Card Pearl Stock",
+        "tonalRamp": ["oklch(0.15 0.018 300)", "oklch(0.25 0.018 300)", "oklch(0.35 0.018 300)", "oklch(0.45 0.018 300)", "oklch(0.55 0.018 300)", "oklch(0.70 0.015 300)", "oklch(0.85 0.010 300)", "oklch(0.95 0.005 300)"]
+      },
+      "card-ink": {
+        "role": "neutral",
+        "displayName": "Card Ink",
+        "tonalRamp": ["oklch(0.15 0.006 260)", "oklch(0.25 0.006 260)", "oklch(0.35 0.006 260)", "oklch(0.45 0.006 260)", "oklch(0.55 0.006 260)", "oklch(0.70 0.005 260)", "oklch(0.85 0.003 260)", "oklch(0.95 0.002 260)"]
+      },
+      "card-muted": {
+        "role": "neutral",
+        "displayName": "Card Muted",
+        "tonalRamp": ["oklch(0.15 0.015 300)", "oklch(0.25 0.015 300)", "oklch(0.35 0.015 300)", "oklch(0.45 0.015 300)", "oklch(0.55 0.015 300)", "oklch(0.70 0.012 300)", "oklch(0.85 0.007 300)", "oklch(0.95 0.003 300)"]
+      },
+      "card-violet-focus": {
+        "role": "primary",
+        "displayName": "Card Violet Focus",
+        "tonalRamp": ["oklch(0.15 0.18 290)", "oklch(0.25 0.20 290)", "oklch(0.35 0.22 290)", "oklch(0.45 0.24 290)", "oklch(0.55 0.25 290)", "oklch(0.70 0.19 290)", "oklch(0.85 0.10 290)", "oklch(0.95 0.04 290)"]
+      },
+      "card-qr-white": {
+        "role": "neutral",
+        "displayName": "Card QR White",
+        "tonalRamp": ["oklch(0.15 0 0)", "oklch(0.25 0 0)", "oklch(0.35 0 0)", "oklch(0.45 0 0)", "oklch(0.55 0 0)", "oklch(0.70 0 0)", "oklch(0.85 0 0)", "oklch(1 0 0)"]
       }
     },
     "typographyMeta": {
@@ -98,18 +114,27 @@
     },
     "shadows": [
       { "name": "navigation-glass", "value": "0 8px 32px 0 rgba(0, 0, 0, 0.06)", "purpose": "Subtle separation for the light scrolled navigation." },
-      { "name": "navigation-glass-dark", "value": "inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 40px -8px rgba(0, 0, 0, 0.5), 0 0 80px -20px rgba(99, 155, 255, 0.12)", "purpose": "Inner edge, shadow, and restrained cobalt ambience for the dark scrolled navigation." }
+      { "name": "navigation-glass-dark", "value": "inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 40px -8px rgba(0, 0, 0, 0.5), 0 0 80px -20px rgba(99, 155, 255, 0.12)", "purpose": "Inner edge, shadow, and restrained cobalt ambience for the dark scrolled navigation." },
+      { "name": "card-credential-float", "value": "0 18px 70px rgb(48 42 77 / 0.22), 0 2px 4px rgb(50 45 75 / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.85)", "purpose": "Gives the holographic credential a stable physical lift without forcing a full shadow repaint during tilt." },
+      { "name": "card-qr-float", "value": "0 0.8rem 2.3rem rgb(49 43 74 / 0.14)", "purpose": "Lifts the opaque QR tile above the foil while keeping it crisp and scannable." }
     ],
     "motion": [
       { "name": "state-fast", "value": "150ms ease", "purpose": "Button, link, navigation, icon, and focus-adjacent state transitions." },
       { "name": "media-standard", "value": "300ms ease", "purpose": "The restrained 1.02 image scale used by project media on hover." },
       { "name": "navigation-scroll", "value": "scroll 0px–100px, clamped", "purpose": "Interpolates navigation width, offset, radius, and blur into the floating state." },
-      { "name": "menu-spring", "value": "spring(stiffness: 300, damping: 20)", "purpose": "Mobile navigation entry and exit." }
+      { "name": "menu-spring", "value": "spring(stiffness: 300, damping: 20)", "purpose": "Mobile navigation entry and exit." },
+      { "name": "card-link-nudge", "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Moves contact arrows a few pixels toward their destination on hover." },
+      { "name": "card-holo-dual-follower", "value": "event-driven requestAnimationFrame; tilt spring 0.085 with 0.77 damping; foil gradient follow 0.08; max rotation 8deg X / 10deg Y", "purpose": "Lets the single composited card tilt promptly while flat spectral layers follow through gradient positions, then stops rendering once settled." },
+      { "name": "card-holo-reduced-motion", "value": "static face-on credential", "purpose": "Removes tilt, idle drift, and continuous foil motion when reduced motion is preferred." },
+      { "name": "card-holo-visibility", "value": "visibilitychange + IntersectionObserver at 0.05", "purpose": "Pauses the animation loop while the document is hidden or the credential is off-screen." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
       { "name": "studio-shell", "value": "900px" },
-      { "name": "lg", "value": "1024px" }
+      { "name": "lg", "value": "1024px" },
+      { "name": "card-portrait", "value": "672px" },
+      { "name": "card-narrow-portrait", "value": "512px" },
+      { "name": "card-compact-actions", "value": "400px" }
     ]
   },
   "components": [
@@ -157,6 +182,13 @@
       "description": "A semantic green exception used only to communicate genuine work availability.",
       "html": "<span class=\"ds-availability\"><span class=\"ds-availability-dot\" aria-hidden=\"true\"></span>Available for work</span>",
       "css": ".ds-availability { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem; border: 1px solid rgb(21 128 76 / 25%); border-radius: 9999px; background: rgb(34 197 94 / 8%); color: #12663d; font: 600 0.75rem/1.4 var(--font-sans, Archivo, system-ui, sans-serif); } .ds-availability-dot { width: 0.375rem; height: 0.375rem; border-radius: 9999px; background: #169653; animation: ds-availability-pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; } @keyframes ds-availability-pulse { 50% { opacity: 0.45; } } @media (prefers-color-scheme: dark) { .ds-availability { border-color: rgb(88 214 141 / 30%); background: rgb(34 197 94 / 10%); color: #7ee2a8; } .ds-availability-dot { background: #66d898; } } @media (prefers-reduced-motion: reduce) { .ds-availability-dot { animation: none; } }"
+    },
+    {
+      "name": "Holographic Identity Credential",
+      "kind": "custom",
+      "description": "The signature `/card` object: crisp identity print and an opaque QR tile float above pearl stock and a restrained spectral laminate.",
+      "html": "<article class=\"ds-holo-card\"><div class=\"ds-holo-foil\" aria-hidden=\"true\"></div><header><span class=\"ds-holo-mark\">SR</span><span>INDEPENDENT SOFTWARE ENGINEER</span><strong>AVAILABLE FOR WORK</strong></header><div class=\"ds-holo-main\"><div><small>PUBLIC IDENTITY</small><h2>Serhii<br><i>Resnianskyi</i></h2><p>Software Engineer · Chernihiv, Ukraine</p></div><div class=\"ds-holo-qr\"><span>SCAN TO CONNECT</span><b aria-hidden=\"true\"></b><small>CONTACT · .VCF</small></div></div><footer><span>TELEGRAM</span><span>LINKEDIN</span><span>GITHUB</span><span>FUAD.WORK</span></footer></article>",
+      "css": ".ds-holo-card { position: relative; display: grid; grid-template-rows: auto 1fr auto; aspect-ratio: 1.58; overflow: hidden; padding: 2rem; border: 1px solid rgb(255 255 255 / .74); border-radius: 1.5rem; background: linear-gradient(135deg,#f1edf7,#e1ddec 52%,#ebe6f1); box-shadow: 0 1.5rem 4rem rgb(48 42 77 / .18); color: #17141e; font-family: Archivo,system-ui,sans-serif; } .ds-holo-foil { position:absolute; inset:-12%; background:conic-gradient(from 210deg at 72% 28%,rgb(255 88 193/.5),rgb(255 211 91/.46),rgb(75 244 211/.44),rgb(85 137 255/.5),rgb(204 91 255/.46),rgb(255 88 193/.5)); opacity:.28; -webkit-mask-image:repeating-linear-gradient(118deg,#000 0 8%,transparent 8.5% 15%); mask-image:repeating-linear-gradient(118deg,#000 0 8%,transparent 8.5% 15%); } .ds-holo-card > *:not(.ds-holo-foil){position:relative;z-index:1}.ds-holo-card header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;font-size:.65rem;letter-spacing:.05em}.ds-holo-mark{display:grid;width:2.75rem;aspect-ratio:1;place-items:center;border:1px solid;border-radius:50%;font-weight:750}.ds-holo-card header strong{font-size:.65rem}.ds-holo-main{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem}.ds-holo-main small,.ds-holo-qr span,.ds-holo-qr small{font-size:.6rem;font-weight:700;letter-spacing:.09em}.ds-holo-main h2{margin:.75rem 0;font-size:3.4rem;line-height:.78;letter-spacing:-.06em}.ds-holo-main h2 i{font-style:normal;color:transparent;-webkit-text-stroke:1px #17141e}.ds-holo-main p{font-size:.8rem;font-weight:650}.ds-holo-qr{display:grid;width:9rem;gap:.45rem;padding:.6rem;border-radius:.6rem;background:#fff;box-shadow:0 .8rem 2.3rem rgb(49 43 74/.14)}.ds-holo-qr b{display:block;aspect-ratio:1;background:repeating-conic-gradient(#17141e 0 25%,#fff 0 50%) 50%/1rem 1rem;border:.5rem solid #fff;outline:1px solid #17141e}.ds-holo-card footer{display:grid;grid-template-columns:repeat(4,1fr);padding-top:.8rem;border-top:1px solid rgb(23 20 30/.3);font-size:.58rem;font-weight:700;letter-spacing:.06em}@media(max-width:640px){.ds-holo-card{aspect-ratio:.68;padding:1.25rem}.ds-holo-main{grid-template-columns:1fr}.ds-holo-main h2{font-size:2.7rem}.ds-holo-qr{justify-self:end}.ds-holo-card footer{grid-template-columns:repeat(2,1fr);gap:.65rem}}"
     }
   ],
   "narrative": {
@@ -171,31 +203,34 @@
       "Short functional motion with reduced-motion fallbacks"
     ],
     "rules": [
-      { "name": "The One Signal Rule", "body": "Signal Cobalt is the only decorative and interactive accent. Green is permitted only when it communicates real availability or status.", "section": "colors" },
+      { "name": "The One Signal Rule", "body": "Signal Cobalt is the only decorative and interactive accent on the standard portfolio. `/card` may use its isolated spectral foil and Card Violet Focus inside the holographic credential; green remains reserved for genuine availability or live status.", "section": "colors" },
       { "name": "The Parallel Theme Rule", "body": "Preserve page, surface, text, border, and signal roles across themes; do not treat dark mode as a simple inversion.", "section": "colors" },
       { "name": "The Scale Before Ornament Rule", "body": "Build hierarchy with size, weight, alignment, and whitespace before adding decoration.", "section": "typography" },
-      { "name": "The Reserved Uppercase Rule", "body": "Keep navigation and ordinary actions in title case; uppercase belongs to compact technical labels and status metadata.", "section": "typography" },
+      { "name": "The Reserved Uppercase Rule", "body": "Uppercase belongs to compact navigation, technical labels, and status metadata; ordinary actions remain in title case.", "section": "typography" },
       { "name": "The Wide Frame, Narrow Reading Rule", "body": "Use the 90rem shell for composition and evidence scanning, but constrain prose to readable 65–72 character measures or the 48rem article column.", "section": "layout" },
       { "name": "The Collapse Before Compress Rule", "body": "Stack columns and actions before shrinking type, hit targets, or internal spacing below the established scale.", "section": "layout" },
       { "name": "The Flat Evidence Rule", "body": "Evidence remains on the page plane; use rules, alignment, and tonal wells before shadow.", "section": "elevation" },
       { "name": "The Earned Frost Rule", "body": "Frosted depth belongs to navigation and meaningful state changes, not every container.", "section": "elevation" },
-      { "name": "The Square Evidence Rule", "body": "Keep evidence rows, gallery fields, and ruled sections square; reserve rounding for controls, navigation, status, and literal circles.", "section": "shapes" }
+      { "name": "The Square Evidence Rule", "body": "Keep evidence rows, gallery fields, and ruled sections square; reserve rounding for controls, navigation, status, and literal circles.", "section": "shapes" },
+      { "name": "The Real Material Rule", "body": "The card's spectacle comes from one coherent physical illusion: fixed print above pearl stock, foil with delayed momentum, direct glare, and directional edge light. Do not replace it with a dark sci-fi console, HUD grid, faux diagnostics, or ornamental technical chrome.", "section": "components" }
     ],
     "dos": [
       "Do use Signal Cobalt for actions, links, active states, bullets, and visible keyboard focus.",
       "Do structure evidence with open space, fine rules, asymmetric columns, and clear reading measures.",
       "Do keep the first viewport focused on identity, concrete capability evidence, and a direct contact route.",
       "Do preserve semantic light/dark role mapping and WCAG 2.2 AA contrast.",
-      "Do keep motion short, functional, and removable under reduced-motion preferences.",
-      "Do keep decorative circles clipped, faint, and subordinate to content."
+      "Do keep standard-page motion short and functional; on `/card`, let the credential and foil respond at different rates, then render the object static and face-on under reduced motion.",
+      "Do keep decorative circles clipped, faint, and subordinate to content.",
+      "Do keep `/card`'s printed identity, contact links, QR, and save action crisp, high contrast, and usable without motion input."
     ],
     "donts": [
       "Don't convert ruled evidence collections into repeated floating cards.",
-      "Don't introduce gradients, ornamental corner flourishes, or decorative accent hues that compete with Signal Cobalt.",
+      "Don't introduce gradients, ornamental corner flourishes, or decorative accent hues that compete with Signal Cobalt on standard portfolio surfaces; `/card`'s isolated spectral foil is the deliberate exception.",
       "Don't use persistent shadows on ordinary content surfaces.",
       "Don't round project media, evidence rows, or section boundaries.",
       "Don't use pure black for the dark page or pure white for primary dark-theme text.",
-      "Don't make meaning depend on color, hover, motion, or pointer input alone."
+      "Don't make meaning depend on color, hover, motion, or pointer input alone.",
+      "Don't translate `/card` back into a dark identity console, HUD, technical grid, or simulated instrumentation."
     ]
   }
 }
