@@ -1,33 +1,33 @@
 <template>
-  <article v-if="post">
-    <header class="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20">
-      <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]" aria-hidden="true"></div>
+  <article v-if="post" class="studio-page pb-24 pt-28 sm:pb-32 sm:pt-32">
+    <div class="studio-circle -right-52 top-20 h-[32rem] w-[32rem]" aria-hidden="true"></div>
 
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <header class="relative pb-14 pt-10 sm:pb-20 sm:pt-16">
+      <div class="relative mx-auto w-[min(calc(100%_-_2.25rem),48rem)]">
         <NuxtLink
           to="/blog"
-          class="inline-flex items-center gap-2 text-sm font-medium text-primary dark:text-primary-light hover:opacity-80 transition-opacity"
+          class="studio-focus inline-flex items-center gap-2 text-sm font-medium text-primary transition-opacity hover:opacity-75 dark:text-primary-light"
         >
-          <ArrowLeftIcon class="h-4 w-4" />
+          <ArrowLeftIcon class="h-4 w-4" aria-hidden="true" />
           Blog
         </NuxtLink>
 
-        <p class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium uppercase tracking-wide text-primary dark:text-primary-light">
+        <p class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-primary dark:text-primary-light">
           <span>{{ post.category }}</span>
           <span aria-hidden="true" class="text-text-light/40 dark:text-text-light-dark/40">/</span>
           <time :datetime="publishedDateTime">{{ formattedDate }}</time>
         </p>
-        <h1 class="mt-4 text-4xl font-display font-semibold text-text dark:text-text-dark sm:text-5xl text-balance">
+        <h1 class="mt-5 text-[clamp(2.75rem,6vw,4.75rem)] font-medium leading-[.98] tracking-[-0.04em] text-text dark:text-text-dark text-balance">
           {{ post.title }}
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-text-light dark:text-text-light-dark text-pretty">
+        <p class="mt-7 max-w-[65ch] text-lg leading-relaxed text-text-light dark:text-text-light-dark text-pretty">
           {{ post.description }}
         </p>
       </div>
     </header>
 
-    <section class="pb-24 sm:pb-32">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative">
+      <div class="mx-auto w-[min(calc(100%_-_2.25rem),48rem)] border-t studio-rule pt-12 sm:pt-16">
         <ContentRenderer
           :value="post"
           :components="contentComponents"

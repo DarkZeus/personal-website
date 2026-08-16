@@ -1,19 +1,13 @@
 <template>
-  <section class="relative py-24 flex items-center justify-center overflow-hidden">
-    <!-- Grid pattern background -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
-    
-    <!-- Decorative elements -->
-    <div class="absolute -top-1/3 -right-1/3 w-[60rem] h-[60rem] rounded-full bg-primary/3 blur-3xl"></div>
-    <div class="absolute -bottom-1/3 -left-1/3 w-[60rem] h-[60rem] rounded-full bg-primary/3 blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45rem] h-[45rem] rounded-full bg-primary/3 blur-3xl opacity-50"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
-      <div class="text-center">
-        <h1 class="text-4xl font-display font-semibold text-text dark:text-text-dark sm:text-5xl md:text-6xl text-balance">
+  <section class="relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40">
+    <div class="studio-circle -right-48 top-16 h-[28rem] w-[28rem]" aria-hidden="true"></div>
+
+    <div class="studio-shell relative">
+      <div class="grid items-end gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-24">
+        <h1 class="studio-page-title">
           <slot name="title" />
         </h1>
-        <p class="mt-6 max-w-2xl mx-auto text-lg text-text-light dark:text-text-light-dark sm:text-xl leading-relaxed text-pretty">
+        <p class="studio-lede m-0 lg:pb-1">
           <slot name="description" />
         </p>
       </div>
@@ -23,7 +17,3 @@
     <slot name="scroll-indicator" />
   </section>
 </template>
-
-<script setup lang="ts">
-import AuroraBackground from '../AuroraBackground.vue'
-</script> 

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-09T16:18:16Z",
+  "title": "Design System: Quiet Systems Studio",
+  "extensions": {
+    "colorMeta": {
+      "signal-cobalt": {
+        "role": "primary",
+        "displayName": "Signal Cobalt",
+        "canonical": "#155ecc",
+        "tonalRamp": ["oklch(0.15 0.16 255)", "oklch(0.25 0.16 255)", "oklch(0.35 0.16 255)", "oklch(0.45 0.16 255)", "oklch(0.55 0.16 255)", "oklch(0.70 0.14 255)", "oklch(0.85 0.08 255)", "oklch(0.95 0.03 255)"]
+      },
+      "signal-cobalt-deep": {
+        "role": "primary",
+        "displayName": "Deep Signal Cobalt",
+        "canonical": "#104fae",
+        "tonalRamp": ["oklch(0.15 0.15 255)", "oklch(0.25 0.15 255)", "oklch(0.35 0.15 255)", "oklch(0.45 0.15 255)", "oklch(0.55 0.15 255)", "oklch(0.70 0.13 255)", "oklch(0.85 0.07 255)", "oklch(0.95 0.03 255)"]
+      },
+      "signal-cobalt-light": {
+        "role": "primary",
+        "displayName": "Luminous Signal Cobalt",
+        "canonical": "#73a7f5",
+        "tonalRamp": ["oklch(0.15 0.11 255)", "oklch(0.25 0.11 255)", "oklch(0.35 0.11 255)", "oklch(0.45 0.11 255)", "oklch(0.55 0.11 255)", "oklch(0.70 0.11 255)", "oklch(0.85 0.07 255)", "oklch(0.95 0.025 255)"]
+      },
+      "cool-paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#f4f7fb",
+        "tonalRamp": ["oklch(0.15 0.01 250)", "oklch(0.25 0.01 250)", "oklch(0.35 0.01 250)", "oklch(0.45 0.01 250)", "oklch(0.55 0.01 250)", "oklch(0.70 0.01 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.01 250)"]
+      },
+      "frosted-surface": {
+        "role": "neutral",
+        "displayName": "Frosted Surface",
+        "canonical": "#fbfcfe",
+        "tonalRamp": ["oklch(0.15 0.006 250)", "oklch(0.25 0.006 250)", "oklch(0.35 0.006 250)", "oklch(0.45 0.006 250)", "oklch(0.55 0.006 250)", "oklch(0.70 0.006 250)", "oklch(0.85 0.006 250)", "oklch(0.95 0.006 250)"]
+      },
+      "surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Paper",
+        "canonical": "#edf2f8",
+        "tonalRamp": ["oklch(0.15 0.012 250)", "oklch(0.25 0.012 250)", "oklch(0.35 0.012 250)", "oklch(0.45 0.012 250)", "oklch(0.55 0.012 250)", "oklch(0.70 0.012 250)", "oklch(0.85 0.012 250)", "oklch(0.95 0.012 250)"]
+      },
+      "midnight-slate": {
+        "role": "neutral",
+        "displayName": "Midnight Slate",
+        "canonical": "#172234",
+        "tonalRamp": ["oklch(0.15 0.025 255)", "oklch(0.25 0.025 255)", "oklch(0.35 0.025 255)", "oklch(0.45 0.025 255)", "oklch(0.55 0.025 255)", "oklch(0.70 0.02 255)", "oklch(0.85 0.012 255)", "oklch(0.95 0.006 255)"]
+      },
+      "muted-slate": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#5d6b80",
+        "tonalRamp": ["oklch(0.15 0.02 250)", "oklch(0.25 0.02 250)", "oklch(0.35 0.02 250)", "oklch(0.45 0.02 250)", "oklch(0.55 0.02 250)", "oklch(0.70 0.018 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.005 250)"]
+      },
+      "warm-void": {
+        "role": "neutral",
+        "displayName": "Warm Void",
+        "canonical": "#101722",
+        "tonalRamp": ["oklch(0.15 0.018 255)", "oklch(0.25 0.018 255)", "oklch(0.35 0.018 255)", "oklch(0.45 0.018 255)", "oklch(0.55 0.018 255)", "oklch(0.70 0.015 255)", "oklch(0.85 0.009 255)", "oklch(0.95 0.004 255)"]
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Surface",
+        "canonical": "#172131",
+        "tonalRamp": ["oklch(0.15 0.02 255)", "oklch(0.25 0.02 255)", "oklch(0.35 0.02 255)", "oklch(0.45 0.02 255)", "oklch(0.55 0.02 255)", "oklch(0.70 0.016 255)", "oklch(0.85 0.009 255)", "oklch(0.95 0.004 255)"]
+      },
+      "dark-surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Dark Surface",
+        "canonical": "#1d2a3d",
+        "tonalRamp": ["oklch(0.15 0.025 255)", "oklch(0.25 0.025 255)", "oklch(0.35 0.025 255)", "oklch(0.45 0.025 255)", "oklch(0.55 0.025 255)", "oklch(0.70 0.018 255)", "oklch(0.85 0.01 255)", "oklch(0.95 0.005 255)"]
+      },
+      "warm-white": {
+        "role": "neutral",
+        "displayName": "Warm White",
+        "canonical": "#f0f4fa",
+        "tonalRamp": ["oklch(0.15 0.008 250)", "oklch(0.25 0.008 250)", "oklch(0.35 0.008 250)", "oklch(0.45 0.008 250)", "oklch(0.55 0.008 250)", "oklch(0.70 0.008 250)", "oklch(0.85 0.008 250)", "oklch(0.95 0.008 250)"]
+      },
+      "dark-muted-slate": {
+        "role": "neutral",
+        "displayName": "Dark Muted Slate",
+        "canonical": "#aeb9ca",
+        "tonalRamp": ["oklch(0.15 0.015 250)", "oklch(0.25 0.015 250)", "oklch(0.35 0.015 250)", "oklch(0.45 0.015 250)", "oklch(0.55 0.015 250)", "oklch(0.70 0.015 250)", "oklch(0.85 0.012 250)", "oklch(0.95 0.006 250)"]
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Dark Structural Border",
+        "canonical": "#2b394c",
+        "tonalRamp": ["oklch(0.15 0.025 250)", "oklch(0.25 0.025 250)", "oklch(0.35 0.025 250)", "oklch(0.45 0.025 250)", "oklch(0.55 0.025 250)", "oklch(0.70 0.018 250)", "oklch(0.85 0.01 250)", "oklch(0.95 0.005 250)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Names and oversized page-title identity moments." },
+      "headline": { "displayName": "Headline", "purpose": "Major evidence sections and strong editorial statements." },
+      "title": { "displayName": "Title", "purpose": "Rows, calls to action, and section introductions." },
+      "body": { "displayName": "Body", "purpose": "Leades, evidence descriptions, and long-form reading." },
+      "label": { "displayName": "Technical Label", "purpose": "Roles, categories, dates, status, and compact metadata." }
+    },
+    "shadows": [
+      { "name": "navigation-glass", "value": "0 8px 32px 0 rgba(0, 0, 0, 0.06)", "purpose": "Subtle separation for the light scrolled navigation." },
+      { "name": "navigation-glass-dark", "value": "inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 40px -8px rgba(0, 0, 0, 0.5), 0 0 80px -20px rgba(99, 155, 255, 0.12)", "purpose": "Inner edge, shadow, and restrained cobalt ambience for the dark scrolled navigation." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "150ms ease", "purpose": "Button, link, navigation, icon, and focus-adjacent state transitions." },
+      { "name": "media-standard", "value": "300ms ease", "purpose": "The restrained 1.02 image scale used by project media on hover." },
+      { "name": "navigation-scroll", "value": "scroll 0px–100px, clamped", "purpose": "Interpolates navigation width, offset, radius, and blur into the floating state." },
+      { "name": "menu-spring", "value": "spring(stiffness: 300, damping: 20)", "purpose": "Mobile navigation entry and exit." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "studio-shell", "value": "900px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The direct contact and résumé action: solid cobalt, compact, and confidently restrained.",
+      "html": "<button class=\"ds-btn-primary\">Get in touch <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: 0.75rem; border: 0; border-radius: var(--radius-lg, 0.5rem); background: var(--color-primary, #155ecc); color: #fff; padding: 0.75rem 1.75rem; font: 600 0.9375rem/1.5 var(--font-sans, Archivo, system-ui, sans-serif); cursor: pointer; transition: background-color 150ms ease, transform 150ms ease; } .ds-btn-primary svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; } .ds-btn-primary:hover { background: var(--color-primary-dark, #104fae); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-primary, #155ecc); outline-offset: 2px; } @media (prefers-color-scheme: dark) { .ds-btn-primary { background: var(--color-primary-light, #73a7f5); color: var(--color-void-black, #101722); } .ds-btn-primary:hover { background: var(--color-primary, #155ecc); color: #fff; } } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "A text-led secondary action that gains only a pale cobalt field on hover.",
+      "html": "<button class=\"ds-btn-ghost\">About me</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; border: 0; border-radius: var(--radius-lg, 0.5rem); background: transparent; color: var(--color-primary, #155ecc); padding: 0.75rem 1.75rem; font: 600 0.9375rem/1.5 var(--font-sans, Archivo, system-ui, sans-serif); cursor: pointer; transition: background-color 150ms ease, transform 150ms ease; } .ds-btn-ghost:hover { background: rgb(21 94 204 / 6%); } .ds-btn-ghost:active { transform: scale(0.98); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-primary, #155ecc); outline-offset: 2px; } @media (prefers-color-scheme: dark) { .ds-btn-ghost { color: var(--color-primary-light, #73a7f5); } .ds-btn-ghost:hover { background: rgb(115 167 245 / 10%); } } @media (prefers-reduced-motion: reduce) { .ds-btn-ghost { transition: none; } }"
+    },
+    {
+      "name": "Frosted Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "The compact scrolled state of the fixed identity bar, with title-case links and a quiet cobalt active field.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Serhii Resnianskyi</a><div class=\"ds-nav-links\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Home</a><a class=\"ds-nav-link\" href=\"#\">Projects</a><a class=\"ds-nav-link\" href=\"#\">Blog</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.5rem; border: 1px solid rgb(23 34 52 / 10%); border-radius: 0.5rem; background: rgb(244 247 251 / 50%); backdrop-filter: blur(10px); box-shadow: 0 8px 32px 0 rgba(0,0,0,0.06); font-family: var(--font-sans, Archivo, system-ui, sans-serif); } .ds-nav a { text-decoration: none; } .ds-nav-brand { color: var(--color-primary, #155ecc); font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.03em; transition: opacity 150ms ease; } .ds-nav-brand:hover { opacity: 0.8; } .ds-nav-links { display: flex; align-items: center; gap: 1rem; } .ds-nav-link { position: relative; padding: 0.5rem 1rem; color: var(--color-text-light, #5d6b80); font-size: 0.75rem; font-weight: 400; transition: color 150ms ease, background-color 150ms ease; } .ds-nav-link:hover, .ds-nav-link-active { background: rgb(21 94 204 / 5%); color: var(--color-primary, #155ecc); } .ds-nav-link:focus-visible, .ds-nav-brand:focus-visible { outline: 2px solid var(--color-primary, #155ecc); outline-offset: 2px; } @media (prefers-color-scheme: dark) { .ds-nav { border-color: var(--color-border-dark, #2b394c); background: rgb(16 23 34 / 55%); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,255,255,0.04), 0 8px 40px -8px rgba(0,0,0,0.5), 0 0 80px -20px rgba(99,155,255,0.12); } .ds-nav-brand, .ds-nav-link:hover, .ds-nav-link-active { color: var(--color-primary-light, #73a7f5); } .ds-nav-link { color: var(--color-text-light-dark, #aeb9ca); } .ds-nav-link:hover, .ds-nav-link-active { background: rgb(115 167 245 / 10%); } }"
+    },
+    {
+      "name": "Evidence Row",
+      "kind": "custom",
+      "description": "The ruled collection pattern used for Blog Posts, links, experience, gear, and contact evidence.",
+      "html": "<a class=\"ds-evidence-row\" href=\"#\"><span class=\"ds-evidence-meta\">ARCHITECTURE</span><div><h3>I build fast, scalable web products</h3><p>Concrete work and technical judgment, presented for fast inspection.</p></div><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-evidence-row { display: grid; grid-template-columns: 9rem minmax(0,1fr) 2.5rem; align-items: start; gap: 2.5rem; padding: 2.5rem 0; border-top: 1px solid rgb(23 34 52 / 13%); color: var(--color-text, #172234); text-decoration: none; } .ds-evidence-meta { color: var(--color-text-light, #5d6b80); font: 500 0.6875rem/1.4 var(--font-sans, Archivo, system-ui, sans-serif); letter-spacing: 0.1em; text-transform: uppercase; } .ds-evidence-row h3 { margin: 0; max-width: 32ch; font: 600 1.8125rem/1.14 var(--font-sans, Archivo, system-ui, sans-serif); letter-spacing: -0.03em; transition: color 150ms ease; } .ds-evidence-row p { margin: 0.75rem 0 0; max-width: 65ch; color: var(--color-text-light, #5d6b80); font: 400 0.875rem/1.75 var(--font-sans, Archivo, system-ui, sans-serif); } .ds-evidence-row svg { width: 1.25rem; height: 1.25rem; color: var(--color-primary, #155ecc); fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; transition: transform 150ms ease; } .ds-evidence-row:hover h3 { color: var(--color-primary, #155ecc); } .ds-evidence-row:hover svg { transform: translateX(0.25rem); } .ds-evidence-row:focus-visible { outline: 2px solid var(--color-primary, #155ecc); outline-offset: 4px; } @media (max-width: 640px) { .ds-evidence-row { grid-template-columns: 1fr 2rem; gap: 1rem; } .ds-evidence-meta { grid-column: 1 / -1; } } @media (prefers-color-scheme: dark) { .ds-evidence-row { border-color: rgb(174 185 202 / 16%); color: var(--color-text-dark, #f0f4fa); } .ds-evidence-meta, .ds-evidence-row p { color: var(--color-text-light-dark, #aeb9ca); } .ds-evidence-row svg, .ds-evidence-row:hover h3 { color: var(--color-primary-light, #73a7f5); } } @media (prefers-reduced-motion: reduce) { .ds-evidence-row h3, .ds-evidence-row svg { transition: none; } }"
+    },
+    {
+      "name": "Project Evidence",
+      "kind": "custom",
+      "description": "A square tonal image well followed by unboxed project evidence and compact cobalt metadata.",
+      "html": "<article class=\"ds-project\"><a class=\"ds-project-media\" href=\"#\"><span>PROJECT IMAGE</span></a><div class=\"ds-project-copy\"><span class=\"ds-project-status\">IN PROGRESS</span><h3>Selected engineering project</h3><p>A concise description grounded in the work, its purpose, and the technical choices behind it.</p><span class=\"ds-project-tag\">NUXT</span><span class=\"ds-project-tag\">TYPESCRIPT</span></div></article>",
+      "css": ".ds-project { max-width: 38rem; font-family: var(--font-sans, Archivo, system-ui, sans-serif); } .ds-project-media { display: grid; height: 22rem; place-items: center; overflow: hidden; background: var(--color-surface-elevated, #edf2f8); color: var(--color-text-light, #5d6b80); text-decoration: none; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.1em; } .ds-project-media span { transition: transform 300ms ease; } .ds-project-media:hover span { transform: scale(1.02); } .ds-project-media:focus-visible { outline: 2px solid var(--color-primary, #155ecc); outline-offset: 4px; } .ds-project-copy { padding-top: 1.5rem; } .ds-project-status, .ds-project-tag { color: var(--color-primary, #155ecc); font-size: 0.75rem; font-weight: 600; } .ds-project-copy h3 { margin: 0.625rem 0 0; color: var(--color-text, #172234); font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.025em; } .ds-project-copy p { margin: 0.75rem 0 1rem; max-width: 55ch; color: var(--color-text-light, #5d6b80); font-size: 0.875rem; line-height: 1.75; } .ds-project-tag + .ds-project-tag { margin-left: 1rem; } @media (prefers-color-scheme: dark) { .ds-project-media { background: var(--color-surface-elevated-dark, #1d2a3d); color: var(--color-text-light-dark, #aeb9ca); } .ds-project-copy h3 { color: var(--color-text-dark, #f0f4fa); } .ds-project-copy p { color: var(--color-text-light-dark, #aeb9ca); } .ds-project-status, .ds-project-tag { color: var(--color-primary-light, #73a7f5); } } @media (prefers-reduced-motion: reduce) { .ds-project-media span { transition: none; } }"
+    },
+    {
+      "name": "Availability Status",
+      "kind": "chip",
+      "description": "A semantic green exception used only to communicate genuine work availability.",
+      "html": "<span class=\"ds-availability\"><span class=\"ds-availability-dot\" aria-hidden=\"true\"></span>Available for work</span>",
+      "css": ".ds-availability { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem; border: 1px solid rgb(21 128 76 / 25%); border-radius: 9999px; background: rgb(34 197 94 / 8%); color: #12663d; font: 600 0.75rem/1.4 var(--font-sans, Archivo, system-ui, sans-serif); } .ds-availability-dot { width: 0.375rem; height: 0.375rem; border-radius: 9999px; background: #169653; animation: ds-availability-pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; } @keyframes ds-availability-pulse { 50% { opacity: 0.45; } } @media (prefers-color-scheme: dark) { .ds-availability { border-color: rgb(88 214 141 / 30%); background: rgb(34 197 94 / 10%); color: #7ee2a8; } .ds-availability-dot { background: #66d898; } } @media (prefers-reduced-motion: reduce) { .ds-availability-dot { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Quiet Systems Studio",
+    "overview": "Quiet Systems Studio presents engineering evidence through calm, open compositions instead of card-heavy templates. It feels like a precise working studio: Cool Paper carries the page, fine rules reveal structure, oversized editorial titles establish identity, and Signal Cobalt marks the few places that deserve action or attention.\n\nThe system is restrained but not anonymous. Archivo supplies one consistent voice from monumental names to technical metadata; clipped cobalt circles create atmosphere without competing with content; and the fixed frosted navigation gives the otherwise flat world a single controlled layer of depth. Light and dark themes preserve the same semantic hierarchy.",
+    "keyCharacteristics": [
+      "Cool Paper and warm slate foundations with Signal Cobalt as the interaction signal",
+      "Oversized, tightly tracked Archivo titles balanced by compact evidence copy",
+      "Wide centered shells, asymmetric introductions, and deliberate open space",
+      "Fine structural rules and line-based collections instead of repeated card chrome",
+      "Clipped circular fields and frosted navigation as the recurring signatures",
+      "Short functional motion with reduced-motion fallbacks"
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Signal Cobalt is the only decorative and interactive accent. Green is permitted only when it communicates real availability or status.", "section": "colors" },
+      { "name": "The Parallel Theme Rule", "body": "Preserve page, surface, text, border, and signal roles across themes; do not treat dark mode as a simple inversion.", "section": "colors" },
+      { "name": "The Scale Before Ornament Rule", "body": "Build hierarchy with size, weight, alignment, and whitespace before adding decoration.", "section": "typography" },
+      { "name": "The Reserved Uppercase Rule", "body": "Keep navigation and ordinary actions in title case; uppercase belongs to compact technical labels and status metadata.", "section": "typography" },
+      { "name": "The Wide Frame, Narrow Reading Rule", "body": "Use the 90rem shell for composition and evidence scanning, but constrain prose to readable 65–72 character measures or the 48rem article column.", "section": "layout" },
+      { "name": "The Collapse Before Compress Rule", "body": "Stack columns and actions before shrinking type, hit targets, or internal spacing below the established scale.", "section": "layout" },
+      { "name": "The Flat Evidence Rule", "body": "Evidence remains on the page plane; use rules, alignment, and tonal wells before shadow.", "section": "elevation" },
+      { "name": "The Earned Frost Rule", "body": "Frosted depth belongs to navigation and meaningful state changes, not every container.", "section": "elevation" },
+      { "name": "The Square Evidence Rule", "body": "Keep evidence rows, gallery fields, and ruled sections square; reserve rounding for controls, navigation, status, and literal circles.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do use Signal Cobalt for actions, links, active states, bullets, and visible keyboard focus.",
+      "Do structure evidence with open space, fine rules, asymmetric columns, and clear reading measures.",
+      "Do keep the first viewport focused on identity, concrete capability evidence, and a direct contact route.",
+      "Do preserve semantic light/dark role mapping and WCAG 2.2 AA contrast.",
+      "Do keep motion short, functional, and removable under reduced-motion preferences.",
+      "Do keep decorative circles clipped, faint, and subordinate to content."
+    ],
+    "donts": [
+      "Don't convert ruled evidence collections into repeated floating cards.",
+      "Don't introduce gradients, ornamental corner flourishes, or decorative accent hues that compete with Signal Cobalt.",
+      "Don't use persistent shadows on ordinary content surfaces.",
+      "Don't round project media, evidence rows, or section boundaries.",
+      "Don't use pure black for the dark page or pure white for primary dark-theme text.",
+      "Don't make meaning depend on color, hover, motion, or pointer input alone."
+    ]
+  }
+}

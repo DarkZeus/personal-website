@@ -12,6 +12,22 @@ _Avoid_: CMS, publication platform, Notes, Writing, Articles
 A first-class Markdown page in the **Blog** with its own URL, title, description, and publication date.
 _Avoid_: entry, item, article
 
+**Achievement**:
+A concise, evidence-backed statement in a work experience entry that connects a concrete contribution to an observable outcome.
+_Avoid_: responsibility, duty, task
+
+**Frontend Owner**:
+The public role label for work where Serhii designed the frontend approach, coordinated implementation, reviewed work, and drove it through release; it does not imply people management.
+_Avoid_: Frontend Lead, manager
+
+**Cross-product Terms and Consent Framework**:
+The public label for compliance-related frontend work applied consistently across the customer-facing Paybis website and **Paybis Widget**, without disclosing internal capabilities or architecture.
+_Avoid_: Compliance Engine, Terms of Service components
+
+**Paybis Widget**:
+The customer-facing embedded Paybis experience through which partner users access Paybis services.
+_Avoid_: widget platform, embedded product
+
 ## Relationships
 
 - The **Blog** belongs to the personal website and is authored by Serhii in Git.

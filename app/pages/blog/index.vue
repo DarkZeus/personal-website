@@ -1,65 +1,56 @@
 <template>
-  <div>
-    <HeroSection>
-      <template #title>Blog</template>
-      <template #description>
-        Notes from building software, shaping interfaces, and keeping systems understandable.
-      </template>
-    </HeroSection>
+  <div class="studio-page pt-28 sm:pt-32">
+    <div class="studio-circle -bottom-48 -right-52 h-[32rem] w-[32rem]" aria-hidden="true"></div>
 
-    <section class="relative overflow-hidden py-16 sm:py-20">
-      <div class="absolute inset-0 bg-grid-pattern opacity-[0.015]" aria-hidden="true"></div>
+    <div class="studio-shell relative">
+      <header class="grid items-end gap-10 py-10 lg:grid-cols-[1.04fr_.96fr] lg:gap-24 lg:py-16">
+        <h1 class="studio-page-title">
+          From the
+          <span class="studio-page-title-accent">Blog</span>
+        </h1>
+        <p class="studio-lede m-0 lg:pb-1">Notes from building software, shaping interfaces, and keeping systems understandable.</p>
+      </header>
 
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div v-if="posts?.length" class="space-y-5" role="list" aria-label="Blog posts">
+      <section class="mt-12 sm:mt-16" aria-label="Blog posts">
+        <template v-if="posts?.length">
           <NuxtLink
-            v-for="post in posts"
+            v-for="(post, index) in posts"
             :key="post.path"
             :to="post.path"
-            class="group block rounded-lg bg-surface dark:bg-surface-dark p-6 sm:p-8 ring-1 ring-text/[0.05] dark:ring-border-dark shadow-card dark:shadow-card-dark hover:shadow-glass dark:hover:shadow-glass-dark transition-all duration-300"
-            role="listitem"
+            class="studio-focus studio-press-row group grid gap-5 border-b studio-rule py-10 last:border-b-0 sm:py-12 lg:grid-cols-[11rem_minmax(0,1fr)_2.5rem] lg:gap-10"
           >
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div class="max-w-3xl">
-                <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium uppercase tracking-wide text-primary dark:text-primary-light">
-                  <span>{{ post.category }}</span>
-                  <span aria-hidden="true" class="text-text-light/40 dark:text-text-light-dark/40">/</span>
-                  <time :datetime="formatDateTime(post.date)">{{ formatDate(post.date) }}</time>
-                </p>
-                <h2 class="mt-3 text-2xl font-display font-semibold text-text dark:text-text-dark text-balance group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
-                  {{ post.title }}
-                </h2>
-                <p class="mt-3 text-text-light dark:text-text-light-dark leading-relaxed text-pretty">
-                  {{ post.description }}
-                </p>
-              </div>
-
-              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary dark:bg-primary-light/10 dark:text-primary-light transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                <ArrowRightIcon class="h-5 w-5" />
-              </span>
+            <div>
+              <time :datetime="formatDateTime(post.date)" class="text-xs text-text-light dark:text-text-light-dark">{{ formatDate(post.date) }}</time>
+              <span class="mt-2 block text-xs font-semibold text-primary dark:text-primary-light">{{ post.category }}</span>
             </div>
+            <div>
+              <h2 :class="['m-0 max-w-[32ch] font-semibold leading-[1.14] tracking-[-0.03em] text-text transition-colors group-hover:text-primary dark:text-text-dark dark:group-hover:text-primary-light', index === 0 ? 'text-[clamp(1.75rem,2.5vw,2.25rem)]' : 'text-[29px]']">
+                {{ post.title }}
+              </h2>
+              <p class="mt-3 max-w-[72ch] text-sm leading-relaxed text-text-light dark:text-text-light-dark">{{ post.description }}</p>
+            </div>
+            <span class="grid h-10 w-10 place-items-center text-primary transition-transform duration-150 group-hover:translate-x-1 motion-reduce:transition-none dark:text-primary-light" aria-hidden="true">
+              <ArrowRightIcon class="h-5 w-5" />
+            </span>
           </NuxtLink>
-        </div>
+        </template>
 
-        <div v-else class="rounded-lg bg-surface dark:bg-surface-dark p-8 ring-1 ring-text/[0.05] dark:ring-border-dark shadow-card dark:shadow-card-dark text-center">
-          <h2 class="text-2xl font-display font-semibold text-text dark:text-text-dark">No posts yet</h2>
-          <p class="mt-3 text-text-light dark:text-text-light-dark">New posts will appear here once they are published.</p>
+        <div v-else class="py-16">
+          <h2 class="m-0 text-2xl font-semibold text-text dark:text-text-dark">No posts yet</h2>
+          <p class="mt-3 text-text-light dark:text-text-light-dark">New Blog Posts will appear here once they are published.</p>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ArrowRightIcon } from '@heroicons/vue/24/outline'
-import HeroSection from '~/components/sections/hero-section.vue'
 
 const blogUrl = 'https://fuad.work/blog'
 
 const { data: posts } = await useAsyncData('blog-posts', () => {
-  return queryCollection('blog')
-    .order('date', 'DESC')
-    .all()
+  return queryCollection('blog').order('date', 'DESC').all()
 })
 
 useSeoMeta({
@@ -73,27 +64,14 @@ useSeoMeta({
   twitterUrl: blogUrl,
 })
 
-useHead({
-  link: [
-    { rel: 'canonical', href: blogUrl },
-  ],
-  meta: [
-    { name: 'twitter:title', content: 'Blog - Serhii Resnianskyi' },
-    { name: 'twitter:description', content: 'Notes from Serhii Resnianskyi on software engineering, interfaces, and web architecture.' },
-    { name: 'twitter:url', content: blogUrl },
-  ],
-})
+useHead({ link: [{ rel: 'canonical', href: blogUrl }] })
 
-const formatDate = (date: string | Date) => {
-  return new Intl.DateTimeFormat('en', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(date))
-}
+const formatDate = (date: string | Date) => new Intl.DateTimeFormat('en', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(date))
 
-const formatDateTime = (date: string | Date) => {
-  return new Date(date).toISOString()
-}
+const formatDateTime = (date: string | Date) => new Date(date).toISOString()
 </script>

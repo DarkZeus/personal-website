@@ -1,174 +1,90 @@
 <template>
-  <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02] pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute top-1/4 right-0 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none" aria-hidden="true"></div>
-  
-  <div>
-    <HeroSection class="py-24">
-      <template #title>Get in Touch</template>
-      <template #description>
-        Have a question or want to work together? I'd love to hear from you.
-      </template>
-    </HeroSection>
+  <div class="studio-page pb-20 pt-28 sm:pb-28 sm:pt-32">
+    <div class="studio-circle -bottom-60 -left-72 h-[40rem] w-[40rem]" aria-hidden="true"></div>
 
-    <!-- Contact Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      
-      <section class="py-12 relative">
-        <div class="grid gap-16 lg:grid-cols-2">
-          <!-- Contact Information -->
-          <div class="space-y-8">
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance">Contact Information</h2>
-              <div class="space-y-6">
-                <ContactInfo title="Email">
-                  <template #icon>
-                    <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </template>
-                  <template #content>
-                    <ClientOnly>
-                      <a href="mailto:serhii.resnyanskyi@gmail.com" class="text-text-light dark:text-text-light-dark hover:text-primary dark:hover:text-primary-light transition-colors duration-300 text-pretty">serhii.resnyanskyi@gmail.com</a>
-                      <template #fallback>
-                        <span class="email-placeholder">Get in touch</span>
-                      </template>
-                    </ClientOnly>
-                  </template>
-                </ContactInfo>
+    <div class="studio-shell relative">
+      <section class="grid items-end gap-10 py-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-24 lg:py-16" aria-labelledby="contact-heading">
+        <h1 id="contact-heading" class="studio-page-title">
+          Let’s
+          <span class="studio-page-title-accent">talk</span>
+        </h1>
 
-                <ContactInfo title="Telegram">
-                  <template #icon>
-                    <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </template>
-                  <template #content>
-                    <a href="https://t.me/fuad_first" class="text-text-light dark:text-text-light-dark hover:text-primary dark:hover:text-primary-light transition-colors duration-300 text-pretty">@fuad_first</a>
-                  </template>
-                </ContactInfo>
-
-                <ContactInfo title="Location">
-                  <template #icon>
-                    <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </template>
-                  <template #content>
-                    <p class="text-text-light dark:text-text-light-dark text-pretty">Chernihiv, Ukraine</p>
-                  </template>
-                </ContactInfo>
-              </div>
-            </div>
-
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance">Social Media</h2>
-              <div class="flex gap-4">
-                <a 
-                  href="https://linkedin.com/in/serhii-resnianskyi" 
-                  class="group relative w-12 h-12 rounded-md overflow-hidden flex items-center justify-center"
-                  aria-label="Visit my LinkedIn profile"
-                >
-                  <div class="absolute inset-0 bg-primary/10 dark:bg-primary/20 opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
-                  <div class="absolute inset-0 bg-primary/20 dark:bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg class="relative z-10 w-6 h-6 text-text-light dark:text-text-light-dark group-hover:text-primary dark:group-hover:text-primary-light transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://github.com/DarkZeus" 
-                  class="group relative w-12 h-12 rounded-md overflow-hidden flex items-center justify-center"
-                  aria-label="Visit my GitHub profile"
-                >
-                  <div class="absolute inset-0 bg-primary/10 dark:bg-primary/20 opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
-                  <div class="absolute inset-0 bg-primary/20 dark:bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg class="relative z-10 w-6 h-6 text-text-light dark:text-text-light-dark group-hover:text-primary dark:group-hover:text-primary-light transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+        <div>
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#15804c]/25 bg-[#22c55e]/[0.08] px-3 py-1.5 text-xs font-semibold text-[#12663d] dark:border-[#58d68d]/30 dark:bg-[#22c55e]/10 dark:text-[#7ee2a8]" role="status" aria-label="Availability status: Available for work">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[#169653] motion-reduce:animate-none dark:bg-[#66d898]" aria-hidden="true"></span>
+            Available for work
           </div>
+          <p class="studio-lede m-0 text-lg">Have a question or want to work together? I’d love to hear from you.</p>
 
-          <!-- Let's Work Together Section -->
-          <div class="space-y-8">
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 ring-1 ring-text/[0.05] dark:ring-border-dark">
-<!--              <OpenToOpportunities />-->
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance">Let's Work Together</h2>
-              <div class="space-y-6">
-                <div class="space-y-4">
-                  <h3 class="text-xl font-display font-medium text-text dark:text-text-dark">What I Do</h3>
-                  <ul class="space-y-5">
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Full-stack web development with modern technologies</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Performance optimization and scalable architecture design</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Cross-functional collaboration and technical mentorship</p>
-                    </li>
-                  </ul>
-                </div>
+          <a href="mailto:serhii.resnyanskyi@gmail.com" class="studio-focus studio-press-row group mt-7 grid grid-cols-[4.75rem_minmax(0,1fr)_1.25rem] items-center gap-4 border-y studio-rule py-5">
+            <span class="studio-label">Email</span>
+            <span class="min-w-0 break-words text-[clamp(1rem,1.5vw,1.25rem)] font-semibold tracking-[-0.02em] text-primary dark:text-primary-light">serhii.resnyanskyi@gmail.com</span>
+            <ArrowRightIcon class="h-4 w-4 text-primary transition-transform duration-150 group-hover:translate-x-1 motion-reduce:transition-none dark:text-primary-light" aria-hidden="true" />
+          </a>
 
-                <div class="space-y-4">
-                  <h3 class="text-xl font-display font-medium text-text dark:text-text-dark">What I'm Looking For</h3>
-                  <ul class="space-y-5">
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Full-time remote or hybrid positions</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Opportunities for growth and learning</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <svg class="w-6 h-6 text-primary dark:text-primary-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p class="text-text-light dark:text-text-light-dark text-pretty">Collaborative and innovative team environment</p>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="pt-4">
-                  <ClientOnly>
-                    <UiButton as="a" href="mailto:serhii.resnyanskyi@gmail.com" variant="primary">
-                      Let's Connect
-                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </UiButton>
-                    <template #fallback>
-                      <span class="email-placeholder">Get in touch</span>
-                    </template>
-                  </ClientOnly>
-                </div>
-              </div>
+          <div class="grid sm:grid-cols-3">
+            <a class="studio-focus studio-press-row group block pt-5 sm:pr-5" href="https://t.me/fuad_first" target="_blank" rel="noopener noreferrer">
+              <span class="studio-label block">Telegram</span>
+              <span class="mt-2 block text-[15px] font-semibold text-text transition-colors duration-150 group-hover:text-primary dark:text-text-dark dark:group-hover:text-primary-light">@fuad_first</span>
+            </a>
+            <a class="studio-focus studio-press-row group block pt-5 sm:border-l sm:px-5 studio-rule" href="https://linkedin.com/in/serhii-resnianskyi" target="_blank" rel="noopener noreferrer">
+              <span class="studio-label block">LinkedIn</span>
+              <span class="mt-2 block text-[15px] font-semibold text-text transition-colors duration-150 group-hover:text-primary dark:text-text-dark dark:group-hover:text-primary-light">Serhii Resnianskyi</span>
+            </a>
+            <div class="pt-5 sm:border-l sm:pl-5 studio-rule">
+              <span class="studio-label block">Location</span>
+              <span class="mt-2 block text-[15px] font-semibold text-text dark:text-text-dark">Chernihiv, Ukraine</span>
             </div>
           </div>
         </div>
       </section>
+
+      <section class="mt-24 border-y studio-rule" aria-labelledby="contact-work-heading">
+        <div class="grid lg:grid-cols-[.7fr_1fr_1fr]">
+          <h2 id="contact-work-heading" class="m-0 py-10 text-[29px] font-medium tracking-[-0.03em] text-text dark:text-text-dark lg:pr-8">Work worth discussing</h2>
+          <div v-for="column in workColumns" :key="column.title" class="border-t studio-rule py-10 lg:border-l lg:border-t-0 lg:px-8">
+            <h3 class="m-0 text-lg font-semibold text-text dark:text-text-dark">{{ column.title }}</h3>
+            <ul class="mt-5 space-y-3 p-0">
+              <li v-for="item in column.items" :key="item" class="relative pl-5 text-sm leading-relaxed text-text-light dark:text-text-light-dark">
+                <span class="absolute left-0 top-[.65em] h-1.5 w-1.5 rounded-full bg-primary dark:bg-primary-light" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="flex flex-col gap-7 pt-16 sm:flex-row sm:items-center sm:justify-between">
+        <p class="m-0 text-text-light dark:text-text-light-dark">I usually respond by email or Telegram.</p>
+        <UiButton as="a" href="mailto:serhii.resnyanskyi@gmail.com" variant="primary">
+          Start a conversation
+          <ArrowRightIcon class="h-4 w-4" aria-hidden="true" />
+        </UiButton>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import HeroSection from '~/components/sections/hero-section.vue'
-import ContactInfo from '~/components/ui/contact-info.vue'
-import OpenToOpportunities from '~/components/ui/open-to-opportunities.vue'
+<script setup lang="ts">
+import { ArrowRightIcon } from '@heroicons/vue/24/outline'
 import UiButton from '~/components/ui/UiButton.vue'
-</script> 
+
+const workColumns = [
+  {
+    title: 'What I do',
+    items: [
+      'Full-stack web development with modern technologies',
+      'Performance optimization and scalable architecture design',
+      'Cross-functional collaboration and technical mentorship',
+    ],
+  },
+  {
+    title: 'What I’m looking for',
+    items: [
+      'Full-time remote or hybrid positions',
+      'Opportunities for growth and learning',
+      'Collaborative and innovative team environments',
+    ],
+  },
+] as const
+</script>

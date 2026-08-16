@@ -1,552 +1,472 @@
 <template>
-  <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02] pointer-events-none"
-       aria-hidden="true"></div>
-  <div class="absolute top-1/4 right-0 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none"
-       aria-hidden="true"></div>
+  <div class="studio-page pt-28 sm:pt-32">
+    <div class="studio-circle -right-52 top-24 h-[34rem] w-[34rem]" aria-hidden="true"></div>
 
-  <div>
-    <HeroSection class="py-24" role="banner">
-
-      <template #title>About Me</template>
-      <template #description>
-        A passionate developer with a focus on creating beautiful, functional, and user-friendly applications.
-      </template>
-    </HeroSection>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <!-- Quick Overview Bento Grid -->
-      <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
-      >
-        <div
-            v-for="item in cards.qualities"
-            :key="item.title"
-            class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark flex flex-col items-start gap-4 ring-1 ring-text/[0.05] dark:ring-border-dark group hover:shadow-glass dark:hover:shadow-glass-dark transition-all duration-300 p-6 relative overflow-hidden"
-        >
-          <component :is="item.icon" class="w-7 h-7 text-primary dark:text-primary-light"/>
-          <h3 class="text-2xl font-semibold text-text dark:text-text-dark">{{ item.title }}</h3>
-          <p class="text-text-light dark:text-text-light-dark text-base">{{ item.description }}</p>
+    <div class="studio-shell relative">
+      <section class="grid items-end gap-10 py-10 lg:grid-cols-[.84fr_1.16fr] lg:gap-24 lg:py-16" aria-labelledby="about-heading">
+        <h1 id="about-heading" class="studio-page-title">
+          About
+          <span class="studio-page-title-accent">me</span>
+        </h1>
+        <div>
+          <p class="studio-lede m-0 text-lg">
+            I’m a software engineer based in Chernihiv, Ukraine, with {{ experienceYears }} of experience building web applications across frontend and full-stack systems. I care about responsive interfaces, performance, and maintainable architecture—and I enjoy working across engineering, design, and product to turn complex requirements into dependable software.
+          </p>
+          <div class="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <UiButton as="a" href="/serhii-resnianskyi-cv.pdf" variant="primary">
+              Download résumé
+              <ArrowDownTrayIcon class="h-4 w-4" aria-hidden="true" />
+            </UiButton>
+            <UiButton as="NuxtLink" to="/contact" variant="ghost">Get in touch</UiButton>
+          </div>
         </div>
+      </section>
+
+      <dl class="grid border-y studio-rule sm:grid-cols-2 lg:grid-cols-4">
+        <div v-for="fact in facts" :key="fact.label" class="border-b studio-rule py-6 last:border-b-0 sm:nth-[2]:border-l sm:nth-[4]:border-l lg:border-b-0 lg:border-l lg:first:border-l-0 lg:px-7 lg:first:pl-0">
+          <dt class="studio-label">{{ fact.label }}</dt>
+          <dd class="mt-2 text-lg font-semibold tracking-[-0.02em] text-text dark:text-text-dark">{{ fact.value }}</dd>
+        </div>
+      </dl>
+
+      <section class="grid gap-8 py-8 lg:grid-cols-[.72fr_1.28fr] lg:gap-20 lg:py-10" aria-labelledby="qualities-heading">
+        <h2 id="qualities-heading" class="m-0 text-[29px] font-medium tracking-[-0.03em] text-text dark:text-text-dark">What I bring</h2>
+        <div>
+          <article v-for="quality in qualities" :key="quality.title" class="grid gap-2 border-b studio-rule py-5 sm:grid-cols-[.72fr_1.28fr] sm:items-baseline sm:gap-8 sm:py-6">
+            <h3 class="m-0 text-lg font-semibold tracking-[-0.025em] text-text dark:text-text-dark">{{ quality.title }}</h3>
+            <p class="m-0 max-w-[48ch] text-sm leading-relaxed text-text-light dark:text-text-light-dark">{{ quality.description }}</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="mt-20">
+        <ExperienceTimeline :items="workExperience" />
+
+        <section class="mt-16" aria-labelledby="skills-heading">
+          <h2 id="skills-heading" class="m-0 text-[clamp(2.25rem,4vw,3.5rem)] font-medium tracking-[-0.04em] text-text dark:text-text-dark">Technical range</h2>
+          <div class="mt-8 border-t studio-rule">
+            <section v-for="group in skillGroups" :key="group.title" class="grid gap-4 border-b studio-rule py-7 sm:grid-cols-[12rem_1fr]">
+              <h3 class="m-0 text-sm font-semibold leading-relaxed text-text dark:text-text-dark">{{ group.title }}</h3>
+              <ul class="flex flex-wrap gap-x-4 gap-y-2 p-0 text-sm leading-relaxed text-text-light dark:text-text-light-dark" :aria-label="`${group.title} skills`">
+                <li v-for="skill in group.skills" :key="skill">{{ skill }}</li>
+              </ul>
+            </section>
+          </div>
+        </section>
       </div>
 
-      <!-- About Content -->
-      <section class="py-12 relative overflow-hidden" role="main" aria-label="About content">
-        <div class="grid gap-16 lg:grid-cols-2">
-          <!-- Left Column -->
-          <div class="space-y-8" role="complementary" aria-label="Personal information">
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full" aria-hidden="true"></div>
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block"
-                  id="about-me">
-                Who I Am
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
-              </h2>
-              <p class="text-lg text-text-light dark:text-text-light-dark leading-relaxed text-pretty" aria-labelledby="about-me">
-                Experienced Software Engineer with 7+ years architecting scalable web solutions and leading technical
-                decision-making in complex environments. Expert in
-                <span
-                    class="inline-flex items-center gap-1.5 -mt-4 px-4 py-0.5 rounded-full text-sm border bg-[#61DAFB]/10 border border-[#61DAFB]">
-                <svg class="w-4 h-4" viewBox="0 0 569 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                     xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g fill="none" fill-rule="evenodd">
-                        <g fill="#087EA4" fill-rule="nonzero">
-                            <path
-                                d="M285.5,201 C255.400481,201 231,225.400481 231,255.5 C231,285.599519 255.400481,310 285.5,310 C315.599519,310 340,285.599519 340,255.5 C340,225.400481 315.599519,201 285.5,201"
-                                id="Path"></path>
-                            <path
-                                d="M568.959856,255.99437 C568.959856,213.207656 529.337802,175.68144 466.251623,150.985214 C467.094645,145.423543 467.85738,139.922107 468.399323,134.521063 C474.621631,73.0415145 459.808523,28.6686204 426.709856,9.5541429 C389.677085,-11.8291748 337.36955,3.69129898 284.479928,46.0162134 C231.590306,3.69129898 179.282771,-11.8291748 142.25,9.5541429 C109.151333,28.6686204 94.3382249,73.0415145 100.560533,134.521063 C101.102476,139.922107 101.845139,145.443621 102.708233,151.02537 C97.4493791,153.033193 92.2908847,155.161486 87.3331099,157.39017 C31.0111824,182.708821 0,217.765415 0,255.99437 C0,298.781084 39.6220545,336.307301 102.708233,361.003527 C101.845139,366.565197 101.102476,372.066633 100.560533,377.467678 C94.3382249,438.947226 109.151333,483.32012 142.25,502.434597 C153.629683,508.887578 166.52439,512.186771 179.603923,511.991836 C210.956328,511.991836 247.567589,495.487529 284.479928,465.972527 C321.372196,495.487529 358.003528,511.991836 389.396077,511.991836 C402.475265,512.183856 415.36922,508.884856 426.75,502.434597 C459.848667,483.32012 474.661775,438.947226 468.439467,377.467678 C467.897524,372.066633 467.134789,366.565197 466.291767,361.003527 C529.377946,336.347457 569,298.761006 569,255.99437 M389.155214,27.1025182 C397.565154,26.899606 405.877839,28.9368502 413.241569,33.0055186 C436.223966,46.2772304 446.540955,82.2775015 441.522965,131.770345 C441.181741,135.143488 440.780302,138.556788 440.298575,141.990165 C414.066922,134.08804 387.205771,128.452154 360.010724,125.144528 C343.525021,103.224055 325.192524,82.7564475 305.214266,63.9661533 C336.586743,39.7116483 366.032313,27.1025182 389.135142,27.1025182 M378.356498,310.205598 C368.204912,327.830733 357.150626,344.919965 345.237759,361.405091 C325.045049,363.479997 304.758818,364.51205 284.459856,364.497299 C264.167589,364.51136 243.888075,363.479308 223.702025,361.405091 C211.820914,344.919381 200.80007,327.83006 190.683646,310.205598 C180.532593,292.629285 171.306974,274.534187 163.044553,255.99437 C171.306974,237.454554 180.532593,219.359455 190.683646,201.783142 C200.784121,184.229367 211.770999,167.201087 223.601665,150.764353 C243.824636,148.63809 264.145559,147.579168 284.479928,147.591877 C304.772146,147.579725 325.051559,148.611772 345.237759,150.68404 C357.109048,167.14607 368.136094,184.201112 378.27621,201.783142 C388.419418,219.363718 397.644825,237.458403 405.915303,255.99437 C397.644825,274.530337 388.419418,292.625022 378.27621,310.205598 M419.724813,290.127366 C426.09516,307.503536 431.324985,325.277083 435.380944,343.334682 C417.779633,348.823635 399.836793,353.149774 381.668372,356.285142 C388.573127,345.871232 395.263781,335.035679 401.740334,323.778483 C408.143291,312.655143 414.144807,301.431411 419.805101,290.207679 M246.363271,390.377981 C258.848032,391.140954 271.593728,391.582675 284.5,391.582675 C297.406272,391.582675 310.232256,391.140954 322.737089,390.377981 C310.880643,404.583418 298.10766,417.997563 284.5,430.534446 C270.921643,417.999548 258.18192,404.585125 246.363271,390.377981 Z M187.311556,356.244986 C169.137286,353.123646 151.187726,348.810918 133.578912,343.334682 C137.618549,325.305649 142.828222,307.559058 149.174827,290.207679 C154.754833,301.431411 160.736278,312.655143 167.239594,323.778483 C173.74291,334.901824 180.467017,345.864539 187.311556,356.285142 M149.174827,221.760984 C142.850954,204.473938 137.654787,186.794745 133.619056,168.834762 C151.18418,163.352378 169.085653,159.013101 187.211197,155.844146 C180.346585,166.224592 173.622478,176.986525 167.139234,188.210257 C160.65599,199.433989 154.734761,210.517173 149.074467,221.760984 M322.616657,121.590681 C310.131896,120.827708 297.3862,120.385987 284.379568,120.385987 C271.479987,120.385987 258.767744,120.787552 246.242839,121.590681 C258.061488,107.383537 270.801211,93.9691137 284.379568,81.4342157 C297.99241,93.9658277 310.765727,107.380324 322.616657,121.590681 Z M401.70019,188.210257 C395.196875,176.939676 388.472767,166.09743 381.527868,155.68352 C399.744224,158.819049 417.734224,163.151949 435.380944,168.654058 C431.331963,186.680673 426.122466,204.426664 419.785029,221.781062 C414.205023,210.55733 408.203506,199.333598 401.720262,188.230335 M127.517179,131.790423 C122.438973,82.3176579 132.816178,46.2973086 155.778503,33.0255968 C163.144699,28.9632474 171.455651,26.9264282 179.864858,27.1225964 C202.967687,27.1225964 232.413257,39.7317265 263.785734,63.9862316 C243.794133,82.7898734 225.448298,103.270812 208.949132,125.204763 C181.761691,128.528025 154.90355,134.14313 128.661281,141.990165 C128.199626,138.556788 127.778115,135.163566 127.456963,131.790423 M98.4529773,182.106474 C101.54406,180.767925 104.695358,179.429376 107.906872,178.090828 C114.220532,204.735668 122.781793,230.7969 133.498624,255.99437 C122.761529,281.241316 114.193296,307.357063 107.8868,334.058539 C56.7434387,313.076786 27.0971497,284.003505 27.0971497,255.99437 C27.0971497,229.450947 53.1907013,202.526037 98.4529773,182.106474 Z M155.778503,478.963143 C132.816178,465.691432 122.438973,429.671082 127.517179,380.198317 C127.838331,376.825174 128.259842,373.431953 128.721497,369.978497 C154.953686,377.878517 181.814655,383.514365 209.009348,386.824134 C225.500295,408.752719 243.832321,429.233234 263.805806,448.042665 C220.069,481.834331 180.105722,492.97775 155.838719,478.963143 M441.502893,380.198317 C446.520883,429.691161 436.203894,465.691432 413.221497,478.963143 C388.974566,493.017906 348.991216,481.834331 305.274481,448.042665 C325.241364,429.232737 343.566681,408.752215 360.050868,386.824134 C387.245915,383.516508 414.107066,377.880622 440.338719,369.978497 C440.820446,373.431953 441.221885,376.825174 441.563109,380.198317 M461.193488,334.018382 C454.869166,307.332523 446.294494,281.231049 435.561592,255.99437 C446.289797,230.744081 454.857778,204.629101 461.173416,177.930202 C512.216417,198.911955 541.942994,227.985236 541.942994,255.99437 C541.942994,284.003505 512.296705,313.076786 461.153344,334.058539"
-                                id="Shape"></path>
-                        </g>
-                    </g>
-                </svg>
-                React
-              </span>
-                and
-                <span
-                    class="inline-flex items-center gap-1.5 -mt-4 px-4 py-0.5 rounded-full text-sm bg-[#41B883]/10 border border-[#41B883]">
-                <svg class="w-4 h-4" viewBox="0 0 256 221" width="256" height="221" xmlns="http://www.w3.org/2000/svg"
-                     preserveAspectRatio="xMidYMid"><path d="M204.8 0H256L128 220.8 0 0h97.92L128 51.2 157.44 0h47.36Z"
-                                                          fill="#41B883"/><path
-                    d="m0 0 128 220.8L256 0h-51.2L128 132.48 50.56 0H0Z" fill="#41B883"/><path
-                    d="M50.56 0 128 133.12 204.8 0h-47.36L128 51.2 97.92 0H50.56Z" fill="#35495E"/></svg>
-                Vue
-              </span>
-                ecosystems with deep focus on performance optimization and system architecture. Proven ability to drive
-                platform modernization, reduce technical debt, and collaborate across design and product teams to
-                deliver user-focused solutions that improve developer productivity and business outcomes.
-              </p>
-            </div>
+      <section class="education-curated" aria-labelledby="education-heading">
+        <h2 id="education-heading">Education &amp; learning</h2>
 
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full"></div>
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block">
-                My Skills
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20"></span>
-              </h2>
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Frontend Development</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Frontend Development skills">
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript
-                        (ES6+)</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://www.typescriptlang.org/">TypeScript</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML5</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS3/SCSS/BEM</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://react.dev/">React</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://redux-toolkit.js.org/">Redux (RTK)</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://vuejs.org/">Vue.js 2/3</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://pinia.vuejs.org/">Pinia</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://router.vuejs.org/">Vue Router</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://zustand-demo.pmnd.rs/">Zustand</a></template>
-                    </SkillTag>
-                    <SkillTag class="text-pretty" role="listitem">
-                      <template #content><a href="https://tanstack.com/">TanStack (Query, Router, Store)</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Backend Development</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Backend Development skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://nodejs.org/">Node.js (Hono, Express, NestJS)</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://bun.sh/">Bun</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://laravel.com/">PHP (Laravel)</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.python.org/">Python (FastAPI, Django, Flask)</a>
-                      </template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Full-Stack Frameworks</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Full-Stack Framework skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://tanstack.com/start">TanStack Start</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://nextjs.org/">Next.js</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://nuxt.com/">Nuxt</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">UI Libraries & Design</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="UI Libraries and Design skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://mui.com/">Material UI</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://tailwindcss.com/">TailwindCSS</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://ui.shadcn.com/">Shadcn/UI</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://chakra-ui.com/">Chakra UI</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://ui.nuxt.com/">Nuxt UI</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Build Tools</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Build Tools skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://webpack.js.org/">Webpack</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://vitejs.dev/">Vite</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.npmjs.com/">npm/yarn</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Testing</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Testing skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://enzymejs.github.io/enzyme/">Enzyme</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://jestjs.io/">Jest</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Databases</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Database skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.postgresql.org/">PostgreSQL</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.mysql.com/">MySQL</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.sqlite.org/">SQLite</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://redis.io/">Redis</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">DevOps & Tools</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="DevOps and Tools skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://git-scm.com/">Git</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.linux.org/">Linux</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://nginx.org/">Nginx</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://httpd.apache.org/">Apache HTTP</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.docker.com/">Docker (basic)</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Cloud & Infrastructure</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Cloud and Infrastructure skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://vercel.com/">Vercel</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.netlify.com/">Netlify</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://aws.amazon.com/">Amazon Web Services (EC2, S3)</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.cloudflare.com/">Cloudflare (D1, R2, KV, DNS, CDN)</a>
-                      </template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">Professional Tools</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="Professional Tools skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.figma.com/">Figma</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.adobe.com/products/photoshop.html">Adobe Photoshop</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.jetbrains.com/">JetBrains IDEs</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.atlassian.com/software/jira">Jira</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.atlassian.com/software/confluence">Confluence</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.notion.so/">Notion</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://slack.com/">Slack</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.postman.com/">Postman</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://insomnia.rest/">Insomnia</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://yaak.ai/">Yaak</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://tableplus.com/">TablePlus</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.pgadmin.org/">pgAdmin</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark mb-4 text-balance">AI & ML</h3>
-                  <div class="flex flex-wrap gap-2" role="list" aria-label="AI and ML skills">
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://ollama.ai/">Ollama (self-hosted models)</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://openai.com/chatgpt">ChatGPT</a>/<a href="https://claude.ai/">Claude</a>
-                      </template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://openrouter.ai/">OpenRouter</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://github.com/CompVis/stable-diffusion">Stable Diffusion 1.6
-                        (LoRA, upscalers, VAE)</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://www.promptingguide.ai/">Prompt Engineering</a></template>
-                    </SkillTag>
-                    <SkillTag role="listitem">
-                      <template #content><a href="https://github.com/features/copilot">AI-powered development
-                        workflows</a></template>
-                    </SkillTag>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="education-degree">
+          <span class="studio-label">Degree</span>
+          <h3>Bachelor’s Degree in Mathematical Modeling and Cybersecurity</h3>
+          <p>Chernihiv Polytechnic National University, Ukraine · 2017–2021</p>
+        </div>
+
+        <div class="education-recent">
+          <div class="education-recent-heading">
+            <span class="studio-label">Recent learning</span>
+            <span>Latest {{ recentCourses.length }}</span>
           </div>
+          <ul class="education-course-list">
+            <li v-for="course in recentCourses" :key="course.title">
+              <a class="studio-focus education-course-link" :href="course.certificateUrl" target="_blank" rel="noopener noreferrer">
+                <span>
+                  <strong>{{ course.title }}</strong>
+                  <small>{{ course.author }} · {{ course.date }}</small>
+                </span>
+                <ArrowUpRightIcon aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <!-- Right Column -->
-          <div class="space-y-8" role="complementary" aria-label="Professional experience">
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full" aria-hidden="true"></div>
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block"
-                  id="experience">
-                Experience
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20" aria-hidden="true"></span>
-              </h2>
-              <div class="space-y-8" role="list" aria-labelledby="experience">
-                <div v-for="(experience, index) in cards.workExperience" :key="index" class="relative pl-8"
-                     role="listitem">
-                  <div class="absolute left-0 top-3 w-2 h-2 rounded-sm bg-primary" aria-hidden="true"></div>
-                  <div v-if="index !== cards.workExperience.length - 1"
-                       class="absolute left-1 top-4 bottom-0 w-px bg-primary/20" aria-hidden="true"></div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-text dark:text-text-dark text-balance">{{ experience.title }}</h3>
-                    <p class="text-text-light dark:text-text-light-dark text-pretty">{{ experience.company }}</p>
-                    <p class="text-sm text-text-light/80 dark:text-text-light-dark/80 text-pretty">{{ experience.duration }}</p>
+        <div v-if="archivedCourses.length" class="education-archive">
+          <button class="studio-focus" type="button" :aria-expanded="isCourseArchiveOpen" aria-controls="course-archive" @click="isCourseArchiveOpen = !isCourseArchiveOpen">
+            <span>
+              <span class="studio-label">Course archive</span>
+              <strong>{{ isCourseArchiveOpen ? 'Hide full archive' : `View ${archivedCourses.length} more courses` }}</strong>
+            </span>
+            <ChevronDownIcon :class="isCourseArchiveOpen ? 'is-open' : ''" aria-hidden="true" />
+          </button>
 
-                    <p v-if="experience.description" class="mt-4 text-text-light dark:text-text-light-dark">{{ experience.description }}</p>
-
-                    <ul v-if="experience.achievements.length" class="mt-4 space-y-2 text-text-light dark:text-text-light-dark" role="list"
-                        aria-label="Key responsibilities and achievements">
-                      <li v-for="achievement in experience.achievements" :key="achievement"
-                          class="flex items-start gap-2 text-pretty">
-                        <span class="text-primary dark:text-primary-light">•</span>
-                        {{ achievement }}
-                      </li>
-                    </ul>
-
-                    <div class="mt-4 flex flex-wrap gap-2" role="list" aria-label="Technologies used">
-                      <SkillTag v-for="tech in experience.technologies" :key="tech" role="listitem">
-                        <template #content>{{ tech }}</template>
-                      </SkillTag>
-                    </div>
-
-                    <p v-if="experience.note" class="mt-4 text-sm text-text-light/80 dark:text-text-light-dark/80 italic">{{ experience.note }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-surface dark:bg-surface-dark rounded-lg shadow-card dark:shadow-card-dark p-8 relative overflow-hidden ring-1 ring-text/[0.05] dark:ring-border-dark">
-              <!-- Decorative corner -->
-              <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 dark:bg-primary/10 rounded-bl-full"></div>
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mb-6 text-balance relative inline-block">
-                Education
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20"></span>
-              </h2>
-              <div class="flex items-start gap-4" role="list" aria-label="Education details">
-                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 dark:bg-primary/20 flex items-center justify-center flex-shrink-0"
-                     aria-hidden="true">
-                  <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                       aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-text dark:text-text-dark">Bachelor's Degree in Mathematical Modeling and
-                    Cybersecurity</h3>
-                  <p class="text-sm text-text-light/80 dark:text-text-light-dark/80">2017 - 2021</p>
-                  <p class="text-text-light dark:text-text-light-dark">Chernihiv Polytechnic National University, Ukraine</p>
-                </div>
-              </div>
-
-              <h2 class="text-3xl font-display font-semibold text-text dark:text-text-dark mt-10 mb-6 text-balance relative inline-block">
-                MOOC & Certifications
-                <span class="absolute -bottom-2 left-0 w-16 h-0.5 bg-primary/20 dark:bg-primary-light/20"></span>
-              </h2>
-              <div class="flex items-start gap-4" role="list" aria-label="MOOC and certification details">
-                <div class="w-12 h-12 min-w-12 rounded-md bg-primary/10 dark:bg-primary-light/15 flex items-center justify-center flex-shrink-0"
-                     aria-hidden="true">
-                  <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                       aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <div class="flex flex-col space-y-4">
-                  <div v-for="item in cards.courses" :key="item.title">
-                    <h3 class="text-xl font-semibold text-text dark:text-text-dark "><a
-                        class="border-b-2 border-b-transparent hover:text-primary dark:hover:text-primary-light hover:border-b-primary dark:hover:border-b-primary-light transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :href="item.certificateUrl">
-                      {{ item.title }}
-                      <span class="size-4  inline-flex transform-gpu translate-y-[2px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                             stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-                      </svg>
-                      </span>
-                    </a>
-
-                    </h3>
-                    <p class="space-x-3"><span class="text-text-light dark:text-text-light-dark">{{ item.author }}</span><span
-                        class="text-sm text-text-light/80 dark:text-text-light-dark/80">{{ item.date }}</span></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ul v-if="isCourseArchiveOpen" id="course-archive" class="education-course-list education-archive-list">
+            <li v-for="course in archivedCourses" :key="course.title">
+              <a class="studio-focus education-course-link" :href="course.certificateUrl" target="_blank" rel="noopener noreferrer">
+                <span>
+                  <strong>{{ course.title }}</strong>
+                  <small>{{ course.author }} · {{ course.date }}</small>
+                </span>
+                <ArrowUpRightIcon aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
     </div>
   </div>
 </template>
 
-<script setup>
-import HeroSection from '~/components/sections/hero-section.vue'
-import SkillTag from '~/components/ui/skill-tag.vue'
-import {CodeBracketIcon, BoltIcon, UsersIcon, PuzzlePieceIcon} from '@heroicons/vue/24/outline'
-import {motion} from "motion-v"
-import {useDuration} from "../../composables/useDuration.js";
+<script setup lang="ts">
+import { ArrowDownTrayIcon, ArrowUpRightIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
+import ExperienceTimeline from '~/components/sections/ExperienceTimeline.vue'
+import UiButton from '~/components/ui/UiButton.vue'
+import { useDuration } from '~/composables/useDuration'
 
-// Add this to your script setup section
-const cards = {
-  qualities: [
-    {
-      icon: CodeBracketIcon,
-      title: 'Frontend Expert',
-      description: '7+ years of experience with React and Vue ecosystems.',
-    },
-    {
-      icon: BoltIcon,
-      title: 'Performance Focus',
-      description: 'Building fast, responsive, and scalable applications.',
-    },
-    {
-      icon: UsersIcon,
-      title: 'Team Player',
-      description: 'Strong communication and collaboration skills.',
-    },
-    {
-      icon: PuzzlePieceIcon,
-      title: 'Problem Solver',
-      description: 'Architecting efficient and maintainable solutions.',
-    },
-  ],
-  courses: [
-    {
-      title: 'Bare Metal JavaScript: The JavaScript Virtual Machine',
-      author: 'MiÅ¡ko Hevery, FrontendMasters',
-      date: 'Aug 2025',
-      certificateUrl: 'https://static.frontendmasters.com/ud/c/bae1a70cbd/svRMuXHpHA/javascript-cpu-vm.pdf',
-    },
-    {
-      title: 'The Last Algorithms Course You\'ll Need',
-      author: 'Michael Paulson, FrontendMasters',
-      date: 'Aug 2025',
-      certificateUrl: 'https://static.frontendmasters.com/ud/c/bae1a70cbd/aPVwjxMZsP/algorithms.pdf',
-    },
-    {
-      title: 'Animations on the Web',
-      author: 'Emil Kowalski',
-      date: 'Feb 2025',
-      certificateUrl: 'https://animations.dev/certificate/c1c416ee-96cf-4e70-9269-78e3b4404e68',
-    }
-  ],
-  workExperience: [
-    {
-      title: 'Middle Frontend Developer',
-      company: 'Paybis',
-      duration: useDuration('2025-09-01'),
-      description: null,
-      achievements: [],
-      technologies: ['Vue 3', 'Pinia', 'Vue router', 'Vuex', 'TailwindCSS'],
-      note: null
-    },
-    {
-      title: 'Middle Software Engineer (Web & Mobile)',
-      company: 'LeverX, Kyiv',
-      duration: 'Oct 2021 — Dec 2024 (3 years, 2 months)',
-      description: null,
-      achievements: [
-        'Researched and delivered proof-of-concept offline-first architecture using IndexedDB, enabling critical functionality during network outages and informing long-term technical strategy',
-        'Led performance optimization initiative for data visualization components, collaborating across design and product teams to deliver 50% rendering improvements through strategic technical analysis and cross-functional alignment',
-        'Drove standardization of core table architecture, eliminating performance bottlenecks and establishing reusable patterns that accelerated team velocity and improved developer productivity across multiple product areas',
-        'Spearheaded platform modernization efforts including Webpack-to-Vite migration (achieving 60% build time reduction), React/Material UI framework upgrades, and Vue 2-to-3 architectural transition, ensuring technical debt reduction and developer experience improvements',
-        'Designed and implemented client-side data processing solution, enabling advanced filtering and pagination capabilities for locally cached data and reducing dependency on server-side operations'
-      ],
-      technologies: [
-        'React', 'Redux', 'SCSS', 'Material UI', 'Vue 2', 'Vuex', 'Vue 3',
-        'TypeScript', 'Pinia', 'Nuxt 3', 'RESTful APIs', 'CI/CD pipeline',
-        'GitHub', 'GitHub Actions', 'AWS', 'Azure DevOps', 'Azure Blob Storage'
-      ],
-      note: 'Client projects completed under confidentiality agreements'
-    },
-    {
-      title: 'Software Engineer',
-      company: 'PJSC Chernihivoblenergo',
-      duration: 'Dec 2018 — Sep 2021 (2 years, 9 months)',
-      description: 'Architected and delivered web platform for regional electrical distribution company, supporting critical business operations including HR management, asset inventory, and service coordination. Developed full-stack solutions using Laravel and Vue 2 that enabled efficient management of infrastructure serving residential and commercial customers across Chernihiv region.',
-      achievements: [],
-      technologies: ['Laravel', 'Vue 2', 'PostgreSQL', 'MySQL'],
-      note: null
-    },
-    {
-      title: 'Web Developer',
-      company: 'Freelance',
-      duration: 'Jan 2017 — Aug 2018 (1 year, 8 months)',
-      description: 'Delivered frontend solutions across diverse client projects, focusing on user experience optimization and responsive interface design.',
-      achievements: [],
-      technologies: ['HTML/CSS', 'JavaScript', 'jQuery', 'Vue 2'],
-      note: null
-    }
-  ],
-};
+const { experienceYears } = useAppConfig()
+
+const facts = [
+  { label: 'Role', value: 'Software Engineer' },
+  { label: 'Experience', value: experienceYears },
+  { label: 'Location', value: 'Chernihiv, Ukraine' },
+  { label: 'Core focus', value: 'Performance & architecture' },
+] as const
+
+const qualities = [
+  { title: 'Frontend Expert', description: `${experienceYears} of experience with React and Vue ecosystems.` },
+  { title: 'Performance Focus', description: 'Building fast, responsive, and scalable applications.' },
+  { title: 'Team Player', description: 'Strong communication and collaboration skills.' },
+  { title: 'Problem Solver', description: 'Architecting efficient and maintainable solutions.' },
+] as const
+
+const skillGroups = [
+  { title: 'Frontend', skills: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SCSS / BEM', 'React', 'Redux (RTK)', 'Vue.js 2/3', 'Pinia', 'Vue Router', 'Zustand', 'TanStack Query / Router / Store'] },
+  { title: 'Backend', skills: ['Node.js', 'Hono', 'Express', 'NestJS', 'Bun', 'PHP / Laravel', 'Python', 'FastAPI', 'Django', 'Flask'] },
+  { title: 'Full-stack', skills: ['TanStack Start', 'Next.js', 'Nuxt'] },
+  { title: 'UI & design', skills: ['Material UI', 'Tailwind CSS', 'Shadcn/UI', 'Chakra UI', 'Nuxt UI'] },
+  { title: 'Build & testing', skills: ['Webpack', 'Vite', 'npm / yarn', 'Enzyme', 'Jest'] },
+  { title: 'Data', skills: ['PostgreSQL', 'MySQL', 'SQLite', 'IndexedDB', 'Redis'] },
+  { title: 'Infrastructure', skills: ['Git', 'Linux', 'Nginx', 'Apache HTTP', 'Docker', 'Vercel', 'Netlify', 'AWS EC2 / S3', 'Cloudflare D1 / R2 / KV / DNS / CDN'] },
+  { title: 'Professional tools', skills: ['Figma', 'Adobe Photoshop', 'JetBrains IDEs', 'Jira', 'Confluence', 'Notion', 'Slack', 'Postman', 'Insomnia', 'Yaak', 'TablePlus', 'pgAdmin'] },
+  { title: 'AI-assisted work', skills: ['Ollama', 'ChatGPT', 'Claude', 'OpenRouter', 'Stable Diffusion', 'Prompt Engineering', 'AI-powered development workflows'] },
+] as const
+
+const courses = [
+  { title: 'Bare Metal JavaScript: The JavaScript Virtual Machine', author: 'Miško Hevery, Frontend Masters', date: 'Aug 2025', certificateUrl: 'https://static.frontendmasters.com/ud/c/bae1a70cbd/svRMuXHpHA/javascript-cpu-vm.pdf' },
+  { title: 'The Last Algorithms Course You’ll Need', author: 'Michael Paulson, Frontend Masters', date: 'Aug 2025', certificateUrl: 'https://static.frontendmasters.com/ud/c/bae1a70cbd/aPVwjxMZsP/algorithms.pdf' },
+  { title: 'Animations on the Web', author: 'Emil Kowalski', date: 'Feb 2025', certificateUrl: 'https://animations.dev/certificate/c1c416ee-96cf-4e70-9269-78e3b4404e68' },
+] as const
+
+const isCourseArchiveOpen = ref(false)
+const recentCourses = courses.slice(0, 3)
+const archivedCourses = courses.slice(3)
+
+const workExperience = [
+  {
+    title: 'Middle Frontend Developer',
+    company: 'Paybis',
+    category: 'Fintech',
+    duration: useDuration('2025-09-01'),
+    description: '',
+    achievements: [
+      'Owned frontend delivery of a cross-product terms and consent framework across the Paybis website and Widget, helping enable MiCA authorisation and strengthen DORA/GDPR readiness.',
+      'Improved Paybis Widget performance through architecture, bundle-chunking, and tooling changes, reaching 25 ms median connection latency, improving FCP by 2.5×, and reducing frontend CI pipeline time by 65%.',
+      'Independently researched and delivered a minimal-click, redirect-free Apple Pay proof of concept, now shaping cross-product integration architecture after stakeholder validation as a competitive opportunity.',
+    ],
+    technologies: ['Vue 3', 'Pinia', 'Vue Router', 'Vuex', 'Nuxt', 'SCSS', 'Tailwind CSS'],
+    note: '',
+  },
+  {
+    title: 'Middle Software Engineer (Web & Mobile)',
+    company: 'LeverX, Kyiv',
+    category: 'Outsource',
+    duration: 'Oct 2021 — Dec 2024 (3 years, 2 months)',
+    description: '',
+    achievements: [
+      'Researched and delivered proof-of-concept offline-first architecture using IndexedDB, enabling critical functionality during network outages and informing long-term technical strategy.',
+      'Led performance optimization for data visualization components, collaborating across design and product teams to deliver 50% rendering improvements.',
+      'Drove standardization of core table architecture, removing performance bottlenecks and establishing reusable patterns across product areas.',
+      'Led modernization work including Webpack-to-Vite migration with a 60% build-time reduction, framework upgrades, and a Vue 2-to-3 transition.',
+      'Designed client-side data processing for advanced filtering and pagination over locally cached data.',
+    ],
+    technologies: ['React', 'Redux', 'SCSS', 'Material UI', 'Vue 2', 'Vuex', 'Vue 3', 'TypeScript', 'Pinia', 'Nuxt 3', 'REST APIs', 'CI/CD', 'GitHub Actions', 'AWS', 'Azure DevOps'],
+    note: 'Client projects completed under confidentiality agreements.',
+  },
+  {
+    title: 'Software Engineer',
+    company: 'PJSC Chernihivoblenergo',
+    category: 'Energy',
+    duration: 'Dec 2018 — Sep 2021 (2 years, 9 months)',
+    description: 'Architected and delivered a web platform supporting HR management, asset inventory, and service coordination for a regional electrical distribution company.',
+    achievements: [],
+    technologies: ['Laravel', 'Vue 2', 'PostgreSQL', 'MySQL'],
+    note: '',
+  },
+  {
+    title: 'Web Developer',
+    company: 'Freelance',
+    category: 'Independent',
+    duration: 'Jan 2017 — Aug 2018 (1 year, 8 months)',
+    description: 'Delivered frontend solutions across diverse client projects, focusing on user experience optimization and responsive interface design.',
+    achievements: [],
+    technologies: ['HTML / CSS', 'JavaScript', 'jQuery', 'Vue 2'],
+    note: '',
+  },
+] as const
 </script>
+
+<style scoped>
+.education-curated {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 1fr;
+  border-block: 1px solid rgb(23 34 52 / 13%);
+}
+
+.education-curated > h2,
+.education-degree,
+.education-recent {
+  min-width: 0;
+  padding-block: 2.5rem;
+}
+
+.education-curated > h2 {
+  margin: 0;
+  padding-right: 2rem;
+  color: var(--color-text);
+  font-size: 1.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.education-degree,
+.education-recent {
+  border-left: 1px solid rgb(23 34 52 / 13%);
+}
+
+.education-degree {
+  padding-inline: 2rem;
+}
+
+.education-degree h3 {
+  margin: 1rem 0 0;
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+.education-degree p {
+  margin: 1rem 0 0;
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+
+.education-recent {
+  padding-left: 2rem;
+}
+
+.education-recent-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.education-recent-heading > span:last-child {
+  color: var(--color-text-light);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.education-course-list {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  border-top: 1px solid rgb(23 34 52 / 8%);
+  list-style: none;
+}
+
+.education-course-list li {
+  border-bottom: 1px solid rgb(23 34 52 / 8%);
+}
+
+.education-course-link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.education-course-link > span {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.education-course-link strong {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+.education-course-link small {
+  color: var(--color-text-light);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+.education-course-link svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: none;
+  transition: color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.education-archive {
+  grid-column: 2 / -1;
+  padding: 0 0 2rem 2rem;
+  border-top: 1px solid rgb(23 34 52 / 13%);
+  border-left: 1px solid rgb(23 34 52 / 13%);
+}
+
+.education-archive > button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.education-archive > button > span {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.education-archive > button strong {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.education-archive > button svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 180ms var(--ease-out);
+}
+
+.education-archive > button svg.is-open {
+  transform: rotate(180deg);
+}
+
+.education-archive-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.education-archive-list li:nth-child(odd) {
+  padding-right: 1.5rem;
+}
+
+.education-archive-list li:nth-child(even) {
+  padding-left: 1.5rem;
+  border-left: 1px solid rgb(23 34 52 / 8%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .education-course-link:hover,
+  .education-archive > button:hover {
+    color: var(--color-primary);
+  }
+
+  .education-course-link:hover svg {
+    transform: translate(0.15rem, -0.15rem);
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .education-curated {
+    grid-template-columns: 1fr;
+  }
+
+  .education-curated > h2 {
+    padding-right: 0;
+  }
+
+  .education-degree,
+  .education-recent,
+  .education-archive {
+    grid-column: auto;
+    padding-inline: 0;
+    border-top: 1px solid rgb(23 34 52 / 13%);
+    border-left: 0;
+  }
+
+  .education-archive {
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .education-archive > button > span {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .education-archive-list {
+    grid-template-columns: 1fr;
+  }
+
+  .education-archive-list li:nth-child(odd),
+  .education-archive-list li:nth-child(even) {
+    padding-inline: 0;
+    border-left: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .education-curated,
+  .education-degree,
+  .education-recent,
+  .education-archive {
+    border-color: rgb(174 185 202 / 16%);
+  }
+
+  .education-course-list,
+  .education-course-list li {
+    border-color: rgb(174 185 202 / 10%);
+  }
+
+  .education-curated > h2,
+  .education-degree h3,
+  .education-course-link,
+  .education-archive > button {
+    color: var(--color-text-dark);
+  }
+
+  .education-degree p,
+  .education-recent-heading > span:last-child,
+  .education-course-link small {
+    color: var(--color-text-light-dark);
+  }
+
+  .education-course-link:hover,
+  .education-archive > button:hover {
+    color: var(--color-primary-light);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .education-course-link svg,
+  .education-archive > button svg {
+    transition: color 100ms var(--ease-out);
+  }
+
+  .education-course-link:hover svg,
+  .education-archive > button svg.is-open {
+    transform: none;
+  }
+}
+</style>

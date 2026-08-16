@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
+:root {
+  --studio-content-max: 72rem;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 @theme {
-  /* ===========================================
-     LIGHT MODE - Clean, bright, professional
-     =========================================== */
-  --color-soft-titanium: oklch(0.97 0.01 250);
-  --color-blue-horizon: oklch(0.45 0.2 250);
-  --color-surface: oklch(0.99 0.005 250);
-  --color-surface-elevated: oklch(0.96 0.005 250);
-  --color-primary: oklch(0.50 0.2 250);
-  --color-primary-dark: oklch(0.40 0.22 250);
-  --color-text: oklch(0.18 0.01 250);
-  --color-text-light: oklch(0.42 0.01 250);
+  --color-soft-titanium: #f4f7fb;
+  --color-blue-horizon: #155ecc;
+  --color-surface: #fbfcfe;
+  --color-surface-elevated: #edf2f8;
+  --color-primary: #155ecc;
+  --color-primary-dark: #104fae;
+  --color-text: #172234;
+  --color-text-light: #5d6b80;
 
   /* ===========================================
      DARK MODE - Warm slate, refined, not black
@@ -19,22 +22,22 @@
      =========================================== */
 
   /* Background hierarchy - warm slate with subtle blue undertone */
-  --color-void-black: oklch(0.20 0.015 265);
-  --color-surface-dark: oklch(0.24 0.015 265);
-  --color-surface-elevated-dark: oklch(0.28 0.012 265);
+  --color-void-black: #101722;
+  --color-surface-dark: #172131;
+  --color-surface-elevated-dark: #1d2a3d;
 
   /* Primary for dark - luminous, vibrant blue that pops */
-  --color-primary-light: oklch(0.65 0.20 250);
-  --color-primary-glow: oklch(0.55 0.22 250);
+  --color-primary-light: #73a7f5;
+  --color-primary-glow: #4386e6;
 
   /* Text - warm off-white, excellent readability */
-  --color-text-dark: oklch(0.94 0.008 90);
-  --color-text-light-dark: oklch(0.70 0.01 250);
-  --color-text-muted-dark: oklch(0.50 0.01 250);
+  --color-text-dark: #f0f4fa;
+  --color-text-light-dark: #aeb9ca;
+  --color-text-muted-dark: #7f8ca0;
 
   /* Borders - subtle but visible definition */
-  --color-border-dark: oklch(0.32 0.015 265);
-  --color-border-subtle-dark: oklch(0.28 0.01 265);
+  --color-border-dark: #2b394c;
+  --color-border-subtle-dark: #233044;
 
   /* Accent colors for dark mode */
   --color-accent-glow: oklch(0.60 0.18 250 / 0.15);
@@ -45,8 +48,8 @@
   /* ===========================================
      TYPOGRAPHY
      =========================================== */
-  --font-sans: "SF Pro", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Archivo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Archivo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --text-display: 4.5rem;
   --text-h1: 3rem;
@@ -80,10 +83,19 @@
 
 html {
   font-family: var(--font-sans);
+  min-width: 320px;
+  background: var(--color-soft-titanium);
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+body {
+  margin: 0;
+  background: var(--color-soft-titanium);
+  color: var(--color-text);
 }
 
 .font-display {
@@ -91,20 +103,160 @@ html {
   letter-spacing: -0.02em;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+.studio-shell {
+  width: min(calc(100% - 4rem), var(--studio-content-max));
+  margin-inline: auto;
 }
 
-/* Dark mode gradient uses lighter, more vibrant primary */
+.studio-page {
+  position: relative;
+  overflow: clip;
+}
+
+.studio-page-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(3.625rem, 7.4vw, 6rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.studio-page-title-accent {
+  display: block;
+  color: var(--color-primary);
+}
+
+.studio-lede {
+  max-width: 65ch;
+  color: var(--color-text-light);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  text-wrap: pretty;
+}
+
+.studio-label {
+  color: var(--color-text-light);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.studio-rule {
+  border-color: rgb(23 34 52 / 13%);
+}
+
+.studio-rule-soft {
+  border-color: rgb(23 34 52 / 8%);
+}
+
+.studio-circle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgb(21 94 204 / 5.5%);
+  pointer-events: none;
+}
+
+.studio-focus:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.studio-press-row {
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.page-enter-active {
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.page-leave-active {
+  transition: opacity 120ms var(--ease-out);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .studio-press-row:active {
+    opacity: 0.92;
+    transform: scale(0.98);
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .studio-shell {
+    width: min(calc(100% - 2.25rem), 45rem);
+  }
+
+  .studio-page-title {
+    font-size: clamp(3.5rem, 15vw, 4.5rem);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+  html,
+  body {
+    background: var(--color-void-black);
+    color: var(--color-text-dark);
+  }
+
+  .studio-page-title {
+    color: var(--color-text-dark);
+  }
+
+  .studio-page-title-accent {
+    color: var(--color-primary-light);
+  }
+
+  .studio-lede,
+  .studio-label {
+    color: var(--color-text-light-dark);
+  }
+
+  .studio-rule {
+    border-color: rgb(174 185 202 / 16%);
+  }
+
+  .studio-rule-soft {
+    border-color: rgb(174 185 202 / 10%);
+  }
+
+  .studio-circle {
+    background: rgb(115 167 245 / 7%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 100ms var(--ease-out);
+  }
+
+  .page-enter-from {
+    transform: none;
+  }
+
+  .studio-press-row {
+    transition: opacity 100ms var(--ease-out);
+  }
+
+  .studio-press-row:active {
+    opacity: 0.92;
+    transform: none;
   }
 }
 
@@ -122,25 +274,6 @@ html {
 
 .leading-tight {
   line-height: 1.25;
-}
-
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.text-shadow-sm {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.text-shadow-lg {
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, currentColor 1px, transparent 1px),
-    linear-gradient(to bottom, currentColor 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
 .blog-content {
@@ -193,7 +326,7 @@ html {
 }
 
 .blog-content code {
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: color-mix(in oklch, var(--color-primary) 10%, transparent);
   padding: 0.125rem 0.35rem;
   color: var(--color-text);
@@ -240,21 +373,5 @@ html {
   }
 }
  
-@theme inline {
-  --animate-aurora: aurora 60s linear infinite;
-  @keyframes aurora {
-    from {
-      background-position:
-        50% 50%,
-        50% 50%;
-    }
-    to {
-      background-position:
-        350% 50%,
-        350% 50%;
-    }
-  }
-}
-
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:where(.light, .light *));

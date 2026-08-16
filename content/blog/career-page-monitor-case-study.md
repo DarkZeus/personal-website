@@ -16,7 +16,7 @@ tags:
 
 A debugging story about Vue bundles, Teamtailor pages, inline job data, and the adapter pattern that fell out of it.
 
-## The Page Said No Jobs. The Bundle Disagreed.
+## The Page Said No Jobs. The Bundle Disagreed
 
 The page said there were no open positions. The JavaScript bundle disagreed.
 

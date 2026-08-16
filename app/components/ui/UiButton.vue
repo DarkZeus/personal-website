@@ -5,33 +5,16 @@
     :href="as === 'a' ? href : undefined"
     :type="as === 'button' ? type : undefined"
     :class="[
-      'group relative inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-md overflow-hidden transition-all duration-300',
+      'group relative inline-flex min-h-12 items-center justify-center rounded-lg px-7 py-3 text-[15px] font-semibold transition-colors duration-150 active:scale-[0.98] motion-reduce:transition-none',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'dark:focus-visible:ring-offset-void-black',
       variantClasses
     ]"
     v-bind="$attrs"
   >
-    <span class="relative z-10 inline-flex items-center gap-2 whitespace-nowrap">
+    <span class="inline-flex items-center gap-3 whitespace-nowrap">
       <slot />
     </span>
-
-    <!-- Primary variant backgrounds -->
-    <template v-if="variant === 'primary'">
-      <div class="absolute inset-0 bg-primary dark:bg-primary-light opacity-100 group-hover:opacity-90 transition-opacity duration-300"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary dark:from-primary dark:to-primary-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <!-- Button decoration -->
-      <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-white/20"></div>
-      <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-white/20"></div>
-    </template>
-
-    <!-- Ghost variant backgrounds -->
-    <template v-else-if="variant === 'ghost'">
-      <div class="absolute inset-0 bg-primary/5 dark:bg-primary-light/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <!-- Button decoration -->
-      <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-primary/20 dark:bg-primary-light/30"></div>
-      <div class="absolute -left-1 -bottom-1 w-2 h-2 rounded-full bg-primary/20 dark:bg-primary-light/30"></div>
-    </template>
   </component>
 </template>
 
@@ -72,9 +55,9 @@ const componentType = computed(() => {
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'text-white dark:text-void-black'
+      return 'bg-primary text-white hover:bg-primary-dark dark:bg-primary-light dark:text-void-black dark:hover:bg-primary'
     case 'ghost':
-      return 'text-primary dark:text-primary-light'
+      return 'text-primary hover:bg-primary/[0.06] dark:text-primary-light dark:hover:bg-primary-light/10'
     default:
       return ''
   }

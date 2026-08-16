@@ -1,27 +1,19 @@
 <template>
-  <div>
-    <HeroSection>
-      <template #title>Links</template>
-      <template #description>
-        Find me across the web
-      </template>
-    </HeroSection>
+  <div class="studio-page pb-24 pt-28 sm:pb-32 sm:pt-32">
+    <div class="studio-circle -right-52 top-24 h-[32rem] w-[32rem]" aria-hidden="true"></div>
+    <div class="studio-shell relative">
+      <header class="grid items-end gap-10 py-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-24 lg:py-16">
+        <h1 class="studio-page-title"><span class="studio-page-title-accent">Links</span></h1>
+        <p class="studio-lede m-0 lg:pb-1">The direct routes to my work, professional profiles, email, and résumé.</p>
+      </header>
 
-    <!-- Links Content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <!-- Featured Links -->
-      <section class="py-12">
-        <h2 class="text-2xl font-display font-semibold text-text dark:text-text-dark mb-8">Featured</h2>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <LinkCard
-            v-for="link in featuredLinks"
-            :key="link.title"
-            :title="link.title"
-            :description="link.description"
-            :url="link.url"
-            :icon="link.icon"
-          />
-        </div>
+      <section class="mt-12 border-t studio-rule sm:mt-16" aria-label="Featured links">
+        <a v-for="link in featuredLinks" :key="link.title" :href="link.url" :target="link.url.startsWith('http') ? '_blank' : undefined" :rel="link.url.startsWith('http') ? 'noopener noreferrer' : undefined" class="studio-focus studio-press-row group grid items-center gap-5 border-b studio-rule py-7 sm:grid-cols-[3rem_10rem_minmax(0,1fr)_2.5rem]">
+          <span class="grid h-12 w-12 place-items-center text-primary dark:text-primary-light" aria-hidden="true"><component :is="link.icon" class="h-6 w-6" /></span>
+          <h2 class="m-0 text-xl font-semibold text-text transition-colors group-hover:text-primary dark:text-text-dark dark:group-hover:text-primary-light">{{ link.title }}</h2>
+          <p class="m-0 text-sm leading-relaxed text-text-light dark:text-text-light-dark">{{ link.description }}</p>
+          <ArrowUpRightIcon class="h-5 w-5 text-primary transition-transform duration-150 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none dark:text-primary-light" aria-hidden="true" />
+        </a>
       </section>
     </div>
   </div>
@@ -29,8 +21,7 @@
 
 <script setup>
 import { h } from 'vue'
-import HeroSection from '~/components/sections/hero-section.vue'
-import LinkCard from '~/components/ui/link-card.vue'
+import { ArrowUpRightIcon } from '@heroicons/vue/24/outline'
 
 // Custom icon components using render functions
 const GithubIcon = {
