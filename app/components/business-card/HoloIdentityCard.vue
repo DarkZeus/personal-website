@@ -30,6 +30,9 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 type MotionState = 'idle' | 'requesting' | 'enabled' | 'denied'
+type MotionPermissionApi = {
+  requestPermission?: () => Promise<'granted' | 'denied'>
+}
 
 const stage = ref<HTMLElement | null>(null)
 const card = ref<HTMLElement | null>(null)
@@ -56,9 +59,26 @@ function clamp(value: number, min = -1, max = 1) {
 }
 
 function canUseOrientation() {
+  const hasTouchInput = navigator.maxTouchPoints > 0 || 'ontouchstart' in window
   return !prefersReducedMotion.value
     && 'DeviceOrientationEvent' in window
-    && 'ontouchstart' in window
+    && hasTouchInput
+}
+
+function getMotionPermissionRequester() {
+  const orientationApi = DeviceOrientationEvent as typeof DeviceOrientationEvent & MotionPermissionApi
+  if (typeof orientationApi.requestPermission === 'function') {
+    return orientationApi.requestPermission.bind(orientationApi)
+  }
+
+  if ('DeviceMotionEvent' in window) {
+    const motionApi = DeviceMotionEvent as typeof DeviceMotionEvent & MotionPermissionApi
+    if (typeof motionApi.requestPermission === 'function') {
+      return motionApi.requestPermission.bind(motionApi)
+    }
+  }
+
+  return null
 }
 
 function setInput(x: number, y: number) {
@@ -130,13 +150,11 @@ function attachOrientation() {
 async function requestDeviceMotion() {
   if (!canUseOrientation()) return
   motionState.value = 'requesting'
-  const orientationApi = DeviceOrientationEvent as typeof DeviceOrientationEvent & {
-    requestPermission?: () => Promise<'granted' | 'denied'>
-  }
+  const requestPermission = getMotionPermissionRequester()
 
   try {
-    if (typeof orientationApi.requestPermission === 'function') {
-      const permission = await orientationApi.requestPermission()
+    if (requestPermission) {
+      const permission = await requestPermission()
       if (permission !== 'granted') {
         motionState.value = 'denied'
         return
@@ -225,6 +243,7 @@ function handleVisibilityChange() {
 onMounted(() => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   prefersReducedMotion.value = motionQuery.matches
+  if (canUseOrientation() && !getMotionPermissionRequester()) attachOrientation()
 
   handleMotionPreferenceChange = (event) => {
     prefersReducedMotion.value = event.matches
@@ -232,6 +251,9 @@ onMounted(() => {
       window.removeEventListener('deviceorientation', handleOrientation)
       orientationAttached = false
       motionState.value = 'idle'
+    }
+    else if (!event.matches && canUseOrientation() && !getMotionPermissionRequester()) {
+      attachOrientation()
     }
     restart()
   }
