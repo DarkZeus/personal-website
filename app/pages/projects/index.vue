@@ -60,16 +60,6 @@ const projects = [
     imageAlt: 'YAFFW browser-native video editor with a media preview and editing timeline',
   },
   {
-    title: 'PlayStation 5 Web Dashboard',
-    description: 'A web recreation of the PlayStation 5 dashboard, built to study smooth navigation and interface motion.',
-    link: 'https://playstation-dashboard.pages.dev/',
-    tags: ['Vue.js', 'Nuxt', 'Tailwind CSS', 'TypeScript', 'Motion'],
-    status: 'Research project',
-    external: true,
-    image: '/images/playstation-dashboard.jpg',
-    imageAlt: 'PlayStation 5 web dashboard recreation',
-  },
-  {
     title: 'Personal Portfolio',
     description: 'A responsive portfolio built with Vue.js and Nuxt to present engineering evidence and technical writing.',
     link: '/',
