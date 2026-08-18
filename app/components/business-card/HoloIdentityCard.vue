@@ -292,8 +292,23 @@ async function requestDeviceMotion() {
   }
 }
 
+function requestFullscreen() {
+  const root = document.documentElement
+  if (document.fullscreenElement || typeof root.requestFullscreen !== 'function') return
+
+  try {
+    void root.requestFullscreen({ navigationUI: 'hide' }).catch(() => {
+      // Fullscreen is an enhancement; motion activation must still succeed when unavailable.
+    })
+  } catch {
+    // Some mobile browsers expose the API but reject fullscreen for ordinary documents.
+  }
+}
+
 async function enableDeviceMotion() {
-  const enabled = await requestDeviceMotion()
+  const motionRequest = requestDeviceMotion()
+  requestFullscreen()
+  const enabled = await motionRequest
   if (!enabled) {
     await nextTick()
     enableMotionButton.value?.focus({ preventScroll: true })
