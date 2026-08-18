@@ -581,9 +581,9 @@ onBeforeUnmount(() => {
   z-index: 3;
   background: radial-gradient(
     circle at var(--glare-x) var(--glare-y),
-    rgb(255 255 255 / 0.5) 0,
-    rgb(255 255 255 / 0.14) 16%,
-    transparent 46%
+    rgb(255 255 255 / 0.28) 0,
+    rgb(255 255 255 / 0.07) 22%,
+    transparent 58%
   );
   mix-blend-mode: soft-light;
 }
