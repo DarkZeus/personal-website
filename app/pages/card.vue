@@ -19,20 +19,26 @@
               </a>
             </section>
 
-            <a
-              class="qr-tile focus-ring"
-              href="/serhii-resnianskyi.vcf"
-              download
-              aria-label="Share or download Serhii Resnianskyi's contact card"
-              @click="shareContact"
-            >
+            <div class="qr-tile">
               <div class="qr-heading">
-                <span>Scan to connect</span>
-                <ArrowDownTrayIcon aria-hidden="true" />
+                <span>Scan to visit</span>
+                <a
+                  class="qr-download focus-ring"
+                  href="/serhii-resnianskyi.vcf"
+                  download
+                  aria-label="Share or download Serhii Resnianskyi's contact card"
+                  @click="shareContact"
+                >
+                  <ArrowDownTrayIcon aria-hidden="true" />
+                </a>
               </div>
-              <div class="qr-code" role="img" aria-label="QR code to save Serhii Resnianskyi as a contact">
+              <a
+                class="qr-code focus-ring"
+                href="/"
+                aria-label="Open fuad.work"
+              >
                 <QrcodeVue
-                  value="https://fuad.work/serhii-resnianskyi.vcf"
+                  value="https://fuad.work/"
                   :size="252"
                   :margin="1"
                   level="M"
@@ -40,9 +46,9 @@
                   background="#ffffff"
                   foreground="#16131d"
                 />
-              </div>
-              <span class="qr-caption">Contact · .VCF</span>
-            </a>
+              </a>
+              <span class="qr-caption">fuad.work · web</span>
+            </div>
           </div>
 
           <footer class="credential-footer">
@@ -334,6 +340,16 @@ h1 span:last-child {
 
 .qr-heading svg { width: 0.9rem; }
 
+.qr-download {
+  display: grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: -0.45rem -0.35rem -0.45rem 0;
+  place-items: center;
+  border-radius: 50%;
+  color: inherit;
+}
+
 .qr-code,
 .qr-code :deep(svg) {
   display: block;
@@ -417,7 +433,8 @@ h1 span:last-child {
 
   .credential-main {
     grid-template-columns: 1fr;
-    align-content: center;
+    grid-template-rows: auto minmax(1rem, 1fr) auto;
+    align-content: stretch;
     gap: 1.2rem;
     padding-block: 1.15rem;
   }
@@ -433,27 +450,15 @@ h1 span:last-child {
   .email-link svg { bottom: 0.75rem; }
 
   .qr-tile {
-    width: clamp(9.5rem, 48dvw, 13rem);
-    justify-self: end;
+    grid-row: 3;
+    width: clamp(11.5rem, 58dvw, 14.5rem);
+    align-self: end;
+    justify-self: center;
     padding: 0.55rem;
   }
 
-  .credential-footer { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  .contact-link { padding: 0.7rem 1rem 0.55rem 0; }
-  .contact-link:not(:first-child) { padding-left: 0.75rem; }
-
-  .contact-link:nth-child(3) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .contact-link:nth-child(n + 3) { border-top: 1px solid rgb(23 20 30 / 0.18); }
-
-  .contact-link svg {
-    top: 0.7rem;
-    right: 0.55rem;
-  }
+  .email-link,
+  .credential-footer { display: none; }
 
 }
 
