@@ -2,8 +2,10 @@ import { initWithGL, initWithGLFallback, isGLRoot } from '@typegpu/gl'
 import { d, std, tgpu } from 'typegpu'
 
 export type HoloMaterialFrame = {
-  lightX: number
-  lightY: number
+  foilX: number
+  foilY: number
+  glareX: number
+  glareY: number
   impulseX: number
   impulseY: number
   energy: number
@@ -19,6 +21,22 @@ export type HoloMaterialRenderer = {
 
 const MAX_CANVAS_DIMENSION = 4096
 const MAX_PIXEL_RATIO = 2
+
+const spectralPalette = tgpu.fn([d.f32], d.vec3f)((phase) => {
+  'use gpu'
+  const hue = std.fract(phase)
+  const pink = d.vec3f(1, 0.345, 0.757)
+  const yellow = d.vec3f(1, 0.827, 0.357)
+  const mint = d.vec3f(0.294, 0.957, 0.827)
+  const blue = d.vec3f(0.333, 0.537, 1)
+  const purple = d.vec3f(0.8, 0.357, 1)
+
+  if (hue < 0.2) return std.mix(pink, yellow, hue * 5)
+  if (hue < 0.4) return std.mix(yellow, mint, (hue - 0.2) * 5)
+  if (hue < 0.6) return std.mix(mint, blue, (hue - 0.4) * 5)
+  if (hue < 0.8) return std.mix(blue, purple, (hue - 0.6) * 5)
+  return std.mix(purple, pink, (hue - 0.8) * 5)
+})
 
 function prepareTypeGpuGlFallback() {
   if ('GPUBufferUsage' in globalThis) return
@@ -58,7 +76,8 @@ export async function createHoloMaterialRenderer(
   })
 
   const resolution = root.createUniform(d.vec2f, d.vec2f(1, 1)).$name('resolution')
-  const light = root.createUniform(d.vec2f, d.vec2f(0, 0)).$name('light')
+  const foil = root.createUniform(d.vec2f, d.vec2f(0, 0)).$name('foil')
+  const glare = root.createUniform(d.vec2f, d.vec2f(0, 0)).$name('glare')
   const impulse = root.createUniform(d.vec2f, d.vec2f(0, 0)).$name('impulse')
   const energy = root.createUniform(d.f32, 0).$name('energy')
   const time = root.createUniform(d.f32, 0).$name('time')
@@ -89,49 +108,78 @@ export async function createHoloMaterialRenderer(
     'use gpu'
 
     const aspect = resolution.$.x / resolution.$.y
-    const centered = d.vec2f((uv.x - 0.5) * aspect, uv.y - 0.5)
-    const lightCenter = d.vec2f(light.$.x * 0.3 * aspect, light.$.y * 0.32)
-    const toLight = std.sub(centered, lightCenter)
-    const distanceToLight = std.length(toLight)
+    const stockAxis = std.saturate((uv.x + uv.y) * 0.5)
+    const stockStart = d.vec3f(0.945, 0.929, 0.969)
+    const stockMiddle = d.vec3f(0.882, 0.867, 0.925)
+    const stockEnd = d.vec3f(0.922, 0.902, 0.945)
+    let color = std.mix(stockStart, stockMiddle, std.smoothstep(0, 0.62, stockAxis))
+    color = std.mix(color, stockEnd, std.smoothstep(0.52, 1, stockAxis))
 
-    const drift = light.$.x * 0.16 + light.$.y * 0.09
-    const inertia = impulse.$.x * 0.07 - impulse.$.y * 0.05
-    const diagonal = uv.x * 0.72 + uv.y * 0.42 + drift + inertia
-    const ringPhase = distanceToLight * 45 - time.$ * (0.16 + energy.$ * 0.48)
-    const interference = std.sin(diagonal * 24 + std.sin(ringPhase) * 0.28)
-    const fineLines = std.sin((uv.x * 1.18 + uv.y) * 260 + light.$.x * 8)
-    const spectralPhase = diagonal * 18 + interference * 1.4 + impulse.$.x * 2.5
+    const topWashDelta = d.vec2f((uv.x - 0.16) * aspect, uv.y - 0.08)
+    const topWash = 1 - std.smoothstep(0.08, 0.62, std.length(topWashDelta))
+    color = std.mix(color, d.vec3f(1, 1, 1), topWash * 0.2)
+    const cornerDelta = d.vec2f((uv.x - 0.9) * aspect, uv.y - 0.95)
+    const cornerTint = 1 - std.smoothstep(0.05, 0.72, std.length(cornerDelta))
+    color = std.mix(color, d.vec3f(0.498, 0.4, 0.722), cornerTint * 0.09)
 
-    const spectrum = d.vec3f(
-      0.56 + 0.44 * std.cos(spectralPhase),
-      0.56 + 0.44 * std.cos(spectralPhase - 2.094),
-      0.56 + 0.44 * std.cos(spectralPhase - 4.188),
-    )
-    const foilBands = std.smoothstep(0.12, 0.92, std.abs(interference))
-    const localReveal = 1 - std.smoothstep(0.06, 0.82, distanceToLight)
-    const lineReveal = 0.5 + fineLines * 0.5
-    const foilAmount = (0.035 + localReveal * 0.13 + energy.$ * 0.14) * (0.48 + foilBands * 0.52)
-    const holoTint = std.mix(d.vec3f(0.82, 0.84, 0.93), spectrum, 0.58)
+    const foilCenter = d.vec2f(0.5 + foil.$.x * 0.31, 0.5 + foil.$.y * 0.36)
+    const foilDelta = std.sub(uv, foilCenter)
+    const foilDistance = std.length(d.vec2f(foilDelta.x * aspect, foilDelta.y))
+    const inertia = impulse.$.x * 0.034 - impulse.$.y * 0.026
+    const diagonal = uv.x * 0.82 + uv.y * 0.34 + foil.$.x * 0.13 + foil.$.y * 0.08 + inertia
+    const movement = std.saturate(std.length(foil.$) + energy.$ * 0.55)
+    const reveal = 0.32 + movement * 0.6
 
-    const paper = d.vec3f(0.91, 0.895, 0.95)
-    const paperLight = d.vec3f(0.985, 0.98, 1)
-    const paperShade = d.vec3f(0.79, 0.77, 0.88)
-    const verticalShade = std.smoothstep(0, 1, uv.y)
-    let color = std.mix(paperLight, paper, verticalShade * 0.72)
-    const cornerShade = 1 - std.smoothstep(0, 0.8, uv.x + uv.y)
-    color = std.mix(color, paperShade, cornerShade * 0.09)
-    color = std.mix(color, std.mul(holoTint, gamut.$), foilAmount)
+    const linearSpectrum = spectralPalette(diagonal * 0.92 + 0.01)
+    const directionScale = 1 / (std.abs(foilDelta.x) + std.abs(foilDelta.y) + 0.001)
+    const conicPhase = (foilDelta.x - foilDelta.y) * directionScale * 0.25
+    const conicSpectrum = spectralPalette(conicPhase + foil.$.x * 0.08 + 0.68)
+    const localSpectrum = std.mix(linearSpectrum, conicSpectrum, 0.26)
 
-    const glare = std.pow(std.saturate(1 - distanceToLight * 1.36), 3.4)
-    color = std.add(color, std.mul(d.vec3f(1, 0.985, 1), glare * (0.075 + energy.$ * 0.1)))
-    color = std.mul(color, 0.989 + lineReveal * 0.011)
+    const stripeWave = 0.5 + std.sin(diagonal * 39.5) * 0.5
+    const stripeMask = std.smoothstep(0.18, 0.7, stripeWave)
+    const spectrumFocus = 1 - std.smoothstep(0.08, 0.76, std.length(d.vec2f((uv.x - 0.74) * aspect * 0.7, uv.y - 0.44)))
+    const spectrumMask = std.max(stripeMask, spectrumFocus * 0.46)
+    const spectrumAmount = spectrumMask * reveal * 0.68
+    const multipliedSpectrum = std.mul(color, std.mix(d.vec3f(1, 1, 1), std.mul(localSpectrum, gamut.$), 0.94))
+    color = std.mix(color, multipliedSpectrum, spectrumAmount)
+
+    const ringDelta = d.vec2f((uv.x - 0.73 - foil.$.x * 0.05) * aspect * 0.72, (uv.y - 0.43 - foil.$.y * 0.05) * 1.18)
+    const ringDistance = std.length(ringDelta)
+    const ringCycle = std.fract(ringDistance * 7.15 - time.$ * energy.$ * 0.09)
+    const pinkRing = std.smoothstep(0.55, 0.6, ringCycle) * (1 - std.smoothstep(0.65, 0.7, ringCycle))
+    const cyanRing = std.smoothstep(0.7, 0.75, ringCycle) * (1 - std.smoothstep(0.82, 0.87, ringCycle))
+    const ringFade = 1 - std.smoothstep(0.12, 1.05, ringDistance)
+    color = std.add(color, std.mul(d.vec3f(1, 0.46, 0.855), pinkRing * ringFade * reveal * 0.012))
+    color = std.add(color, std.mul(d.vec3f(0.286, 0.878, 1), cyanRing * ringFade * reveal * 0.02))
+
+    const diffractionWave = std.abs(std.sin((uv.x * 1.04 + uv.y * 0.66 + foil.$.x * 0.04) * 246))
+    const diffraction = std.pow(diffractionWave, 19) * reveal
+    color = std.add(color, std.mul(d.vec3f(0.72, 0.94, 1), diffraction * 0.045))
+
+    const sweetCenter = d.vec2f(foilCenter.x - 0.08, foilCenter.y + 0.04)
+    const sweetDistance = std.length(d.vec2f((uv.x - sweetCenter.x) * aspect, uv.y - sweetCenter.y))
+    const sweetWhite = 1 - std.smoothstep(0, 0.08, sweetDistance)
+    const sweetCyan = 1 - std.smoothstep(0.03, 0.19, sweetDistance)
+    const sweetPink = 1 - std.smoothstep(0.11, 0.31, sweetDistance)
+    color = std.add(color, std.mul(d.vec3f(1, 1, 1), sweetWhite * reveal * 0.12))
+    color = std.add(color, std.mul(d.vec3f(0.5, 0.95, 1), sweetCyan * reveal * 0.045))
+    color = std.add(color, std.mul(d.vec3f(1, 0.44, 0.86), sweetPink * reveal * 0.02))
+
+    const glareCenter = d.vec2f(0.5 + glare.$.x * 0.46, 0.5 + glare.$.y * 0.46)
+    const glareDistance = std.length(d.vec2f((uv.x - glareCenter.x) * aspect, uv.y - glareCenter.y))
+    const glareAmount = 1 - std.smoothstep(0, 0.72, glareDistance)
+    color = std.add(color, std.mul(d.vec3f(1, 0.985, 1), glareAmount * (0.055 + energy.$ * 0.05)))
+
+    const grain = std.sin((uv.x * 1.18 + uv.y) * 260)
+    color = std.mul(color, 0.994 + grain * 0.006)
 
     const edgeDistance = std.min(std.min(uv.x, 1 - uv.x), std.min(uv.y, 1 - uv.y))
-    const edgeLight = 1 - std.smoothstep(0, 0.035, edgeDistance)
+    const edgeLight = 1 - std.smoothstep(0, 0.025, edgeDistance)
     const directionalEdge = std.saturate(
-      edgeLight * (0.42 + light.$.x * (uv.x - 0.5) + light.$.y * (uv.y - 0.5)),
+      edgeLight * (0.32 + foil.$.x * (uv.x - 0.5) + foil.$.y * (uv.y - 0.5)),
     )
-    color = std.add(color, std.mul(d.vec3f(1, 1, 1), directionalEdge * 0.26))
+    color = std.add(color, std.mul(d.vec3f(1, 1, 1), directionalEdge * 0.22))
 
     return d.vec4f(std.saturate(color), 1)
   })
@@ -166,7 +214,8 @@ export async function createHoloMaterialRenderer(
     draw(frame) {
       if (destroyed) return
       resize()
-      light.write(d.vec2f(frame.lightX, frame.lightY))
+      foil.write(d.vec2f(frame.foilX, frame.foilY))
+      glare.write(d.vec2f(frame.glareX, frame.glareY))
       impulse.write(d.vec2f(frame.impulseX, frame.impulseY))
       energy.write(frame.energy)
       time.write(frame.time)

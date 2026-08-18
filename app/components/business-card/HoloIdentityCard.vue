@@ -517,8 +517,10 @@ function applyFrame(now: number) {
   card.value.style.setProperty('--rotate-x', `${rotateX.toFixed(3)}deg`)
   card.value.style.setProperty('--rotate-y', `${rotateY.toFixed(3)}deg`)
   materialRenderer?.draw({
-    lightX: foil.x * 0.72 + direct.x * 0.28,
-    lightY: foil.y * 0.72 + direct.y * 0.28,
+    foilX: foil.x,
+    foilY: foil.y,
+    glareX: direct.x,
+    glareY: direct.y,
     impulseX: materialImpulse.x,
     impulseY: materialImpulse.y,
     energy: motionEnergy,
