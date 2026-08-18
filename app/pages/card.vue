@@ -372,7 +372,7 @@ h1 span:last-child {
   .card-page { padding: 0.75rem; }
 
   .card-stage {
-    width: min(28rem, calc(100dvw - 1.5rem));
+    width: min(28rem, calc(100dvw - 1.5rem), calc((100dvh - 1.5rem) * 0.68));
     min-width: 0;
     margin: 0;
   }
@@ -422,7 +422,7 @@ h1 span:last-child {
 
 }
 
-@media (max-width: 25rem) {
+@media (max-width: 32rem) {
   .card-stage {
     width: min(calc(100dvw - 1.5rem), calc((100dvh - 1.5rem) * 0.56));
   }
