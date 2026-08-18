@@ -23,7 +23,8 @@
               class="qr-tile focus-ring"
               href="/serhii-resnianskyi.vcf"
               download
-              aria-label="Download Serhii Resnianskyi's contact card"
+              aria-label="Share or download Serhii Resnianskyi's contact card"
+              @click="shareContact"
             >
               <div class="qr-heading">
                 <span>Scan to connect</span>
@@ -97,6 +98,40 @@ const contacts = [
   { label: 'GitHub', value: '@DarkZeus', href: 'https://github.com/DarkZeus' },
   { label: 'Web', value: 'fuad.work', href: '/' },
 ]
+
+async function shareContact(event: MouseEvent) {
+  if (!navigator.share) return
+  event.preventDefault()
+
+  const contactUrl = new URL('/serhii-resnianskyi.vcf', window.location.origin).href
+  try {
+    const response = await fetch(contactUrl)
+    if (!response.ok) throw new Error('Contact file unavailable')
+    const file = new File([await response.blob()], 'serhii-resnianskyi.vcf', { type: 'text/vcard' })
+
+    if (navigator.canShare?.({ files: [file] })) {
+      await navigator.share({
+        title: 'Serhii Resnianskyi — contact',
+        text: 'Save Serhii Resnianskyi as a contact.',
+        files: [file],
+      })
+      return
+    }
+
+    await navigator.share({
+      title: 'Serhii Resnianskyi — contact',
+      text: 'Save Serhii Resnianskyi as a contact.',
+      url: contactUrl,
+    })
+  }
+  catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') return
+    const download = document.createElement('a')
+    download.href = contactUrl
+    download.download = 'serhii-resnianskyi.vcf'
+    download.click()
+  }
+}
 </script>
 
 <style scoped>

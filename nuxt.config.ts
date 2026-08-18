@@ -1,5 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import { defineNuxtConfig } from 'nuxt/config'
+import typegpu from 'unplugin-typegpu/vite'
 import { getExperienceYearsLabel } from './utils/experience'
 
 const experienceYears = getExperienceYearsLabel()
@@ -34,6 +35,7 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [
+      typegpu(),
       tailwindcss(),
     ],
     build: {

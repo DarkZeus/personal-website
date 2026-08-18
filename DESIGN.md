@@ -246,7 +246,9 @@ Availability is a compact full pill with a green semantic dot and faint green fi
 
 On mobile browsers that require an explicit motion permission gesture, the first-use state becomes a full-viewport activation layer rather than a hidden tap target. The credential remains as blurred spectral atmosphere behind a concise “Unlock physical mode” prompt, with one direct enable action, an equally clear touch-only path, a truthful denied state, and a local-only sensor note. Successful activation or dismissal is remembered for the tab session; reduced-motion users bypass the layer entirely.
 
-The credential, immediate glare, delayed spectral foil, and independent edge catches respond to one normalized pointer or device-orientation input at different rates. Card tilt follows through a spring while the laminate follows more slowly, so the foil appears to carry mass; device orientation zeroes itself on the first reading, and iOS permission is requested only from a user gesture. The printed face stays crisp above every reflective layer, every contact remains a normal link, and the QR sits on an opaque white tile so no foil or glare can compromise scanning.
+The credential uses one procedural TypeGPU surface for pearl stock, diffraction, glare, grain, and edge catches, rendered behind the ordinary DOM content. WebGPU is preferred, TypeGPU's WebGL2 backend renders the same typed vertex and fragment functions when needed, and one static CSS stock remains as the emergency fallback. This single opaque surface avoids browser compositing conflicts while keeping the printed face crisp and the QR isolated on an opaque white tile.
+
+On desktop, card tilt follows the pointer through a spring while the material response follows more slowly. On mobile, orientation and acceleration keep the credential geometry fixed and move only light, diffraction, and foil inertia, making the handset itself feel like the physical card; orientation zeroes itself on the first reading, and iOS permission is requested only from a user gesture. Rendering stops when the material settles or the page is hidden, DPR is capped, and sustained slow frames lower the internal canvas resolution. Screen Wake Lock is requested after interaction, and the contact tile uses Web Share for the `.vcf` file or its URL before falling back to download.
 
 The credential keeps a landscape ratio on desktop and becomes portrait on mobile, preserving comfortable type, contact targets, and a camera-readable QR instead of compressing the desktop composition. The dedicated route sizes against `dvh`/`dvw`, disables page zoom, and suppresses text selection and iOS touch callouts so browser gestures do not interrupt the physical-object illusion. Reduced motion renders a static face-on card, and animation pauses while the page is hidden or the card is off-screen.
 
@@ -260,7 +262,7 @@ The credential keeps a landscape ratio on desktop and becomes portrait on mobile
 - **Do** structure evidence with open space, fine rules, asymmetric columns, and clear reading measures.
 - **Do** keep the first viewport focused on identity, concrete capability evidence, and a direct contact route.
 - **Do** preserve semantic light/dark role mapping and WCAG 2.2 AA contrast.
-- **Do** keep standard-page motion short and functional; on `/card`, let the credential and foil respond at different rates, then render the object static and face-on under reduced motion.
+- **Do** keep standard-page motion short and functional; on `/card`, let desktop pointer input tilt the credential while mobile orientation moves only its material response, then render the object static and face-on under reduced motion.
 - **Do** keep decorative circles clipped, faint, and subordinate to content.
 - **Do** keep `/card`'s printed identity, contact links, QR, and save action crisp, high contrast, and usable without motion input.
 

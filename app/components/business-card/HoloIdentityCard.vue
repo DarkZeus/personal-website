@@ -5,21 +5,16 @@
     :inert="motionGateVisible"
     tabindex="-1"
     @pointerenter="handlePointerEnter"
+    @pointerdown="handlePointerDown"
     @pointermove="handlePointerMove"
+    @pointerup="handlePointerUp"
+    @pointercancel="handlePointerUp"
     @pointerleave="handlePointerLeave"
     @click="handleCardActivation"
   >
     <div ref="card" class="holo-card">
       <div class="card-stock" aria-hidden="true"></div>
-      <div class="foil foil-rings" aria-hidden="true"></div>
-      <div class="foil foil-spectrum" aria-hidden="true"></div>
-      <div class="foil foil-diffraction" aria-hidden="true"></div>
-      <div class="foil foil-sweet-spot" aria-hidden="true"></div>
-      <div class="glare" aria-hidden="true"></div>
-      <div class="edge edge-top" aria-hidden="true"></div>
-      <div class="edge edge-right" aria-hidden="true"></div>
-      <div class="edge edge-bottom" aria-hidden="true"></div>
-      <div class="edge edge-left" aria-hidden="true"></div>
+      <canvas ref="materialCanvas" class="holo-material" aria-hidden="true"></canvas>
 
       <div class="printed-face">
         <slot />
@@ -40,12 +35,10 @@
       >
         <div class="motion-permission-content">
           <h2 id="motion-permission-title">
-            {{ motionState === 'denied' ? 'Motion access is off' : 'Unlock physical mode' }}
+            {{ motionPermissionTitle }}
           </h2>
           <p id="motion-permission-description" class="motion-permission-description">
-            {{ motionState === 'denied'
-              ? 'Motion wasn’t allowed. Retry the request, or continue with touch.'
-              : 'Move your phone to bend light across the card. Motion access only drives the effect.' }}
+            {{ motionPermissionDescription }}
           </p>
 
           <div class="motion-permission-actions">
@@ -53,7 +46,7 @@
               ref="enableMotionButton"
               class="motion-permission-primary"
               type="button"
-              :disabled="motionState === 'requesting' || motionState === 'enabled'"
+              :disabled="motionState === 'requesting' || motionState === 'enabled' || motionState === 'unavailable'"
               :aria-busy="motionState === 'requesting'"
               @click="enableDeviceMotion"
             >
@@ -83,16 +76,27 @@
 <script setup lang="ts">
 import { LockClosedIcon } from '@heroicons/vue/24/outline'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { createHoloMaterialRenderer, type HoloMaterialRenderer } from './holoMaterialRenderer'
 
-type MotionState = 'idle' | 'requesting' | 'enabled' | 'denied' | 'skipped'
+type MotionState = 'idle' | 'requesting' | 'enabled' | 'denied' | 'skipped' | 'unavailable'
 type MotionPermissionApi = {
   requestPermission?: () => Promise<'granted' | 'denied'>
+}
+type WakeLockSentinelLike = {
+  readonly released?: boolean
+  release: () => Promise<void>
+}
+type WakeLockNavigator = Navigator & {
+  wakeLock?: {
+    request: (type: 'screen') => Promise<WakeLockSentinelLike>
+  }
 }
 
 const MOTION_PREFERENCE_KEY = 'business-card-motion'
 
 const stage = ref<HTMLElement | null>(null)
 const card = ref<HTMLElement | null>(null)
+const materialCanvas = ref<HTMLCanvasElement | null>(null)
 const enableMotionButton = ref<HTMLButtonElement | null>(null)
 const skipMotionButton = ref<HTMLButtonElement | null>(null)
 const motionState = ref<MotionState>('idle')
@@ -103,20 +107,52 @@ const motionPermissionAction = computed(() => {
   if (motionState.value === 'requesting') return 'Waiting for permission…'
   if (motionState.value === 'enabled') return 'Motion connected'
   if (motionState.value === 'denied') return 'Try again'
+  if (motionState.value === 'unavailable') return 'HTTPS required'
   return 'Enable motion'
 })
 
+const motionPermissionTitle = computed(() => {
+  if (motionState.value === 'denied') return 'Motion access is off'
+  if (motionState.value === 'unavailable') return 'Secure connection required'
+  return 'Unlock physical mode'
+})
+
+const motionPermissionDescription = computed(() => {
+  if (motionState.value === 'denied') {
+    return 'Motion wasn’t allowed. Retry the request, or continue with touch.'
+  }
+  if (motionState.value === 'unavailable') {
+    return 'This preview is using HTTP. Open the card over HTTPS to enable phone motion; touch still works here.'
+  }
+  return 'Move your phone to bend light across the card. Motion access only drives the effect.'
+})
+
 const target = { x: 0, y: 0 }
+const sensorTarget = { x: 0, y: 0 }
 const tilt = { x: 0, y: 0 }
 const velocity = { x: 0, y: 0 }
 const foil = { x: 0, y: 0 }
 const direct = { x: 0, y: 0 }
+const impulseTarget = { x: 0, y: 0 }
+const materialImpulse = { x: 0, y: 0 }
+const gravityEstimate = { x: 0, y: 0 }
 const orientationOrigin = { beta: 0, gamma: 0, set: false }
 
 let frame = 0
 let lastFrame = 0
-let orientationAttached = false
+let sensorsAttached = false
 let visible = true
+let pointerId: number | null = null
+let pointerOverride = false
+let isMobilePhysicalCard = false
+let materialRenderer: HoloMaterialRenderer | null = null
+let renderScale = 1
+let slowFrameCount = 0
+let fastFrameCount = 0
+let motionEnergy = 0
+let motionEnergyTarget = 0
+let keepAwake = false
+let wakeLock: WakeLockSentinelLike | null = null
 let motionQuery: MediaQueryList | null = null
 let intersectionObserver: IntersectionObserver | null = null
 let handleMotionPreferenceChange: ((event: MediaQueryListEvent) => void) | null = null
@@ -126,27 +162,36 @@ function clamp(value: number, min = -1, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
 
-function canUseOrientation() {
-  const hasTouchInput = navigator.maxTouchPoints > 0 || 'ontouchstart' in window
-  return !prefersReducedMotion.value
-    && 'DeviceOrientationEvent' in window
-    && hasTouchInput
+function hasTouchInput() {
+  return navigator.maxTouchPoints > 0 || 'ontouchstart' in window
 }
 
-function getMotionPermissionRequester() {
+function canUseOrientation() {
+  return !prefersReducedMotion.value
+    && window.isSecureContext
+    && 'DeviceOrientationEvent' in window
+    && hasTouchInput()
+}
+
+function isInsecureMobilePreview() {
+  return !window.isSecureContext && hasTouchInput()
+}
+
+function getMotionPermissionRequesters() {
+  const requesters: Array<() => Promise<'granted' | 'denied'>> = []
   const orientationApi = DeviceOrientationEvent as typeof DeviceOrientationEvent & MotionPermissionApi
   if (typeof orientationApi.requestPermission === 'function') {
-    return orientationApi.requestPermission.bind(orientationApi)
+    requesters.push(orientationApi.requestPermission.bind(orientationApi))
   }
 
   if ('DeviceMotionEvent' in window) {
     const motionApi = DeviceMotionEvent as typeof DeviceMotionEvent & MotionPermissionApi
     if (typeof motionApi.requestPermission === 'function') {
-      return motionApi.requestPermission.bind(motionApi)
+      requesters.push(motionApi.requestPermission.bind(motionApi))
     }
   }
 
-  return null
+  return requesters
 }
 
 function getStoredMotionPreference() {
@@ -188,19 +233,40 @@ function setInput(x: number, y: number) {
 }
 
 function handlePointerEnter(event: PointerEvent) {
-  if (prefersReducedMotion.value || motionState.value === 'enabled') return
+  if (prefersReducedMotion.value || (motionState.value === 'enabled' && event.pointerType !== 'touch')) return
   handlePointerMove(event)
 }
 
+function handlePointerDown(event: PointerEvent) {
+  if (prefersReducedMotion.value) return
+  pointerId = event.pointerId
+  pointerOverride = true
+  stage.value?.setPointerCapture(event.pointerId)
+  handlePointerMove(event)
+  void requestWakeLock()
+}
+
 function handlePointerMove(event: PointerEvent) {
-  if (!stage.value || prefersReducedMotion.value || motionState.value === 'enabled') return
+  if (!stage.value || prefersReducedMotion.value) return
+  if (pointerId !== null && event.pointerId !== pointerId) return
+  if (motionState.value === 'enabled' && !pointerOverride) return
   const rect = stage.value.getBoundingClientRect()
   const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
   const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2
   setInput(x, y)
 }
 
-function handlePointerLeave() {
+function handlePointerUp(event: PointerEvent) {
+  if (pointerId !== event.pointerId) return
+  if (stage.value?.hasPointerCapture(event.pointerId)) stage.value.releasePointerCapture(event.pointerId)
+  pointerId = null
+  pointerOverride = false
+  if (motionState.value === 'enabled') setInput(sensorTarget.x, sensorTarget.y)
+  else handlePointerLeave()
+}
+
+function handlePointerLeave(event?: PointerEvent) {
+  if (pointerOverride && event?.pointerId === pointerId) return
   if (motionState.value === 'enabled') return
   velocity.x += tilt.x > 0 ? -0.025 : 0.025
   velocity.y += tilt.y > 0 ? -0.02 : 0.02
@@ -212,13 +278,14 @@ function handlePointerLeave() {
 }
 
 function handleCardActivation() {
-  if (motionState.value !== 'idle' || !canUseOrientation()) return
-  void requestDeviceMotion()
+  void requestWakeLock()
+  if (motionState.value === 'idle' && canUseOrientation()) void requestDeviceMotion()
 }
 
 function continueWithoutMotion() {
   motionState.value = 'skipped'
   storeMotionPreference('skipped')
+  void requestWakeLock()
   void dismissMotionGate()
 }
 
@@ -258,37 +325,112 @@ function handleOrientation(event: DeviceOrientationEvent) {
   const deltaGamma = clamp((gamma - orientationOrigin.gamma) / 22)
   const angle = window.screen.orientation?.angle ?? 0
 
-  if (angle === 90) setInput(deltaBeta, -deltaGamma)
-  else if (angle === 270) setInput(-deltaBeta, deltaGamma)
-  else setInput(deltaGamma, deltaBeta)
+  if (angle === 90) {
+    sensorTarget.x = deltaBeta
+    sensorTarget.y = -deltaGamma
+  }
+  else if (angle === 270) {
+    sensorTarget.x = -deltaBeta
+    sensorTarget.y = deltaGamma
+  }
+  else {
+    sensorTarget.x = deltaGamma
+    sensorTarget.y = deltaBeta
+  }
+  if (!pointerOverride) setInput(sensorTarget.x, sensorTarget.y)
 }
 
-function attachOrientation() {
-  if (orientationAttached) return
+function mapMotionToScreen(x: number, y: number) {
+  const angle = window.screen.orientation?.angle ?? 0
+  if (angle === 90) return { x: y, y: -x }
+  if (angle === 270) return { x: -y, y: x }
+  return { x, y }
+}
+
+function handleDeviceMotion(event: DeviceMotionEvent) {
+  if (prefersReducedMotion.value) return
+  let x = event.acceleration?.x
+  let y = event.acceleration?.y
+
+  if (x == null || y == null) {
+    const includingGravityX = event.accelerationIncludingGravity?.x ?? 0
+    const includingGravityY = event.accelerationIncludingGravity?.y ?? 0
+    gravityEstimate.x += (includingGravityX - gravityEstimate.x) * 0.12
+    gravityEstimate.y += (includingGravityY - gravityEstimate.y) * 0.12
+    x = includingGravityX - gravityEstimate.x
+    y = includingGravityY - gravityEstimate.y
+  }
+
+  const mapped = mapMotionToScreen(x, y)
+  const nextX = clamp(mapped.x / 7.5)
+  const nextY = clamp(-mapped.y / 7.5)
+  impulseTarget.x = clamp(impulseTarget.x + nextX * 0.42)
+  impulseTarget.y = clamp(impulseTarget.y + nextY * 0.42)
+  motionEnergyTarget = Math.max(motionEnergyTarget, Math.min(1, Math.hypot(nextX, nextY) * 1.35))
+  scheduleRender()
+}
+
+function attachSensors() {
+  if (sensorsAttached) return
   orientationOrigin.set = false
   window.addEventListener('deviceorientation', handleOrientation, { passive: true })
-  orientationAttached = true
+  if ('DeviceMotionEvent' in window) window.addEventListener('devicemotion', handleDeviceMotion, { passive: true })
+  sensorsAttached = true
   motionState.value = 'enabled'
+  void requestWakeLock()
+}
+
+function detachSensors() {
+  if (!sensorsAttached) return
+  window.removeEventListener('deviceorientation', handleOrientation)
+  window.removeEventListener('devicemotion', handleDeviceMotion)
+  sensorsAttached = false
 }
 
 async function requestDeviceMotion() {
   if (!canUseOrientation()) return false
   motionState.value = 'requesting'
-  const requestPermission = getMotionPermissionRequester()
+  const requesters = getMotionPermissionRequesters()
 
   try {
-    if (requestPermission) {
-      const permission = await requestPermission()
-      if (permission !== 'granted') {
+    if (requesters.length) {
+      const permissions = await Promise.all(requesters.map(requestPermission => requestPermission()))
+      if (permissions.some(permission => permission !== 'granted')) {
         motionState.value = 'denied'
         return false
       }
     }
-    attachOrientation()
+    attachSensors()
     return true
   } catch {
     motionState.value = 'denied'
     return false
+  }
+}
+
+async function requestWakeLock() {
+  keepAwake = true
+  if (document.hidden || wakeLock && !wakeLock.released) return
+  const wakeLockApi = (navigator as WakeLockNavigator).wakeLock
+  if (!wakeLockApi) return
+
+  try {
+    wakeLock = await wakeLockApi.request('screen')
+  }
+  catch {
+    wakeLock = null
+  }
+}
+
+async function releaseWakeLock() {
+  const activeLock = wakeLock
+  wakeLock = null
+  if (!activeLock || activeLock.released) return
+  try {
+    await activeLock.release()
+  }
+  catch {
+    // Losing a wake lock is harmless; the browser owns its lifecycle.
   }
 }
 
@@ -325,8 +467,32 @@ async function enableDeviceMotion() {
 function applyFrame(now: number) {
   if (!card.value) return
 
-  const delta = lastFrame ? Math.min(2, (now - lastFrame) / 16.667) : 1
+  const elapsed = lastFrame ? now - lastFrame : 16.667
+  const delta = Math.min(2, elapsed / 16.667)
   lastFrame = now
+
+  if (elapsed > 25) {
+    slowFrameCount += 1
+    fastFrameCount = 0
+  }
+  else if (elapsed < 18) {
+    fastFrameCount += 1
+    slowFrameCount = Math.max(0, slowFrameCount - 1)
+  }
+  else {
+    slowFrameCount = Math.max(0, slowFrameCount - 1)
+    fastFrameCount = 0
+  }
+  if (slowFrameCount >= 8 && renderScale > 0.63) {
+    renderScale = renderScale > 0.85 ? 0.78 : 0.62
+    materialRenderer?.setRenderScale(renderScale)
+    slowFrameCount = 0
+  }
+  else if (fastFrameCount >= 90 && renderScale < 1) {
+    renderScale = renderScale < 0.7 ? 0.78 : 1
+    materialRenderer?.setRenderScale(renderScale)
+    fastFrameCount = 0
+  }
 
   const spring = 0.085 * delta
   velocity.x = (velocity.x + (target.x - tilt.x) * spring) * Math.pow(0.77, delta)
@@ -338,20 +504,26 @@ function applyFrame(now: number) {
   foil.x += (target.x - foil.x) * foilFollow
   foil.y += (target.y - foil.y) * foilFollow
 
-  const magnitude = Math.min(1, Math.hypot(tilt.x, tilt.y))
-  card.value.style.cssText = [
-    `--rotate-x:${(-tilt.y * 8).toFixed(3)}deg`,
-    `--rotate-y:${(tilt.x * 10).toFixed(3)}deg`,
-    `--foil-x:${(50 + foil.x * 31).toFixed(2)}%`,
-    `--foil-y:${(50 + foil.y * 36).toFixed(2)}%`,
-    `--glare-x:${(50 + direct.x * 46).toFixed(2)}%`,
-    `--glare-y:${(50 + direct.y * 46).toFixed(2)}%`,
-    `--reveal:${(0.32 + magnitude * 0.6).toFixed(3)}`,
-    `--edge-top:${Math.max(0, -tilt.y).toFixed(3)}`,
-    `--edge-right:${Math.max(0, tilt.x).toFixed(3)}`,
-    `--edge-bottom:${Math.max(0, tilt.y).toFixed(3)}`,
-    `--edge-left:${Math.max(0, -tilt.x).toFixed(3)}`,
-  ].join(';')
+  const impulseFollow = 1 - Math.pow(0.78, delta)
+  materialImpulse.x += (impulseTarget.x - materialImpulse.x) * impulseFollow
+  materialImpulse.y += (impulseTarget.y - materialImpulse.y) * impulseFollow
+  impulseTarget.x *= Math.pow(0.8, delta)
+  impulseTarget.y *= Math.pow(0.8, delta)
+  motionEnergy += (motionEnergyTarget - motionEnergy) * impulseFollow
+  motionEnergyTarget *= Math.pow(0.82, delta)
+
+  const rotateX = isMobilePhysicalCard ? 0 : -tilt.y * 8
+  const rotateY = isMobilePhysicalCard ? 0 : tilt.x * 10
+  card.value.style.setProperty('--rotate-x', `${rotateX.toFixed(3)}deg`)
+  card.value.style.setProperty('--rotate-y', `${rotateY.toFixed(3)}deg`)
+  materialRenderer?.draw({
+    lightX: foil.x * 0.72 + direct.x * 0.28,
+    lightY: foil.y * 0.72 + direct.y * 0.28,
+    impulseX: materialImpulse.x,
+    impulseY: materialImpulse.y,
+    energy: motionEnergy,
+    time: now / 1000,
+  })
 }
 
 function render(now: number) {
@@ -364,6 +536,12 @@ function render(now: number) {
     || Math.abs(target.y - foil.y) > 0.001
     || Math.abs(velocity.x) > 0.0005
     || Math.abs(velocity.y) > 0.0005
+    || Math.abs(impulseTarget.x) > 0.001
+    || Math.abs(impulseTarget.y) > 0.001
+    || Math.abs(materialImpulse.x) > 0.001
+    || Math.abs(materialImpulse.y) > 0.001
+    || motionEnergy > 0.001
+    || motionEnergyTarget > 0.001
   if (unsettled) frame = requestAnimationFrame(render)
 }
 
@@ -393,16 +571,43 @@ function restart() {
 }
 
 function handleVisibilityChange() {
+  if (document.hidden) void releaseWakeLock()
+  else if (keepAwake) void requestWakeLock()
   restart()
 }
 
-onMounted(() => {
+onMounted(async () => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   prefersReducedMotion.value = motionQuery.matches
-  if (canUseOrientation()) {
-    const requestPermission = getMotionPermissionRequester()
+  isMobilePhysicalCard = navigator.maxTouchPoints > 0 && window.matchMedia('(pointer: coarse)').matches
+
+  if (materialCanvas.value) {
+    try {
+      const rendererOverride = import.meta.dev && new URLSearchParams(window.location.search).get('renderer') === 'webgl2'
+        ? 'webgl2'
+        : 'auto'
+      materialRenderer = await createHoloMaterialRenderer(materialCanvas.value, rendererOverride)
+      stage.value?.setAttribute('data-renderer', materialRenderer.backend)
+    }
+    catch (error) {
+      materialCanvas.value.hidden = true
+      stage.value?.setAttribute('data-renderer', 'css')
+      if (import.meta.dev && error instanceof Error) stage.value?.setAttribute('data-renderer-error', error.message)
+    }
+  }
+
+  if (isInsecureMobilePreview()) {
     const storedPreference = getStoredMotionPreference()
-    if (!requestPermission || storedPreference === 'enabled') attachOrientation()
+    if (storedPreference === 'skipped') motionState.value = 'skipped'
+    else {
+      motionState.value = 'unavailable'
+      void showMotionGate()
+    }
+  }
+  else if (canUseOrientation()) {
+    const requestPermission = getMotionPermissionRequesters().length > 0
+    const storedPreference = getStoredMotionPreference()
+    if (!requestPermission || storedPreference === 'enabled') attachSensors()
     else if (storedPreference === 'skipped') motionState.value = 'skipped'
     else void showMotionGate()
   }
@@ -411,16 +616,21 @@ onMounted(() => {
     prefersReducedMotion.value = event.matches
     if (event.matches) {
       motionGateVisible.value = false
-      if (orientationAttached) {
-        window.removeEventListener('deviceorientation', handleOrientation)
-        orientationAttached = false
-      }
+      detachSensors()
       motionState.value = 'idle'
     }
-    else if (canUseOrientation()) {
-      const requestPermission = getMotionPermissionRequester()
+    else if (isInsecureMobilePreview()) {
       const storedPreference = getStoredMotionPreference()
-      if (!requestPermission || storedPreference === 'enabled') attachOrientation()
+      if (storedPreference === 'skipped') motionState.value = 'skipped'
+      else {
+        motionState.value = 'unavailable'
+        void showMotionGate()
+      }
+    }
+    else if (canUseOrientation()) {
+      const requestPermission = getMotionPermissionRequesters().length > 0
+      const storedPreference = getStoredMotionPreference()
+      if (!requestPermission || storedPreference === 'enabled') attachSensors()
       else if (storedPreference === 'skipped') motionState.value = 'skipped'
       else void showMotionGate()
     }
@@ -446,7 +656,11 @@ onBeforeUnmount(() => {
   if (motionQuery && handleMotionPreferenceChange) {
     motionQuery.removeEventListener('change', handleMotionPreferenceChange)
   }
-  if (orientationAttached) window.removeEventListener('deviceorientation', handleOrientation)
+  detachSensors()
+  keepAwake = false
+  void releaseWakeLock()
+  materialRenderer?.destroy()
+  materialRenderer = null
 })
 </script>
 
@@ -461,15 +675,6 @@ onBeforeUnmount(() => {
 .holo-card {
   --rotate-x: 0deg;
   --rotate-y: 0deg;
-  --foil-x: 50%;
-  --foil-y: 50%;
-  --glare-x: 50%;
-  --glare-y: 50%;
-  --reveal: 0.32;
-  --edge-top: 0;
-  --edge-right: 0;
-  --edge-bottom: 0;
-  --edge-left: 0;
   position: relative;
   width: 100%;
   aspect-ratio: 1.58;
@@ -486,15 +691,13 @@ onBeforeUnmount(() => {
 }
 
 .card-stock,
-.foil,
-.glare,
-.edge {
+.holo-material {
   position: absolute;
+  inset: 0;
   pointer-events: none;
 }
 
 .card-stock {
-  inset: 0;
   background:
     radial-gradient(circle at 16% 8%, rgb(255 255 255 / 0.9), transparent 34%),
     radial-gradient(circle at 90% 95%, rgb(127 102 184 / 0.18), transparent 40%),
@@ -508,125 +711,28 @@ onBeforeUnmount(() => {
   content: '';
 }
 
-.foil {
-  inset: -12%;
-  opacity: var(--reveal);
+.holo-material {
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
 }
 
-.foil-rings {
-  inset: -34% -18%;
-  background:
-    repeating-radial-gradient(
-      ellipse at 73% 43%,
-      transparent 0 8%,
-      rgb(255 117 218 / 0.2) 8.4% 8.8%,
-      rgb(73 224 255 / 0.36) 9.1% 9.6%,
-      transparent 10% 14%
-    ),
-    radial-gradient(ellipse at var(--foil-x) var(--foil-y), rgb(255 255 255 / 0.55), transparent 34%);
-  mix-blend-mode: soft-light;
+.holo-stage[data-renderer='webgpu'] .holo-material,
+.holo-stage[data-renderer='webgl2'] .holo-material {
+  opacity: 1;
 }
 
-.foil-spectrum {
-  background:
-    conic-gradient(
-      from 210deg at var(--foil-x) var(--foil-y),
-      rgb(255 88 193 / 0.76),
-      rgb(255 211 91 / 0.72),
-      rgb(75 244 211 / 0.7),
-      rgb(85 137 255 / 0.78),
-      rgb(204 91 255 / 0.72),
-      rgb(255 88 193 / 0.76)
-    ),
-    linear-gradient(
-      112deg,
-      transparent 15%,
-      rgb(255 66 168 / 0.8) 30%,
-      rgb(255 217 93 / 0.82) 40%,
-      rgb(99 255 223 / 0.76) 51%,
-      rgb(86 143 255 / 0.84) 62%,
-      rgb(205 93 255 / 0.72) 73%,
-      transparent 87%
-    );
-  background-position: var(--foil-x) var(--foil-y);
-  background-size: 170% 170%;
-  filter: saturate(1.28) contrast(1.08);
-  mix-blend-mode: multiply;
-  opacity: calc(var(--reveal) * 0.54);
-  -webkit-mask-image:
-    radial-gradient(ellipse at 74% 44%, #000 0 10%, transparent 38%),
-    repeating-linear-gradient(118deg, #000 0 8%, transparent 8.5% 15%);
-  mask-image:
-    radial-gradient(ellipse at 74% 44%, #000 0 10%, transparent 38%),
-    repeating-linear-gradient(118deg, #000 0 8%, transparent 8.5% 15%);
-  -webkit-mask-composite: source-over;
-  mask-composite: add;
+@supports (color: color(display-p3 1 1 1)) {
+  .card-stock {
+    background:
+      radial-gradient(circle at 16% 8%, color(display-p3 1 1 1 / 0.9), transparent 34%),
+      radial-gradient(circle at 90% 95%, color(display-p3 0.5 0.4 0.76 / 0.18), transparent 40%),
+      linear-gradient(135deg, color(display-p3 0.96 0.94 0.99), color(display-p3 0.87 0.85 0.93) 52%, color(display-p3 0.94 0.91 0.97));
+  }
 }
-
-.foil-diffraction {
-  background:
-    repeating-linear-gradient(
-      122deg,
-      transparent 0 7px,
-      rgb(255 255 255 / 0.2) 8px,
-      rgb(93 217 255 / 0.15) 9px,
-      transparent 10px 16px
-    );
-  mix-blend-mode: overlay;
-  opacity: calc(var(--reveal) * 0.65);
-  background-position: var(--foil-x) var(--foil-y);
-}
-
-.foil-sweet-spot {
-  inset: -30%;
-  background: radial-gradient(
-    circle at calc(var(--foil-x) - 8%) calc(var(--foil-y) + 4%),
-    rgb(255 255 255 / 0.82) 0,
-    rgb(128 242 255 / 0.32) 7%,
-    rgb(255 111 220 / 0.18) 14%,
-    transparent 28%
-  );
-  filter: blur(5px);
-  mix-blend-mode: color-dodge;
-  opacity: calc(var(--reveal) * 0.8);
-}
-
-.glare {
-  inset: 0;
-  z-index: 3;
-  background: radial-gradient(
-    circle at var(--glare-x) var(--glare-y),
-    rgb(255 255 255 / 0.28) 0,
-    rgb(255 255 255 / 0.07) 22%,
-    transparent 58%
-  );
-  mix-blend-mode: soft-light;
-}
-
-.edge {
-  z-index: 5;
-  background: rgb(255 255 255 / 0.9);
-  filter: blur(0.5px);
-}
-
-.edge-top,
-.edge-bottom {
-  right: 5%;
-  left: 5%;
-  height: 1px;
-}
-
-.edge-left,
-.edge-right {
-  top: 7%;
-  bottom: 7%;
-  width: 1px;
-}
-
-.edge-top { top: 0; opacity: var(--edge-top); }
-.edge-right { right: 0; opacity: var(--edge-right); }
-.edge-bottom { bottom: 0; opacity: var(--edge-bottom); }
-.edge-left { left: 0; opacity: var(--edge-left); }
 
 .printed-face {
   position: absolute;
