@@ -163,8 +163,9 @@ const workExperience = [
       'Owned frontend delivery of a cross-product terms and consent framework across the Paybis website and Widget, helping enable MiCA authorisation and strengthen DORA/GDPR readiness.',
       'Improved Paybis Widget performance through architecture, bundle-chunking, and tooling changes, reaching 25 ms median connection latency, improving FCP by 2.5×, and reducing frontend CI pipeline time by 65%.',
       'Independently researched and delivered a minimal-click, redirect-free Apple Pay proof of concept, now shaping cross-product integration architecture after stakeholder validation as a competitive opportunity.',
+      'Introduced Playwright end-to-end testing for the Paybis Widget, owning the initiative from technical investigation and test-suite implementation through CI/CD integration.',
     ],
-    technologies: ['Vue 3', 'Pinia', 'Vue Router', 'Vuex', 'Nuxt', 'SCSS', 'Tailwind CSS'],
+    technologies: ['Vue 3', 'Pinia', 'Vue Router', 'Vuex', 'Nuxt', 'SCSS', 'Tailwind CSS', 'Playwright'],
     note: '',
   },
   {

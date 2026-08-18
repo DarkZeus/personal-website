@@ -1,4 +1,4 @@
-export const useDuration = (startDate) => {
+export const useDuration = (startDate: string) => {
   const start = new Date(startDate)
   const now = new Date()
 
