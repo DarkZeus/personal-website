@@ -2,6 +2,8 @@
   <div
     ref="stage"
     class="holo-stage"
+    :inert="motionGateVisible"
+    tabindex="-1"
     @pointerenter="handlePointerEnter"
     @pointermove="handlePointerMove"
     @pointerleave="handlePointerLeave"
@@ -24,20 +26,85 @@
       </div>
     </div>
   </div>
+
+  <Teleport to="body">
+    <Transition name="motion-gate">
+      <section
+        v-if="motionGateVisible"
+        class="motion-permission-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="motion-permission-title"
+        aria-describedby="motion-permission-description motion-permission-privacy"
+        @keydown="handleMotionGateKeydown"
+      >
+        <div class="motion-permission-content">
+          <h2 id="motion-permission-title">
+            {{ motionState === 'denied' ? 'Motion access is off' : 'Unlock physical mode' }}
+          </h2>
+          <p id="motion-permission-description" class="motion-permission-description">
+            {{ motionState === 'denied'
+              ? 'Motion wasn’t allowed. Retry the request, or continue with touch.'
+              : 'Move your phone to bend light across the card. Motion access only drives the effect.' }}
+          </p>
+
+          <div class="motion-permission-actions">
+            <button
+              ref="enableMotionButton"
+              class="motion-permission-primary"
+              type="button"
+              :disabled="motionState === 'requesting' || motionState === 'enabled'"
+              :aria-busy="motionState === 'requesting'"
+              @click="enableDeviceMotion"
+            >
+              {{ motionPermissionAction }}
+            </button>
+            <button
+              ref="skipMotionButton"
+              class="motion-permission-secondary"
+              type="button"
+              :disabled="motionState === 'enabled'"
+              @click="continueWithoutMotion"
+            >
+              Continue with touch
+            </button>
+          </div>
+
+          <p id="motion-permission-privacy" class="motion-permission-privacy">
+            <LockClosedIcon aria-hidden="true" />
+            Sensor data stays on this device.
+          </p>
+        </div>
+      </section>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { LockClosedIcon } from '@heroicons/vue/24/outline'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 
-type MotionState = 'idle' | 'requesting' | 'enabled' | 'denied'
+type MotionState = 'idle' | 'requesting' | 'enabled' | 'denied' | 'skipped'
 type MotionPermissionApi = {
   requestPermission?: () => Promise<'granted' | 'denied'>
 }
 
+const MOTION_PREFERENCE_KEY = 'business-card-motion'
+
 const stage = ref<HTMLElement | null>(null)
 const card = ref<HTMLElement | null>(null)
+const enableMotionButton = ref<HTMLButtonElement | null>(null)
+const skipMotionButton = ref<HTMLButtonElement | null>(null)
 const motionState = ref<MotionState>('idle')
+const motionGateVisible = ref(false)
 const prefersReducedMotion = ref(false)
+
+const motionPermissionAction = computed(() => {
+  if (motionState.value === 'requesting') return 'Waiting for permission…'
+  if (motionState.value === 'enabled') return 'Motion connected'
+  if (motionState.value === 'denied') return 'Try again'
+  return 'Enable motion'
+})
 
 const target = { x: 0, y: 0 }
 const tilt = { x: 0, y: 0 }
@@ -53,6 +120,7 @@ let visible = true
 let motionQuery: MediaQueryList | null = null
 let intersectionObserver: IntersectionObserver | null = null
 let handleMotionPreferenceChange: ((event: MediaQueryListEvent) => void) | null = null
+let gateDismissTimer = 0
 
 function clamp(value: number, min = -1, max = 1) {
   return Math.min(max, Math.max(min, value))
@@ -79,6 +147,36 @@ function getMotionPermissionRequester() {
   }
 
   return null
+}
+
+function getStoredMotionPreference() {
+  try {
+    return sessionStorage.getItem(MOTION_PREFERENCE_KEY)
+  }
+  catch {
+    return null
+  }
+}
+
+function storeMotionPreference(value: 'enabled' | 'skipped') {
+  try {
+    sessionStorage.setItem(MOTION_PREFERENCE_KEY, value)
+  }
+  catch {
+    // The card still works when session storage is unavailable.
+  }
+}
+
+async function showMotionGate() {
+  motionGateVisible.value = true
+  await nextTick()
+  enableMotionButton.value?.focus({ preventScroll: true })
+}
+
+async function dismissMotionGate() {
+  motionGateVisible.value = false
+  await nextTick()
+  stage.value?.focus({ preventScroll: true })
 }
 
 function setInput(x: number, y: number) {
@@ -118,6 +216,32 @@ function handleCardActivation() {
   void requestDeviceMotion()
 }
 
+function continueWithoutMotion() {
+  motionState.value = 'skipped'
+  storeMotionPreference('skipped')
+  void dismissMotionGate()
+}
+
+function handleMotionGateKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    continueWithoutMotion()
+    return
+  }
+
+  if (event.key !== 'Tab') return
+  const controls = [enableMotionButton.value, skipMotionButton.value]
+    .filter((control): control is HTMLButtonElement => Boolean(control && !control.disabled))
+  if (!controls.length) return
+
+  const currentIndex = controls.indexOf(document.activeElement as HTMLButtonElement)
+  const nextIndex = event.shiftKey
+    ? (currentIndex <= 0 ? controls.length - 1 : currentIndex - 1)
+    : (currentIndex >= controls.length - 1 ? 0 : currentIndex + 1)
+  event.preventDefault()
+  controls[nextIndex]?.focus()
+}
+
 function handleOrientation(event: DeviceOrientationEvent) {
   if (prefersReducedMotion.value) return
   const beta = event.beta ?? 0
@@ -148,7 +272,7 @@ function attachOrientation() {
 }
 
 async function requestDeviceMotion() {
-  if (!canUseOrientation()) return
+  if (!canUseOrientation()) return false
   motionState.value = 'requesting'
   const requestPermission = getMotionPermissionRequester()
 
@@ -157,13 +281,30 @@ async function requestDeviceMotion() {
       const permission = await requestPermission()
       if (permission !== 'granted') {
         motionState.value = 'denied'
-        return
+        return false
       }
     }
     attachOrientation()
+    return true
   } catch {
     motionState.value = 'denied'
+    return false
   }
+}
+
+async function enableDeviceMotion() {
+  const enabled = await requestDeviceMotion()
+  if (!enabled) {
+    await nextTick()
+    enableMotionButton.value?.focus({ preventScroll: true })
+    return
+  }
+
+  storeMotionPreference('enabled')
+  window.clearTimeout(gateDismissTimer)
+  gateDismissTimer = window.setTimeout(() => {
+    void dismissMotionGate()
+  }, 360)
 }
 
 function applyFrame(now: number) {
@@ -243,17 +384,30 @@ function handleVisibilityChange() {
 onMounted(() => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   prefersReducedMotion.value = motionQuery.matches
-  if (canUseOrientation() && !getMotionPermissionRequester()) attachOrientation()
+  if (canUseOrientation()) {
+    const requestPermission = getMotionPermissionRequester()
+    const storedPreference = getStoredMotionPreference()
+    if (!requestPermission || storedPreference === 'enabled') attachOrientation()
+    else if (storedPreference === 'skipped') motionState.value = 'skipped'
+    else void showMotionGate()
+  }
 
   handleMotionPreferenceChange = (event) => {
     prefersReducedMotion.value = event.matches
-    if (event.matches && orientationAttached) {
-      window.removeEventListener('deviceorientation', handleOrientation)
-      orientationAttached = false
+    if (event.matches) {
+      motionGateVisible.value = false
+      if (orientationAttached) {
+        window.removeEventListener('deviceorientation', handleOrientation)
+        orientationAttached = false
+      }
       motionState.value = 'idle'
     }
-    else if (!event.matches && canUseOrientation() && !getMotionPermissionRequester()) {
-      attachOrientation()
+    else if (canUseOrientation()) {
+      const requestPermission = getMotionPermissionRequester()
+      const storedPreference = getStoredMotionPreference()
+      if (!requestPermission || storedPreference === 'enabled') attachOrientation()
+      else if (storedPreference === 'skipped') motionState.value = 'skipped'
+      else void showMotionGate()
     }
     restart()
   }
@@ -271,6 +425,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(frame)
+  window.clearTimeout(gateDismissTimer)
   intersectionObserver?.disconnect()
   document.removeEventListener('visibilitychange', handleVisibilityChange)
   if (motionQuery && handleMotionPreferenceChange) {
@@ -305,7 +460,7 @@ onBeforeUnmount(() => {
   aspect-ratio: 1.58;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 0.74);
-  border-radius: clamp(1.25rem, 2.2vw, 2rem);
+  border-radius: clamp(1.25rem, 2.2dvw, 2rem);
   background: #e9e5f3;
   box-shadow:
     0 18px 70px rgb(48 42 77 / 0.22),
@@ -464,6 +619,177 @@ onBeforeUnmount(() => {
   z-index: 10;
 }
 
+.motion-permission-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: max(1.5rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+  overflow: hidden;
+  background: rgb(0 0 0 / 0.76);
+  -webkit-backdrop-filter: blur(18px) saturate(0.72);
+  backdrop-filter: blur(18px) saturate(0.72);
+  color: #f7f4fb;
+  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  text-align: center;
+}
+
+.motion-permission-overlay::before {
+  position: absolute;
+  width: min(42rem, 130dvw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.09) 0 1px, transparent 1.5px 100%),
+    conic-gradient(
+      from 210deg,
+      rgb(255 71 194 / 0.12),
+      rgb(255 211 91 / 0.08),
+      rgb(71 240 218 / 0.1),
+      rgb(95 125 255 / 0.16),
+      rgb(215 89 255 / 0.11),
+      rgb(255 71 194 / 0.12)
+    );
+  filter: blur(44px);
+  content: '';
+  opacity: 0.78;
+  pointer-events: none;
+  transform: translateY(-8%);
+}
+
+.motion-permission-content {
+  position: relative;
+  width: min(27rem, 100%);
+}
+
+.motion-permission-content h2 {
+  max-width: 10ch;
+  margin: 0 auto;
+  font-size: clamp(2.4rem, 10dvw, 4rem);
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.motion-permission-description {
+  max-width: 34ch;
+  margin: 1.25rem auto 0;
+  color: rgb(247 244 251 / 0.72);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.motion-permission-actions {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 2rem;
+}
+
+.motion-permission-primary,
+.motion-permission-secondary {
+  width: 100%;
+  min-height: 3.25rem;
+  border-radius: 0.625rem;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.motion-permission-primary {
+  border: 0;
+  background: #f7f4fb;
+  color: #17141e;
+  font-weight: 700;
+  box-shadow: 0 0.8rem 2.6rem rgb(0 0 0 / 0.34);
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.motion-permission-primary:hover:not(:disabled) {
+  background: #fff;
+}
+
+.motion-permission-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.motion-permission-primary:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.motion-permission-secondary {
+  border: 0;
+  background: transparent;
+  color: rgb(247 244 251 / 0.72);
+  font-size: 0.9rem;
+  font-weight: 560;
+  transition: color 160ms ease;
+}
+
+.motion-permission-secondary:hover {
+  color: #fff;
+}
+
+.motion-permission-secondary:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.motion-permission-primary:focus-visible,
+.motion-permission-secondary:focus-visible {
+  outline: 2px solid #9b86ff;
+  outline-offset: 3px;
+}
+
+.motion-permission-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 1.4rem 0 0;
+  color: rgb(247 244 251 / 0.5);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.motion-permission-privacy svg {
+  width: 0.88rem;
+  height: 0.88rem;
+  flex: 0 0 auto;
+  stroke-width: 1.8;
+}
+
+.motion-gate-enter-active,
+.motion-gate-leave-active {
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), backdrop-filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-gate-enter-active .motion-permission-content,
+.motion-gate-leave-active .motion-permission-content {
+  transition: filter 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-gate-enter-from,
+.motion-gate-leave-to {
+  opacity: 0;
+  -webkit-backdrop-filter: blur(0) saturate(1);
+  backdrop-filter: blur(0) saturate(1);
+}
+
+.motion-gate-enter-from .motion-permission-content {
+  filter: blur(8px);
+  transform: translateY(0.8rem) scale(0.985);
+}
+
+.motion-gate-leave-to .motion-permission-content {
+  filter: blur(6px);
+  transform: scale(1.035);
+}
+
 @media (max-width: 42rem) {
   .holo-card {
     aspect-ratio: 0.68;
@@ -475,12 +801,25 @@ onBeforeUnmount(() => {
   .holo-card {
     aspect-ratio: 0.56;
   }
+
+  .motion-permission-overlay {
+    padding-inline: max(1.25rem, env(safe-area-inset-left));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .holo-card {
     box-shadow: 0 1.5rem 4rem rgb(48 42 77 / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.85);
     transform: none;
+    transition: none;
+  }
+
+  .motion-gate-enter-active,
+  .motion-gate-leave-active,
+  .motion-gate-enter-active .motion-permission-content,
+  .motion-gate-leave-active .motion-permission-content,
+  .motion-permission-primary,
+  .motion-permission-secondary {
     transition: none;
   }
 }

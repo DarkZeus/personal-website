@@ -81,7 +81,13 @@ useSeoMeta({
 
 useHead({
   bodyAttrs: { class: 'business-card-body' },
-  meta: [{ name: 'theme-color', content: '#000000' }],
+  meta: [
+    { name: 'theme-color', content: '#000000' },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
+    },
+  ],
   link: [{ rel: 'canonical', href: 'https://fuad.work/card' }],
 })
 
@@ -98,6 +104,13 @@ const contacts = [
   margin: 0;
   overflow-x: hidden;
   background: #000;
+  touch-action: none;
+}
+
+:global(.business-card-body *) {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 :global(.business-card-body ::selection) {
@@ -110,9 +123,9 @@ const contacts = [
   --muted: #696470;
   display: grid;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100dvh;
   place-items: center;
-  padding: clamp(1rem, 2vw, 2rem);
+  padding: clamp(1rem, 2dvw, 2rem);
   overflow: hidden;
   background: #000;
   color: var(--ink);
@@ -124,7 +137,7 @@ const contacts = [
   z-index: 1;
   display: grid;
   place-items: center;
-  width: min(72rem, calc(100vw - 4rem), calc((100svh - 4rem) * 1.58));
+  width: min(72rem, calc(100dvw - 4rem), calc((100dvh - 4rem) * 1.58));
   min-width: 42rem;
   margin: 0;
 }
@@ -133,7 +146,7 @@ const contacts = [
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
-  padding: clamp(1.4rem, 3.2vw, 2.8rem);
+  padding: clamp(1.4rem, 3.2dvw, 2.8rem);
   color: var(--ink);
 }
 
@@ -141,18 +154,18 @@ const contacts = [
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  gap: clamp(0.8rem, 1.6vw, 1.5rem);
+  gap: clamp(0.8rem, 1.6dvw, 1.5rem);
 }
 
 .identity-mark {
   position: relative;
   display: grid;
-  width: clamp(2.5rem, 4.5vw, 3.75rem);
+  width: clamp(2.5rem, 4.5dvw, 3.75rem);
   aspect-ratio: 1;
   place-items: center;
   border: 1px solid rgb(23 20 30 / 0.65);
   border-radius: 50%;
-  font-size: clamp(0.66rem, 1vw, 0.82rem);
+  font-size: clamp(0.66rem, 1dvw, 0.82rem);
   font-weight: 750;
   letter-spacing: 0.04em;
 }
@@ -174,7 +187,7 @@ const contacts = [
   justify-self: end;
   gap: 0.55rem;
   margin: 0;
-  font-size: clamp(0.64rem, 0.9vw, 0.75rem);
+  font-size: clamp(0.64rem, 0.9dvw, 0.75rem);
   font-weight: 680;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -193,15 +206,15 @@ const contacts = [
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
-  padding-block: clamp(1.4rem, 3vw, 2.8rem);
+  gap: clamp(2rem, 5dvw, 5rem);
+  padding-block: clamp(1.4rem, 3dvw, 2.8rem);
 }
 
 .identity-copy { min-width: 0; }
 
 h1 {
   margin: 0;
-  font-size: clamp(3.25rem, 7.3vw, 6.35rem);
+  font-size: clamp(3.25rem, 7.3dvw, 6.35rem);
   font-weight: 590;
   letter-spacing: -0.065em;
   line-height: 0.78;
@@ -211,12 +224,12 @@ h1 span { display: block; }
 
 h1 span:last-child {
   color: transparent;
-  -webkit-text-stroke: clamp(1px, 0.12vw, 1.5px) var(--ink);
+  -webkit-text-stroke: clamp(1px, 0.12dvw, 1.5px) var(--ink);
 }
 
 .role {
-  margin: clamp(1.2rem, 2.4vw, 2rem) 0 0;
-  font-size: clamp(0.82rem, 1.2vw, 1rem);
+  margin: clamp(1.2rem, 2.4dvw, 2rem) 0 0;
+  font-size: clamp(0.82rem, 1.2dvw, 1rem);
   font-weight: 650;
 }
 
@@ -226,7 +239,7 @@ h1 span:last-child {
   grid-template-columns: 1fr auto;
   gap: 0.28rem 1rem;
   width: min(29rem, 100%);
-  margin-top: clamp(1rem, 2vw, 1.8rem);
+  margin-top: clamp(1rem, 2dvw, 1.8rem);
   padding: 0.8rem 2.4rem 0.8rem 0;
   border-top: 1px solid rgb(23 20 30 / 0.28);
   border-bottom: 1px solid rgb(23 20 30 / 0.28);
@@ -245,7 +258,7 @@ h1 span:last-child {
 .email-link strong {
   min-width: 0;
   overflow-wrap: anywhere;
-  font-size: clamp(0.72rem, 1.12vw, 0.92rem);
+  font-size: clamp(0.72rem, 1.12dvw, 0.92rem);
   font-weight: 680;
 }
 
@@ -262,8 +275,8 @@ h1 span:last-child {
 
 .qr-tile {
   display: block;
-  width: clamp(11rem, 20.5vw, 15.75rem);
-  padding: clamp(0.55rem, 1.2vw, 0.9rem);
+  width: clamp(11rem, 20.5dvw, 15.75rem);
+  padding: clamp(0.55rem, 1.2dvw, 0.9rem);
   border: 1px solid rgb(23 20 30 / 0.09);
   border-radius: 0.75rem;
   background: #fff;
@@ -278,7 +291,7 @@ h1 span:last-child {
   justify-content: space-between;
   gap: 1rem;
   padding: 0 0.18rem 0.55rem;
-  font-size: clamp(0.58rem, 0.8vw, 0.68rem);
+  font-size: clamp(0.58rem, 0.8dvw, 0.68rem);
   font-weight: 720;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -315,19 +328,19 @@ h1 span:last-child {
   min-width: 0;
   flex-direction: column;
   gap: 0.28rem;
-  padding: clamp(0.8rem, 1.45vw, 1.2rem) clamp(0.7rem, 1.35vw, 1.1rem) 0 0;
+  padding: clamp(0.8rem, 1.45dvw, 1.2rem) clamp(0.7rem, 1.35dvw, 1.1rem) 0 0;
   color: inherit;
   text-decoration: none;
 }
 
 .contact-link:not(:first-child) {
-  padding-left: clamp(0.7rem, 1.35vw, 1.1rem);
+  padding-left: clamp(0.7rem, 1.35dvw, 1.1rem);
   border-left: 1px solid rgb(23 20 30 / 0.18);
 }
 
 .contact-link span {
   color: var(--muted);
-  font-size: clamp(0.56rem, 0.78vw, 0.66rem);
+  font-size: clamp(0.56rem, 0.78dvw, 0.66rem);
   font-weight: 690;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -335,7 +348,7 @@ h1 span:last-child {
 
 .contact-link strong {
   overflow: hidden;
-  font-size: clamp(0.63rem, 0.95vw, 0.8rem);
+  font-size: clamp(0.63rem, 0.95dvw, 0.8rem);
   font-weight: 680;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -343,8 +356,8 @@ h1 span:last-child {
 
 .contact-link svg {
   position: absolute;
-  top: clamp(0.8rem, 1.45vw, 1.2rem);
-  right: clamp(0.7rem, 1.35vw, 1.1rem);
+  top: clamp(0.8rem, 1.45dvw, 1.2rem);
+  right: clamp(0.7rem, 1.35dvw, 1.1rem);
   width: 0.75rem;
   transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -359,7 +372,7 @@ h1 span:last-child {
   .card-page { padding: 0.75rem; }
 
   .card-stage {
-    width: min(28rem, calc(100vw - 1.5rem));
+    width: min(28rem, calc(100dvw - 1.5rem));
     min-width: 0;
     margin: 0;
   }
@@ -374,7 +387,7 @@ h1 span:last-child {
     padding-block: 1.15rem;
   }
 
-  h1 { font-size: clamp(2.8rem, 13.4vw, 4.1rem); }
+  h1 { font-size: clamp(2.8rem, 13.4dvw, 4.1rem); }
   .role { margin-top: 1rem; }
 
   .email-link {
@@ -385,7 +398,7 @@ h1 span:last-child {
   .email-link svg { bottom: 0.75rem; }
 
   .qr-tile {
-    width: clamp(9.5rem, 48vw, 13rem);
+    width: clamp(9.5rem, 48dvw, 13rem);
     justify-self: end;
     padding: 0.55rem;
   }
@@ -411,7 +424,7 @@ h1 span:last-child {
 
 @media (max-width: 25rem) {
   .card-stage {
-    width: min(calc(100vw - 1.5rem), calc((100svh - 1.5rem) * 0.56));
+    width: min(calc(100dvw - 1.5rem), calc((100dvh - 1.5rem) * 0.56));
   }
 }
 

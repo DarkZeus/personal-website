@@ -125,6 +125,7 @@
       { "name": "menu-spring", "value": "spring(stiffness: 300, damping: 20)", "purpose": "Mobile navigation entry and exit." },
       { "name": "card-link-nudge", "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Moves contact arrows a few pixels toward their destination on hover." },
       { "name": "card-holo-dual-follower", "value": "event-driven requestAnimationFrame; tilt spring 0.085 with 0.77 damping; foil gradient follow 0.08; max rotation 8deg X / 10deg Y", "purpose": "Lets the single composited card tilt promptly while flat spectral layers follow through gradient positions, then stops rendering once settled." },
+      { "name": "card-motion-activation", "value": "420ms cubic-bezier(0.22, 1, 0.36, 1); session-scoped grant or skip", "purpose": "Turns the required mobile sensor gesture into a focused first-use reveal, then keeps it out of the returning tab experience." },
       { "name": "card-holo-reduced-motion", "value": "static face-on credential", "purpose": "Removes tilt, idle drift, and continuous foil motion when reduced motion is preferred." },
       { "name": "card-holo-visibility", "value": "visibilitychange + IntersectionObserver at 0.05", "purpose": "Pauses the animation loop while the document is hidden or the credential is off-screen." }
     ],
@@ -221,7 +222,8 @@
       "Do preserve semantic light/dark role mapping and WCAG 2.2 AA contrast.",
       "Do keep standard-page motion short and functional; on `/card`, let the credential and foil respond at different rates, then render the object static and face-on under reduced motion.",
       "Do keep decorative circles clipped, faint, and subordinate to content.",
-      "Do keep `/card`'s printed identity, contact links, QR, and save action crisp, high contrast, and usable without motion input."
+      "Do keep `/card`'s printed identity, contact links, QR, and save action crisp, high contrast, and usable without motion input.",
+      "Do size `/card` with dynamic viewport units and suppress zoom, text selection, and touch callouts on that dedicated experiential route."
     ],
     "donts": [
       "Don't convert ruled evidence collections into repeated floating cards.",

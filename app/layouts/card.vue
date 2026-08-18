@@ -14,7 +14,7 @@
 
 <style scoped>
 .card-layout {
-  min-height: 100svh;
+  min-height: 100dvh;
   background: #f2f0e9;
   color: #101114;
   color-scheme: light;
