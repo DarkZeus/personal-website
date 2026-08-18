@@ -5,7 +5,7 @@
     @pointerenter="handlePointerEnter"
     @pointermove="handlePointerMove"
     @pointerleave="handlePointerLeave"
-    @pointerdown="handlePointerDown"
+    @click="handleCardActivation"
   >
     <div ref="card" class="holo-card">
       <div class="card-stock" aria-hidden="true"></div>
@@ -113,8 +113,8 @@ function handlePointerLeave() {
   scheduleRender()
 }
 
-function handlePointerDown(event: PointerEvent) {
-  if (event.pointerType !== 'touch' || motionState.value !== 'idle' || !canUseOrientation()) return
+function handleCardActivation() {
+  if (motionState.value !== 'idle' || !canUseOrientation()) return
   void requestDeviceMotion()
 }
 
